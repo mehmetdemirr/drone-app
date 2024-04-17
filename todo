@@ -1,0 +1,56 @@
+3 giriş şekli , Müşteri | Şirket | Admin 
+
+
+Müşteri
+-------------------------------------
+Kayıt ol
+Giriş yap
+Tesise giriş yap  // güvenlik açısından
+Tesisten çıkış yap
+Sepete ürün ekle 
+Sepetten ürün çıkar 
+Konum belirt(golf sahası bölgeleri + haritadan seçim) ve sepeti onayla 
+Sipariş durumu (sipariş verildi, sipariş alındı, sipariş hazırlanıyor, sipariş teslim edilid)
+Kayıt olduğu şirketler (birden fazla golf sahasına gidebilir ya da şube olabilir, her zaman yeni üyelik saçma olur)
+kayıt olduğu şirketler olsun (giriş yaptığında tabloda tutulsun yani)
+
+
+Şirket Yönetim
+-----------------------------------------
+Kayıt ol
+Giriş yap
+Tüm müşteriyi gör 
+İçerdeki müşteriyi gör
+Borçlu müşteriyi göster
+İçeriye müşteri al  // barkod çalışmadığında 
+İçeriden müşteri çıkar
+Ürün ekle (fotoğraf,ad , açıklama,fiyat(free yapabiliriz default),ağırlık(drone için ağırlık hesabı yapılabilir))
+Ürün düzenle
+Ürünlerini gör
+Siparişleri getir (tarihe göre filtre olacak , pagination )
+Sipariş detay 
+Sipariş onayla
+
+
+Şirket Barkod Gösterme 
+-----------------------------------------
+Şirket hesabı ile gir ve sadece barkod göstersin 
+Bunu tablette her zaman açık tutulabilir (her dakika ,her saat ya da her gün değişecek barkod güvenlik nedeniyle)
+
+
+Admin 
+-----------------------------------------
+Tüm Şirketler 
+Şirket ürünleri , şirket müşteri ,vs 
+Tüm müşteriler
+
+
+
+Sadece bir işletme için mi yapılacak yoksa çoklu mu ?
+Abonelik planı var mı ?
+Ürünlerin özellikleri tam ne olacak ? (yiyecek, içecek kategori vs var mı ? )
+Her golf sahası aynı olmayabilir bazıları bölüm bölüm ayrılmıştır bazıları ayrılmamıştır.
+  Konum seçerken şirkete bölüm, harita ya da bölüm + harita konumu gönder diyebiliriz gibi
+Gelir modeli ne olacak ?
+İlk aşamada kim kullanacak ? (hedef kitleye göre tasarım seçilecek,ihtiyaçlar araştırılacak)
+Tam gereksinimler var mı ?
