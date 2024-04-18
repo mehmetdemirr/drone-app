@@ -15,6 +15,18 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    CompanyCashEditRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<CompanyCashEditRouteArgs>(
+          orElse: () => CompanyCashEditRouteArgs(id: pathParams.getInt('id')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CompanyCashEditScreen(
+          key: args.key,
+          id: args.id,
+        ),
+      );
+    },
     CompanyCashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -33,6 +45,18 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CompanyLoginScreen(),
       );
     },
+    CompanyNewOrderRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CompanyNewOrderScreen(),
+      );
+    },
+    CompanyNewProductRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CompanyNewProductScreen(),
+      );
+    },
     CompanyOrderDetailRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -43,6 +67,32 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const CompanyOrderScreen(),
+      );
+    },
+    CompanyProductDetailRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<CompanyProductDetailRouteArgs>(
+          orElse: () =>
+              CompanyProductDetailRouteArgs(id: pathParams.getInt('id')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CompanyProductDetailScreen(
+          key: args.key,
+          id: args.id,
+        ),
+      );
+    },
+    CompanyProductEditRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<CompanyProductEditRouteArgs>(
+          orElse: () =>
+              CompanyProductEditRouteArgs(id: pathParams.getInt('id')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CompanyProductEditScreen(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     CompanyProductsRoute.name: (routeData) {
@@ -99,6 +149,19 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CustomerOrderConfirmScreen(),
       );
     },
+    CustomerProductDetailRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<CustomerProductDetailRouteArgs>(
+          orElse: () =>
+              CustomerProductDetailRouteArgs(id: pathParams.getInt('id')));
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CustomerProductDetailScreen(
+          key: args.key,
+          id: args.id,
+        ),
+      );
+    },
     CustomerSettingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -129,18 +192,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const PostScreen(),
       );
     },
-    ProductDetailRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<ProductDetailRouteArgs>(
-          orElse: () => ProductDetailRouteArgs(id: pathParams.getInt('id')));
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: ProductDetailScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
     QRViewExampleRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -160,6 +211,45 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [CompanyCashEditScreen]
+class CompanyCashEditRoute extends PageRouteInfo<CompanyCashEditRouteArgs> {
+  CompanyCashEditRoute({
+    Key? key,
+    required int id,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CompanyCashEditRoute.name,
+          args: CompanyCashEditRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawPathParams: {'id': id},
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyCashEditRoute';
+
+  static const PageInfo<CompanyCashEditRouteArgs> page =
+      PageInfo<CompanyCashEditRouteArgs>(name);
+}
+
+class CompanyCashEditRouteArgs {
+  const CompanyCashEditRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final Key? key;
+
+  final int id;
+
+  @override
+  String toString() {
+    return 'CompanyCashEditRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for
@@ -205,6 +295,34 @@ class CompanyLoginRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CompanyNewOrderScreen]
+class CompanyNewOrderRoute extends PageRouteInfo<void> {
+  const CompanyNewOrderRoute({List<PageRouteInfo>? children})
+      : super(
+          CompanyNewOrderRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyNewOrderRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CompanyNewProductScreen]
+class CompanyNewProductRoute extends PageRouteInfo<void> {
+  const CompanyNewProductRoute({List<PageRouteInfo>? children})
+      : super(
+          CompanyNewProductRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyNewProductRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [CompanyOrderDetailScreen]
 class CompanyOrderDetailRoute extends PageRouteInfo<void> {
   const CompanyOrderDetailRoute({List<PageRouteInfo>? children})
@@ -230,6 +348,86 @@ class CompanyOrderRoute extends PageRouteInfo<void> {
   static const String name = 'CompanyOrderRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CompanyProductDetailScreen]
+class CompanyProductDetailRoute
+    extends PageRouteInfo<CompanyProductDetailRouteArgs> {
+  CompanyProductDetailRoute({
+    Key? key,
+    required int id,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CompanyProductDetailRoute.name,
+          args: CompanyProductDetailRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawPathParams: {'id': id},
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyProductDetailRoute';
+
+  static const PageInfo<CompanyProductDetailRouteArgs> page =
+      PageInfo<CompanyProductDetailRouteArgs>(name);
+}
+
+class CompanyProductDetailRouteArgs {
+  const CompanyProductDetailRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final Key? key;
+
+  final int id;
+
+  @override
+  String toString() {
+    return 'CompanyProductDetailRouteArgs{key: $key, id: $id}';
+  }
+}
+
+/// generated route for
+/// [CompanyProductEditScreen]
+class CompanyProductEditRoute
+    extends PageRouteInfo<CompanyProductEditRouteArgs> {
+  CompanyProductEditRoute({
+    Key? key,
+    required int id,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CompanyProductEditRoute.name,
+          args: CompanyProductEditRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawPathParams: {'id': id},
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyProductEditRoute';
+
+  static const PageInfo<CompanyProductEditRouteArgs> page =
+      PageInfo<CompanyProductEditRouteArgs>(name);
+}
+
+class CompanyProductEditRouteArgs {
+  const CompanyProductEditRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final Key? key;
+
+  final int id;
+
+  @override
+  String toString() {
+    return 'CompanyProductEditRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for
@@ -359,6 +557,46 @@ class CustomerOrderConfirmRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CustomerProductDetailScreen]
+class CustomerProductDetailRoute
+    extends PageRouteInfo<CustomerProductDetailRouteArgs> {
+  CustomerProductDetailRoute({
+    Key? key,
+    required int id,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CustomerProductDetailRoute.name,
+          args: CustomerProductDetailRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawPathParams: {'id': id},
+          initialChildren: children,
+        );
+
+  static const String name = 'CustomerProductDetailRoute';
+
+  static const PageInfo<CustomerProductDetailRouteArgs> page =
+      PageInfo<CustomerProductDetailRouteArgs>(name);
+}
+
+class CustomerProductDetailRouteArgs {
+  const CustomerProductDetailRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final Key? key;
+
+  final int id;
+
+  @override
+  String toString() {
+    return 'CustomerProductDetailRouteArgs{key: $key, id: $id}';
+  }
+}
+
+/// generated route for
 /// [CustomerSettingScreen]
 class CustomerSettingRoute extends PageRouteInfo<void> {
   const CustomerSettingRoute({List<PageRouteInfo>? children})
@@ -426,45 +664,6 @@ class PostRoute extends PageRouteInfo<void> {
   static const String name = 'PostRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [ProductDetailScreen]
-class ProductDetailRoute extends PageRouteInfo<ProductDetailRouteArgs> {
-  ProductDetailRoute({
-    Key? key,
-    required int id,
-    List<PageRouteInfo>? children,
-  }) : super(
-          ProductDetailRoute.name,
-          args: ProductDetailRouteArgs(
-            key: key,
-            id: id,
-          ),
-          rawPathParams: {'id': id},
-          initialChildren: children,
-        );
-
-  static const String name = 'ProductDetailRoute';
-
-  static const PageInfo<ProductDetailRouteArgs> page =
-      PageInfo<ProductDetailRouteArgs>(name);
-}
-
-class ProductDetailRouteArgs {
-  const ProductDetailRouteArgs({
-    this.key,
-    required this.id,
-  });
-
-  final Key? key;
-
-  final int id;
-
-  @override
-  String toString() {
-    return 'ProductDetailRouteArgs{key: $key, id: $id}';
-  }
 }
 
 /// generated route for

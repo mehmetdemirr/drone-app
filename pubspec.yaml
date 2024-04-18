@@ -43,6 +43,12 @@ dependencies:
   #qr 
   qr_code_scanner: ^1.0.1
   pretty_qr_code: ^3.3.0
+  #map 
+  geolocator: ^11.0.0
+  geocoding: ^3.0.0
+  flutter_map: ^6.1.0
+  latlng: ^2.0.7
+  latlong2: ^0.9.1
 
 
 

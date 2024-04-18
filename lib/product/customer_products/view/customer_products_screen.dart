@@ -38,7 +38,7 @@ class _CustomerProductsScreenState extends State<CustomerProductsScreen> {
                   double cardWidth = context.width / 2 - 10;
                   return InkWell(
                     onTap: () {
-                      context.navigateTo(ProductDetailRoute(id: 1));
+                      context.navigateTo(CustomerProductDetailRoute(id: 1));
                     },
                     child: SizedBox(
                       height: context.height / 2,

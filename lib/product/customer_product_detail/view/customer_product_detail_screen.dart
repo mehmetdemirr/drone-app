@@ -4,17 +4,19 @@ import 'package:demo/core/utilty/images_items.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
-class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({
+class CustomerProductDetailScreen extends StatefulWidget {
+  const CustomerProductDetailScreen({
     super.key,
     @PathParam('id') required this.id,
   });
   final int id;
   @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  State<CustomerProductDetailScreen> createState() =>
+      _CustomerProductDetailScreenState();
 }
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
+class _CustomerProductDetailScreenState
+    extends State<CustomerProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

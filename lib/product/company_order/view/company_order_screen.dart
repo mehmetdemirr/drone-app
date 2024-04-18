@@ -24,8 +24,7 @@ class _CompanyOrderScreenState extends State<CompanyOrderScreen> {
             padding: const EdgeInsets.only(right: 8.0),
             child: InkWell(
               onTap: () {
-                // context.router
-                //     .navigateNamed(RouterItem.customerOrderConfirm.str());
+                context.router.navigateNamed(RouterItem.companyNewOrder.str());
               },
               child: Container(
                 height: 35,

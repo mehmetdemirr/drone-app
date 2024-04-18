@@ -14,8 +14,12 @@ class _CompanyStatisticScreenState extends State<CompanyStatisticScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("İstatistiklerim")),
       body: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("İstatistik"),
+          Text(
+              textAlign: TextAlign.center,
+              "Sonraki aşama olacak İstatistik \n en çok satan ürün , kritik stok , aylık-günlük-yıllık istatistik grafiği vs "),
         ],
       ),
     );

@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/navigation/app_router.dart';
-import 'package:demo/product/qr_screen/view/qr_screen.dart';
+import 'package:demo/product/customer_area_login/widget/qr_border_paint.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 @RoutePage()
 class CustomerAreaLoginScreen extends StatefulWidget {
@@ -14,6 +18,20 @@ class CustomerAreaLoginScreen extends StatefulWidget {
 }
 
 class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
+  Barcode? result;
+  QRViewController? controller;
+  GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      controller!.pauseCamera();
+    } else if (Platform.isIOS) {
+      controller!.resumeCamera();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +42,7 @@ class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 16),
+              const SizedBox(height: 30),
               Text(
                 "Qr Kodu Tarayın",
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -35,7 +53,7 @@ class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
               const SizedBox(height: 5),
               Text(
                 textAlign: TextAlign.center,
-                "işletme girişindeki Qr kodu cihazınız ile tarayıp işletmeye girdiğinizi doğrulayın",
+                "İşletme girişindeki Qr kodu cihazınız ile tarayıp işletmeye girdiğinizi doğrulayın",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.white,
                     ),
@@ -43,10 +61,46 @@ class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                height: 300,
+              Container(
+                height: context.height * .60,
                 width: context.width * 0.85,
-                child: const QRViewExampleScreen(),
+                decoration: const BoxDecoration(
+                  color: Color.fromRGBO(217, 217, 217, 1),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(16.0),
+                  ),
+                ),
+                child: SizedBox(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 180, horizontal: 90),
+                    child: CustomPaint(
+                      foregroundPainter: BorderPainter(),
+                      child: Container(
+                        // decoration: BoxDecoration(
+                        //   color: Colors.grey.shade100,
+                        //   borderRadius: const BorderRadius.all(
+                        //     Radius.circular(16.0),
+                        //   ),
+                        // ),
+                        child: QRView(
+                          key: qrKey,
+                          onQRViewCreated: _onQRViewCreated,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Text(
+                  result != null
+                      ? 'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}'
+                      : '',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Colors.white,
+                      ),
+                ),
               ),
               Text(
                 "Okuduktan sonra otomatik işletmeye giriş yapacak \n Not: Giriş yapmışsa bu sayfa gözükmeyecek !",
@@ -71,5 +125,20 @@ class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
         ),
       ),
     );
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        result = scanData;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 }

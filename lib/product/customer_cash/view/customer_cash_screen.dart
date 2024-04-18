@@ -13,9 +13,23 @@ class _CustomerCashScreenState extends State<CustomerCashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Kasam")),
-      body: const Column(
+      body: Column(
         children: [
-          Text("daha önce alınan siparişler | ödenmeyi bekleyen siparişler "),
+          const Text(
+              "Ödeme alınacak Siparişler | Ödenmiş tutarlar | en üstte toplamı yazacak"),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return const Card(
+                  child: Column(
+                    children: [
+                      Text("sipariş id : 1232   Toplam : 200TL"),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

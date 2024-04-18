@@ -1,9 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/product/company_cash/view/company_cash_screen.dart';
+import 'package:demo/product/company_cash_edit/view/company_cash_edit_screen.dart';
 import 'package:demo/product/company_home/view/company_home_screen.dart';
 import 'package:demo/product/company_login/view/company_login_screen.dart';
+import 'package:demo/product/company_new_order/view/company_new_order_screen.dart';
+import 'package:demo/product/company_new_product/view/company_new_product_screen.dart';
 import 'package:demo/product/company_order/view/company_order_screen.dart';
 import 'package:demo/product/company_order_detail/view/company_order_detail_screen.dart';
+import 'package:demo/product/company_product_detail/view/company_product_detail_screen.dart';
+import 'package:demo/product/company_product_edit/view/company_product_edit_screen.dart';
 import 'package:demo/product/company_products/view/company_products_screen.dart';
 import 'package:demo/product/company_setting/view/company_setting_screen.dart';
 import 'package:demo/product/company_show_qr/view/company_show_qr_screen.dart';
@@ -17,7 +22,7 @@ import 'package:demo/product/customer_setting/view/customer_setting_screen.dart'
 import 'package:demo/product/general/view/order_success_screen.dart';
 import 'package:demo/product/home_screen/home_screen.dart';
 import 'package:demo/product/network_work_screen/view/post_screen.dart';
-import 'package:demo/product/product_detail/view/product_detail_screen.dart';
+import 'package:demo/product/customer_product_detail/view/customer_product_detail_screen.dart';
 import 'package:demo/product/qr_screen/view/qr_screen.dart';
 import 'package:demo/product/setting_screen/setting_screen.dart';
 import 'package:demo/product/splash_screen/view/splash_screen.dart';
@@ -35,7 +40,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           path: RouterItem.splash.str(),
           page: SplashRoute.page,
-          initial: true,
         ),
         // for customer
         AutoRoute(
@@ -55,8 +59,8 @@ class AppRouter extends _$AppRouter {
           page: QRViewExampleRoute.page,
         ),
         AutoRoute(
-          path: RouterItem.productDetail.str(),
-          page: ProductDetailRoute.page,
+          path: RouterItem.customerProductDetail.str(),
+          page: CustomerProductDetailRoute.page,
         ),
         AutoRoute(
           path: RouterItem.customerOrderConfirm.str(),
@@ -83,15 +87,45 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           path: RouterItem.companyHome.str(),
           page: CompanyHomeRoute.page,
+          initial: true,
         ),
         AutoRoute(
           path: RouterItem.companyOrderDetail.str(),
           page: CompanyOrderDetailRoute.page,
         ),
         AutoRoute(
+          path: RouterItem.companyNewOrder.str(),
+          page: CompanyNewOrderRoute.page,
+        ),
+        AutoRoute(
           path: RouterItem.companySetting.str(),
           page: CompanySettingRoute.page,
         ),
+        AutoRoute(
+          path: RouterItem.companyProduct.str(),
+          page: CompanyProductsRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.companyNewProduct.str(),
+          page: CompanyNewProductRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.companyProductDetail.str(),
+          page: CompanyProductDetailRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.companyProductEdit.str(),
+          page: CompanyProductEditRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.companyCash.str(),
+          page: CompanyCashRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.companyCashEdit.str(),
+          page: CompanyCashEditRoute.page,
+        ),
+
         //company just qr show screen
         AutoRoute(
           path: RouterItem.companyShowQr.str(),
@@ -124,17 +158,24 @@ enum RouterItem {
   customerLogin,
   customerAreaLogin,
   qr,
-  productDetail,
-  companyLogin,
+  customerProductDetail,
   customerHome,
   customerOrderConfirm,
   customerOrderSucces,
   customerSetting,
   //company
+  companyLogin,
   companyHome,
   companyOrderDetail,
   companySetting,
   companyShowQr,
+  companyNewOrder,
+  companyNewProduct,
+  companyProduct,
+  companyProductDetail,
+  companyProductEdit,
+  companyCash,
+  companyCashEdit,
   //other
   home,
   setting,
@@ -152,7 +193,7 @@ extension RouterItems on RouterItem {
         return "/customerHome";
       case RouterItem.qr:
         return "/qr";
-      case RouterItem.productDetail:
+      case RouterItem.customerProductDetail:
         return "/productDetail";
       case RouterItem.customerLogin:
         return "/customerLogin";
@@ -174,8 +215,25 @@ extension RouterItems on RouterItem {
         return "/companyOrderDetail";
       case RouterItem.companySetting:
         return "/companySetting";
+      case RouterItem.companyNewOrder:
+        return "/companyNewOrder";
+      case RouterItem.companyProduct:
+        return "/companyProduct";
+      case RouterItem.companyNewProduct:
+        return "/companyNewProduct";
+      case RouterItem.companyProductDetail:
+        return "/companyProductDetail";
+      case RouterItem.companyProductEdit:
+        return "/companyProductEdit";
+      case RouterItem.companyCash:
+        return "/companyCash";
+      case RouterItem.companyCashEdit:
+        return "/companyCashEdit";
+
+      // işletme için sadece qr gösterme sayfası
       case RouterItem.companyShowQr:
         return "/companyShowQr";
+
       //other
       case RouterItem.home:
         return "/home";
