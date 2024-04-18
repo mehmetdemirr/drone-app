@@ -87,6 +87,23 @@ class _CompanyLoginScreenState extends State<CompanyLoginScreen> {
                       },
                       child: const Text("Giriş"),
                     ),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          EasyLoading.showSuccess("Giriş başarılı ");
+                          //tüm routları temizle sadece customer ana sayfa kalsın
+                          context.router.replaceAll(
+                            [
+                              const CompanyShowQrRoute(),
+                            ],
+                          );
+                        } else {
+                          EasyLoading.showError(
+                              "Verileri düzgün formatta giriniz!");
+                        }
+                      },
+                      child: const Text("Qr gösterme girişi"),
+                    ),
                   ],
                 ),
               ),

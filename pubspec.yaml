@@ -40,8 +40,10 @@ dependencies:
   #permission
   permission_handler: ^11.3.0
   app_settings: ^5.0.0
-  #qr scanner
+  #qr 
   qr_code_scanner: ^1.0.1
+  pretty_qr_code: ^3.3.0
+
 
 
 dev_dependencies:

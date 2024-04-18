@@ -4,6 +4,7 @@ import 'package:demo/product/company_login/view/company_login_screen.dart';
 import 'package:demo/product/company_order/view/company_order_screen.dart';
 import 'package:demo/product/company_order_detail/view/company_order_detail_screen.dart';
 import 'package:demo/product/company_setting/view/company_setting_screen.dart';
+import 'package:demo/product/company_show_qr/view/company_show_qr_screen.dart';
 import 'package:demo/product/customer_area_login/view/customer_area_login_screen.dart';
 import 'package:demo/product/customer_home/view/customer_home_screen.dart';
 import 'package:demo/product/customer_login/view/customer_login_screem.dart';
@@ -87,6 +88,11 @@ class AppRouter extends _$AppRouter {
           path: RouterItem.companySetting.str(),
           page: CompanySettingRoute.page,
         ),
+        //company just qr show screen
+        AutoRoute(
+          path: RouterItem.companyShowQr.str(),
+          page: CompanyShowQrRoute.page,
+        ),
 
         //other
         AutoRoute(
@@ -124,7 +130,8 @@ enum RouterItem {
   companyHome,
   companyOrderDetail,
   companySetting,
-
+  companyShowQr,
+  //other
   home,
   setting,
   post,
@@ -163,7 +170,9 @@ extension RouterItems on RouterItem {
         return "/companyOrderDetail";
       case RouterItem.companySetting:
         return "/companySetting";
-
+      case RouterItem.companyShowQr:
+        return "/companyShowQr";
+      //other
       case RouterItem.home:
         return "/home";
       case RouterItem.setting:

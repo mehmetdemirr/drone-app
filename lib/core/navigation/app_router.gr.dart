@@ -45,6 +45,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CompanySettingScreen(),
       );
     },
+    CompanyShowQrRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CompanyShowQrScreen(),
+      );
+    },
     CustomerAreaLoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -198,6 +204,20 @@ class CompanySettingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CompanySettingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CompanyShowQrScreen]
+class CompanyShowQrRoute extends PageRouteInfo<void> {
+  const CompanyShowQrRoute({List<PageRouteInfo>? children})
+      : super(
+          CompanyShowQrRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyShowQrRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
