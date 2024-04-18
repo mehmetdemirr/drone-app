@@ -1,11 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/product/company_cash/view/company_cash_screen.dart';
 import 'package:demo/product/company_home/view/company_home_screen.dart';
 import 'package:demo/product/company_login/view/company_login_screen.dart';
 import 'package:demo/product/company_order/view/company_order_screen.dart';
 import 'package:demo/product/company_order_detail/view/company_order_detail_screen.dart';
+import 'package:demo/product/company_products/view/company_products_screen.dart';
 import 'package:demo/product/company_setting/view/company_setting_screen.dart';
 import 'package:demo/product/company_show_qr/view/company_show_qr_screen.dart';
+import 'package:demo/product/company_statistic/view/company_statistic_screen.dart';
 import 'package:demo/product/customer_area_login/view/customer_area_login_screen.dart';
+import 'package:demo/product/customer_cash/view/customer_cash_screen.dart';
 import 'package:demo/product/customer_home/view/customer_home_screen.dart';
 import 'package:demo/product/customer_login/view/customer_login_screem.dart';
 import 'package:demo/product/customer_order_confirm/view/customer_order_confirm_screen.dart';

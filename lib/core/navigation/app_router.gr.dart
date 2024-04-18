@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    CompanyCashRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CompanyCashScreen(),
+      );
+    },
     CompanyHomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -39,6 +45,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CompanyOrderScreen(),
       );
     },
+    CompanyProductsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CompanyProductsScreen(),
+      );
+    },
     CompanySettingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -51,10 +63,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CompanyShowQrScreen(),
       );
     },
+    CompanyStatisticRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CompanyStatisticScreen(),
+      );
+    },
     CustomerAreaLoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const CustomerAreaLoginScreen(),
+      );
+    },
+    CustomerCashRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CustomerCashScreen(),
       );
     },
     CustomerHomeRoute.name: (routeData) {
@@ -139,6 +163,20 @@ abstract class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
+/// [CompanyCashScreen]
+class CompanyCashRoute extends PageRouteInfo<void> {
+  const CompanyCashRoute({List<PageRouteInfo>? children})
+      : super(
+          CompanyCashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyCashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [CompanyHomeScreen]
 class CompanyHomeRoute extends PageRouteInfo<void> {
   const CompanyHomeRoute({List<PageRouteInfo>? children})
@@ -195,6 +233,20 @@ class CompanyOrderRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CompanyProductsScreen]
+class CompanyProductsRoute extends PageRouteInfo<void> {
+  const CompanyProductsRoute({List<PageRouteInfo>? children})
+      : super(
+          CompanyProductsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyProductsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [CompanySettingScreen]
 class CompanySettingRoute extends PageRouteInfo<void> {
   const CompanySettingRoute({List<PageRouteInfo>? children})
@@ -223,6 +275,20 @@ class CompanyShowQrRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CompanyStatisticScreen]
+class CompanyStatisticRoute extends PageRouteInfo<void> {
+  const CompanyStatisticRoute({List<PageRouteInfo>? children})
+      : super(
+          CompanyStatisticRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyStatisticRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [CustomerAreaLoginScreen]
 class CustomerAreaLoginRoute extends PageRouteInfo<void> {
   const CustomerAreaLoginRoute({List<PageRouteInfo>? children})
@@ -232,6 +298,20 @@ class CustomerAreaLoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CustomerAreaLoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CustomerCashScreen]
+class CustomerCashRoute extends PageRouteInfo<void> {
+  const CustomerCashRoute({List<PageRouteInfo>? children})
+      : super(
+          CustomerCashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CustomerCashRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/product/company_cash/view/company_cash_screen.dart';
 import 'package:demo/product/company_order/view/company_order_screen.dart';
+import 'package:demo/product/company_products/view/company_products_screen.dart';
 import 'package:demo/product/company_setting/view/company_setting_screen.dart';
+import 'package:demo/product/company_statistic/view/company_statistic_screen.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -15,15 +18,9 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
 
   final List _pages = [
     const CompanyOrderScreen(),
-    const Center(
-      child: Text("İstatistik"),
-    ),
-    const Center(
-      child: Text("Ürünler"),
-    ),
-    const Center(
-      child: Text("Kasa"),
-    ),
+    const CompanyStatisticScreen(),
+    const CompanyProductsScreen(),
+    const CompanyCashScreen(),
     const CompanySettingScreen(),
   ];
 

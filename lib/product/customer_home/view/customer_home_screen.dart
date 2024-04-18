@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/product/customer_basket/view/customer_basket_screen.dart';
+import 'package:demo/product/customer_cash/view/customer_cash_screen.dart';
 import 'package:demo/product/customer_products/view/customer_products_screen.dart';
 import 'package:demo/product/customer_setting/view/customer_setting_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +17,12 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
 
   final List _pages = [
     const Center(
-      child: Text("Ana Sayfam"),
+      child: Text(
+          "Ana Sayfam (sayfa oluşturlmadı toplu istatistik vs koyarız galiba)"),
     ),
     const CustomerProductsScreen(),
     const CustomerBasketScreen(),
-    const Center(
-      child: Text("Kasa \n Daha önce ödedikleri ve şuan ödeyeceği miktarlar"),
-    ),
+    const CustomerCashScreen(),
     const CustomerSettingScreen(),
   ];
 
