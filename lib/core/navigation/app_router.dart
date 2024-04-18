@@ -4,9 +4,11 @@ import 'package:demo/product/company_login/view/company_login_screen.dart';
 import 'package:demo/product/company_order/view/company_order_screen.dart';
 import 'package:demo/product/company_order_detail/view/company_order_detail_screen.dart';
 import 'package:demo/product/company_setting/view/company_setting_screen.dart';
+import 'package:demo/product/customer_area_login/view/customer_area_login_screen.dart';
 import 'package:demo/product/customer_home/view/customer_home_screen.dart';
 import 'package:demo/product/customer_login/view/customer_login_screem.dart';
 import 'package:demo/product/customer_order_confirm/view/customer_order_confirm_screen.dart';
+import 'package:demo/product/customer_setting/view/customer_setting_screen.dart';
 import 'package:demo/product/general/view/order_success_screen.dart';
 import 'package:demo/product/home_screen/home_screen.dart';
 import 'package:demo/product/network_work_screen/view/post_screen.dart';
@@ -28,11 +30,16 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           path: RouterItem.splash.str(),
           page: SplashRoute.page,
+          initial: true,
         ),
         // for customer
         AutoRoute(
           path: RouterItem.customerLogin.str(),
           page: CustomerLoginRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.customerAreaLogin.str(),
+          page: CustomerAreaLoginRoute.page,
         ),
         AutoRoute(
           path: RouterItem.customerHome.str(),
@@ -54,6 +61,14 @@ class AppRouter extends _$AppRouter {
           path: RouterItem.customerOrderSucces.str(),
           page: OrderSuccessRoute.page,
         ),
+        AutoRoute(
+          path: RouterItem.customerSetting.str(),
+          page: CustomerSettingRoute.page,
+        ),
+        AutoRoute(
+          path: RouterItem.customerSetting.str(),
+          page: CustomerSettingRoute.page,
+        ),
 
         // for company
         AutoRoute(
@@ -63,7 +78,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           path: RouterItem.companyHome.str(),
           page: CompanyHomeRoute.page,
-          initial: true,
         ),
         AutoRoute(
           path: RouterItem.companyOrderDetail.str(),
@@ -98,12 +112,14 @@ enum RouterItem {
   splash,
   //customer
   customerLogin,
+  customerAreaLogin,
   qr,
   productDetail,
   companyLogin,
   customerHome,
   customerOrderConfirm,
   customerOrderSucces,
+  customerSetting,
   //company
   companyHome,
   companyOrderDetail,
@@ -129,10 +145,14 @@ extension RouterItems on RouterItem {
         return "/productDetail";
       case RouterItem.customerLogin:
         return "/customerLogin";
+      case RouterItem.customerAreaLogin:
+        return "/customerAreaLogin";
       case RouterItem.customerOrderConfirm:
         return "/customerOrderConfirm";
       case RouterItem.customerOrderSucces:
         return "/customerOrderSucces";
+      case RouterItem.customerSetting:
+        return "/customerSetting";
 
       //company
       case RouterItem.companyLogin:

@@ -15,6 +15,9 @@ class _CustomerBasketScreenState extends State<CustomerBasketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Sepetim"),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -69,12 +72,13 @@ class _CustomerBasketScreenState extends State<CustomerBasketScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: Container(
-          height: 50,
+          height: 60,
           decoration: const BoxDecoration(
             color: Colors.transparent,
           ),
           child: Column(
             children: [
+              const Text("Toplam Tutar : 12.44"),
               InkWell(
                 onTap: () {
                   context.router

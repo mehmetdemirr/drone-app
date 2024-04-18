@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(ImageItem.splash.str()),
-          const Text("Splash Screen"),
+          const Text("Powered by Belek University"),
         ],
       ),
     );

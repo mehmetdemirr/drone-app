@@ -45,6 +45,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CompanySettingScreen(),
       );
     },
+    CustomerAreaLoginRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CustomerAreaLoginScreen(),
+      );
+    },
     CustomerHomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -61,6 +67,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const CustomerOrderConfirmScreen(),
+      );
+    },
+    CustomerSettingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CustomerSettingScreen(),
       );
     },
     GetImageRoute.name: (routeData) {
@@ -191,6 +203,20 @@ class CompanySettingRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CustomerAreaLoginScreen]
+class CustomerAreaLoginRoute extends PageRouteInfo<void> {
+  const CustomerAreaLoginRoute({List<PageRouteInfo>? children})
+      : super(
+          CustomerAreaLoginRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CustomerAreaLoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [CustomerHomeScreen]
 class CustomerHomeRoute extends PageRouteInfo<void> {
   const CustomerHomeRoute({List<PageRouteInfo>? children})
@@ -228,6 +254,20 @@ class CustomerOrderConfirmRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CustomerOrderConfirmRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CustomerSettingScreen]
+class CustomerSettingRoute extends PageRouteInfo<void> {
+  const CustomerSettingRoute({List<PageRouteInfo>? children})
+      : super(
+          CustomerSettingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CustomerSettingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

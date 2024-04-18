@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 @RoutePage()
 class CustomerOrderConfirmScreen extends StatefulWidget {

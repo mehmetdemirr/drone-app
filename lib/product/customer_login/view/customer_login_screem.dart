@@ -100,7 +100,7 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                           //tüm routları temizle sadece customer ana sayfa kalsın
                           context.router.replaceAll(
                             [
-                              const CustomerHomeRoute(),
+                              const CustomerAreaLoginRoute(),
                             ],
                           );
                         } else {

@@ -1,8 +1,4 @@
-import 'dart:math';
-
 import 'package:auto_route/auto_route.dart';
-import 'package:demo/core/log/log.dart';
-import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/company_order/view/company_order_screen.dart';
 import 'package:demo/product/company_setting/view/company_setting_screen.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +44,7 @@ class _CompanyHomeScreenState extends State<CompanyHomeScreen> {
         unselectedItemColor: Colors.grey,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart_outlined), label: "Ana Sayfa"),
+              icon: Icon(Icons.shopping_cart_outlined), label: "Siparişler"),
           BottomNavigationBarItem(
               icon: Icon(Icons.trending_up_outlined), label: "İstatistik"),
           BottomNavigationBarItem(
