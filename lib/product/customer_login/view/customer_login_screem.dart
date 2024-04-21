@@ -1,7 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/cache/shared_pref.dart';
 import 'package:demo/core/log/log.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/utilty/images_items.dart';
+import 'package:demo/product/customer_login/model/customer_token_model.dart';
+import 'package:demo/product/customer_login/service/customer_login_service.dart';
+import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -13,9 +17,8 @@ class CustomerLoginScreen extends StatefulWidget {
 }
 
 class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
-  TextEditingController mail =
-      TextEditingController(text: "customer@droneapp.com");
-  TextEditingController password = TextEditingController(text: "12345678");
+  TextEditingController mail = TextEditingController(text: "test@gmail.com");
+  TextEditingController password = TextEditingController(text: "123456");
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -94,21 +97,37 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          EasyLoading.showSuccess("Giriş başarılı ");
-                          //tüm routları temizle sadece customer ana sayfa kalsın
-                          context.router.replaceAll(
-                            [
-                              const CustomerAreaLoginRoute(),
-                            ],
-                          );
+                          BaseResponse<CustomerTokenModel> response =
+                              await CustomerLoginService()
+                                  .customerLogin(mail.text, password.text);
+                          if (response.succeeded &&
+                              response.data?.token != null) {
+                            SharedPref()
+                                .setCustomerToken(response.data?.token ?? "");
+                            EasyLoading.showSuccess("Giriş başarılı ");
+                            //tüm routları temizle sadece customer ana sayfa kalsın
+                            // ignore: use_build_context_synchronously
+                            context.router.replaceAll(
+                              [
+                                const CustomerAreaLoginRoute(),
+                              ],
+                            );
+                          }
                         } else {
                           EasyLoading.showError(
                               "Verileri düzgün formatta giriniz!");
                         }
                       },
                       child: const Text("Giriş"),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        context.router
+                            .replaceNamed(RouterItem.customerRegister.str());
+                      },
+                      child: const Text("Hesabın yok mu ? Kayıt Ol"),
                     ),
                   ],
                 ),

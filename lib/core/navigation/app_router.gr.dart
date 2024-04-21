@@ -210,12 +210,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const OrderSuccessScreen(),
       );
     },
-    PostRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const PostScreen(),
-      );
-    },
     QRViewExampleRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -728,20 +722,6 @@ class OrderSuccessRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'OrderSuccessRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [PostScreen]
-class PostRoute extends PageRouteInfo<void> {
-  const PostRoute({List<PageRouteInfo>? children})
-      : super(
-          PostRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'PostRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

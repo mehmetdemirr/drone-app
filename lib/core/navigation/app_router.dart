@@ -25,7 +25,6 @@ import 'package:demo/product/customer_setting/view/customer_setting_screen.dart'
 import 'package:demo/product/customer_statistic/view/customer_statistic_screen.dart';
 import 'package:demo/product/general/view/order_success_screen.dart';
 import 'package:demo/product/home_screen/home_screen.dart';
-import 'package:demo/product/network_work_screen/view/post_screen.dart';
 import 'package:demo/product/customer_product_detail/view/customer_product_detail_screen.dart';
 import 'package:demo/product/qr_screen/view/qr_screen.dart';
 import 'package:demo/product/setting_screen/setting_screen.dart';
@@ -156,10 +155,6 @@ class AppRouter extends _$AppRouter {
           page: SettingRoute.page,
         ),
         AutoRoute(
-          path: RouterItem.post.str(),
-          page: PostRoute.page,
-        ),
-        AutoRoute(
           path: RouterItem.getImage.str(),
           page: GetImageRoute.page,
         ),
@@ -197,7 +192,6 @@ enum RouterItem {
   //other
   home,
   setting,
-  post,
   getImage,
 }
 
@@ -265,8 +259,6 @@ extension RouterItems on RouterItem {
         return "/home";
       case RouterItem.setting:
         return "/setting";
-      case RouterItem.post:
-        return "/post";
       case RouterItem.getImage:
         return "/getImage";
     }
