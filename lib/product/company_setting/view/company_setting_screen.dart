@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/theme/dark_theme.dart';
 import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
+import 'package:demo/core/utilty/images_items.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,29 +26,82 @@ class _CompanySettingScreenState extends State<CompanySettingScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  "Tema Değiştir",
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const Spacer(),
-                _switchTheme(
-                    context, context.watch<ThemeNotifier>().getTheme()),
-              ],
+            Image.asset(
+              width: context.width / 3,
+              ImageItem.companyIcon.str(),
             ),
-            const SizedBox(
-              height: 15,
+            Text(
+              "Antalya Belek Üniversitesi",
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: Colors.black54,
+                    fontStyle: FontStyle.italic,
+                  ),
             ),
-            Row(
-              children: [
-                Text(
-                  "Dil Seçenekleri",
-                  style: Theme.of(context).textTheme.titleMedium,
+            Card(
+              child: SizedBox(
+                width: context.width,
+                height: 60,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Tema Değiştir",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const Spacer(),
+                      _switchTheme(
+                          context, context.watch<ThemeNotifier>().getTheme()),
+                    ],
+                  ),
                 ),
-                const Spacer(),
-                const Text("Gelecek..."),
-              ],
+              ),
+            ),
+            Card(
+              child: SizedBox(
+                width: context.width,
+                height: 60,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Dil Seçenekleri",
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const Spacer(),
+                      const Text("Gelecek..."),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                context.navigateNamedTo(RouterItem.companyFeedBack.str());
+              },
+              child: Card(
+                child: SizedBox(
+                  width: context.width,
+                  height: 60,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Geri Bildirim",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const Spacer(),
+                        const Icon(Icons.arrow_forward),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
             const Spacer(),
             InkWell(

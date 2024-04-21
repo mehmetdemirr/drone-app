@@ -104,6 +104,13 @@ class _CompanyLoginScreenState extends State<CompanyLoginScreen> {
                       },
                       child: const Text("Qr gösterme girişi"),
                     ),
+                    TextButton(
+                      onPressed: () {
+                        context.router
+                            .replaceNamed(RouterItem.companyRegister.str());
+                      },
+                      child: const Text("Şirket hesabın yok mu ? Kayıt Ol"),
+                    ),
                   ],
                 ),
               ),

@@ -2,10 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/utilty/images_items.dart';
-import 'package:demo/product/company_product_detail/view/company_product_detail_screen.dart';
-import 'package:demo/product/company_product_edit/view/company_product_edit_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 @RoutePage()
 class CompanyProductsScreen extends StatefulWidget {

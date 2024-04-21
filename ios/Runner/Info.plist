@@ -51,6 +51,17 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>This app needs camera access to scan QR codes</string>
+	<!--Location-->
+	<key>NSLocationAlwaysUsageDescription</key>	
+	<string>I need it location </string>	
+	<key>NSLocationWhenInUseUsageDescription</key>	
+	<string>Because</string>
+	<!--Location background work-->
+	<!-- <key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array> -->
+
 	
 </dict>
 </plist>

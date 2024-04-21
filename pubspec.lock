@@ -709,6 +709,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  location:
+    dependency: "direct main"
+    description:
+      name: location
+      sha256: "2d88e4ffb464d0ca5510e7edd29723ab762c43479de39d2d19ed6194f5b6d624"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.1"
+  location_platform_interface:
+    dependency: transitive
+    description:
+      name: location_platform_interface
+      sha256: "2ecde6bb0f88032b0bbbde37e18975b4468711dd92619c2235cc0c0ee93b4b8e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
+  location_web:
+    dependency: transitive
+    description:
+      name: location_web
+      sha256: "15ad7b4c8a9f55abee513373755e093a40c04d7e24fc1b4f89676fe99523d034"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.1"
   logger:
     dependency: transitive
     description:
@@ -781,6 +805,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.0"
+  onesignal_flutter:
+    dependency: "direct main"
+    description:
+      name: onesignal_flutter
+      sha256: "3435b1b7d422932683f145f8110e68628c005ec7807d83123729392de684c36f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.1.5"
   package_config:
     dependency: transitive
     description:
@@ -1130,6 +1162,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_charts:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_charts
+      sha256: f3327077c4816573895b15545ea85b12c6a6cab7f8c2cde1a7eec05c36bfb432
+      url: "https://pub.dev"
+    source: hosted
+    version: "25.1.40"
+  syncfusion_flutter_core:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_core
+      sha256: "8e19260d292ed77e1cbd4ee1baafb3c9486079cad856e7891478131d25076039"
+      url: "https://pub.dev"
+    source: hosted
+    version: "25.1.40"
   term_glyph:
     dependency: transitive
     description:

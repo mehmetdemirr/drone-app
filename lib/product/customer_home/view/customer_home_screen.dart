@@ -3,6 +3,7 @@ import 'package:demo/product/customer_basket/view/customer_basket_screen.dart';
 import 'package:demo/product/customer_cash/view/customer_cash_screen.dart';
 import 'package:demo/product/customer_products/view/customer_products_screen.dart';
 import 'package:demo/product/customer_setting/view/customer_setting_screen.dart';
+import 'package:demo/product/customer_statistic/view/customer_statistic_screen.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -16,10 +17,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   int _selectedTab = 0;
 
   final List _pages = [
-    const Center(
-      child: Text(
-          "Ana Sayfam (sayfa oluşturlmadı toplu istatistik vs koyarız galiba)"),
-    ),
+    const CustomerStatisticScreen(),
     const CustomerProductsScreen(),
     const CustomerBasketScreen(),
     const CustomerCashScreen(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyInput extends StatefulWidget {
-  final controler;
+  final TextEditingController controler;
   final String hint;
 
   const MyInput({

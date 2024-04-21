@@ -76,7 +76,7 @@ class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
                         vertical: 180, horizontal: 90),
                     child: CustomPaint(
                       foregroundPainter: BorderPainter(),
-                      child: Container(
+                      child: SizedBox(
                         // decoration: BoxDecoration(
                         //   color: Colors.grey.shade100,
                         //   borderRadius: const BorderRadius.all(

@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
  <!--
       Granular media permissions for Android 13 and newer.
       See https://developer.android.com/about/versions/13/behavior-changes-13#granular-media-permissions
@@ -7,12 +8,20 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
-
+    <!--Location service-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     <!-- Permissions options for the `camera` group -->
     <uses-permission android:name="android.permission.CAMERA"/>
 
         <!-- Permissions options for the `notification` group -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <!-- Permissions options for the `alarm` group -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <!-- Permissions options for the `access notification policy` group -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
       <!--#docregion android-queries-->
   <!-- Provide required visibility configuration for API level 30 and above -->

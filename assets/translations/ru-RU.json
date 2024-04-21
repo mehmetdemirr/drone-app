@@ -1,5 +1,5 @@
 {
-    "hello":"türkçe merhaba",
+    "hello":"rusça merhaba",
 
     "ocak":"Ocak",
     "subat":"Şubat",
@@ -12,14 +12,12 @@
     "eylul":"Eylül",
     "ekim":"Ekim",
     "kasim":"Kasım",
-    "aralik":"Aralık",
 
-    "pazartesi":"Pazartesi",
-    "sali":"Salı",
-    "carsamba":"Çarşamba",
-    "persembe":"Perşembe",
-    "cuma":"Cuma",
-    "cumartesi":"Cumartesi",
-    "pazar":"Pazar"
-
+    "pazartesi":"Aralık",
+    "sali":"Aralık",
+    "carsamba":"Aralık",
+    "persembe":"Aralık",
+    "cuma":"Aralık",
+    "cumartesi":"Aralık",
+    "pazar":"Aralık"
 }

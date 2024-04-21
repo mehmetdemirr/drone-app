@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/extension/string_extension.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/theme/dark_theme.dart';
 import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
+import 'package:demo/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -45,8 +47,12 @@ class _CustomerSettingScreenState extends State<CustomerSettingScreen> {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const Spacer(),
-                const Text("Gelecek..."),
+                const Text("Otomatik Cihaz dili yaptım"),
               ],
+            ),
+            Text(
+              LocaleKeys.hello.locale,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const Spacer(),
             InkWell(

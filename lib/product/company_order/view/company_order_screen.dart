@@ -85,7 +85,7 @@ class _CompanyOrderScreenState extends State<CompanyOrderScreen> {
                         color: Colors.black38,
                       ),
                 ),
-                //TODO iptal daha sonra eklenebilir
+                // iptal daha sonra eklenebilir
                 // Text(
                 //   "İptal",
                 //   style: Theme.of(context).textTheme.titleSmall?.copyWith(

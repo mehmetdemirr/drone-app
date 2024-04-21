@@ -1,4 +1,5 @@
-import 'package:demo/product/company_order_detail/widget/myInput.dart';
+import 'package:demo/core/log/log.dart';
+import 'package:demo/product/company_order_detail/widget/my_input.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -54,7 +55,7 @@ class _FlutterMapExampleState extends State<FlutterMapExample> {
                       var url =
                           'http://router.project-osrm.org/route/v1/driving/$v2,$v1;$v4,$v3?steps=true&annotations=true&geometries=geojson&overview=full';
                       var response = await Dio().get(url);
-                      print(response.data);
+                      Log.info(response.data);
                       setState(() {
                         routpoints = [];
                         var ruter = response.data['routes'][0]['geometry']
@@ -69,7 +70,7 @@ class _FlutterMapExampleState extends State<FlutterMapExample> {
                               double.parse(lat1[1]), double.parse(long1[0])));
                         }
                         isVisible = !isVisible;
-                        print(routpoints);
+                        Log.info(routpoints);
                       });
                     },
                     child: const Text('Press')),
@@ -82,10 +83,10 @@ class _FlutterMapExampleState extends State<FlutterMapExample> {
                   child: Visibility(
                     visible: isVisible,
                     child: FlutterMap(
-                      options: MapOptions(
-                        center: routpoints[0],
-                        zoom: 10,
-                      ),
+                      options: const MapOptions(
+                          // center: routpoints[0],
+                          // zoom: 10,
+                          ),
                       // nonRotatedChildren: [
                       //   AttributionWidget.defaultWidget(
                       //       source: 'OpenStreetMap contributors',
@@ -101,9 +102,10 @@ class _FlutterMapExampleState extends State<FlutterMapExample> {
                           polylineCulling: false,
                           polylines: [
                             Polyline(
-                                points: routpoints,
-                                color: Colors.blue,
-                                strokeWidth: 9)
+                              points: routpoints,
+                              color: Colors.blue,
+                              strokeWidth: 9,
+                            )
                           ],
                         )
                       ],
