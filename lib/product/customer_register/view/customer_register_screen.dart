@@ -150,19 +150,15 @@ class _CustomerRegisterScreenState extends State<CustomerRegisterScreen> {
                         );
                         if (response.succeeded &&
                             response.data?.token != null) {
-                          await SharedPref()
-                              .setCustomerToken(response.data?.token ?? "")
-                              .then((value) {
-                            EasyLoading.showSuccess(
-                                response.message ?? "Kayıt Yapıldı");
-                            //tüm routları temizle sadece customer ana sayfa kalsın
-                            // ignore: use_build_context_synchronously
-                            context.router.replaceAll(
-                              [
-                                const CustomerHomeRoute(),
-                              ],
-                            );
-                          });
+                          EasyLoading.showSuccess(
+                              response.message ?? "Kayıt Yapıldı");
+                          //tüm routları temizle sadece customer ana sayfa kalsın
+                          // ignore: use_build_context_synchronously
+                          context.router.replaceAll(
+                            [
+                              const CustomerLoginRoute(),
+                            ],
+                          );
                         } else {
                           EasyLoading.showError(
                               "Kayıt başarısız ! \nError:${response.message}-${response.errors}");

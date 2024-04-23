@@ -57,9 +57,7 @@ class CompanyCustomersService extends ApiService {
   }
 
   //içerdeki aktif kullanıcılar
-  Future<BaseResponse<List<CompanyCustomerUserModel>?>> activeUsersCompany(
-    int id,
-  ) {
+  Future<BaseResponse<List<CompanyCustomerUserModel>?>> activeUsersCompany() {
     return requestMethod<List<CompanyCustomerUserModel>?>(
       path: '/company/active-users',
       headers: {
@@ -74,20 +72,16 @@ class CompanyCustomersService extends ApiService {
         }
         return null;
       },
-      requestModel: {
-        "id": id, // User_id değil active Usersdeki id (pivot id)
-      },
+      requestModel: null,
       queryParameters: null,
       method: HttpMethod.post,
     );
   }
 
   //içerdeki aktif olmayan kullanıcılar
-  Future<BaseResponse<List<CompanyCustomerUserModel>?>> inactiveUsersCompany(
-    int id,
-  ) {
+  Future<BaseResponse<List<CompanyCustomerUserModel>?>> inactiveUsersCompany() {
     return requestMethod<List<CompanyCustomerUserModel>?>(
-      path: '/company/active-users',
+      path: '/company/inactive-users',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -100,9 +94,7 @@ class CompanyCustomersService extends ApiService {
         }
         return null;
       },
-      requestModel: {
-        "id": id, // User_id değil active Usersdeki id (pivot id)
-      },
+      requestModel: null,
       queryParameters: null,
       method: HttpMethod.post,
     );

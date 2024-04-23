@@ -90,6 +90,10 @@ class AppRouter extends _$AppRouter {
           path: RouterItem.customerStatistic.str(),
           page: CustomerStatisticRoute.page,
         ),
+        AutoRoute(
+          path: RouterItem.customerWaitingRoom.str(),
+          page: CustomerWaitingRoomRoute.page,
+        ),
         // for company
         AutoRoute(
           path: RouterItem.companyLogin.str(),
@@ -186,6 +190,7 @@ enum RouterItem {
   customerOrderSucces,
   customerSetting,
   customerStatistic,
+  customerWaitingRoom,
   //company
   companyLogin,
   companyRegister,
@@ -235,6 +240,8 @@ extension RouterItems on RouterItem {
         return "/customerSetting";
       case RouterItem.customerStatistic:
         return "/customerStatistic";
+      case RouterItem.customerWaitingRoom:
+        return "/customerWaitingRoom";
 
       //company
       case RouterItem.companyLogin:

@@ -6,7 +6,10 @@ import 'package:demo/core/theme/dark_theme.dart';
 import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
 import 'package:demo/generated/locale_keys.g.dart';
+import 'package:demo/product/customer_area_login/service/customer_company_service.dart';
+import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -58,14 +61,22 @@ class _CustomerSettingScreenState extends State<CustomerSettingScreen> {
             const Spacer(),
             InkWell(
               onTap: () async {
-                await SharedPref().clearAll().then((value) {
-                  //tüm routları temizle sadece splash kalsın
-                  context.router.replaceAll(
-                    [
-                      const SplashRoute(),
-                    ],
-                  );
-                });
+                BaseResponse response =
+                    await CustomerCompanyService().userLogoutCompany();
+                if (response.succeeded) {
+                  EasyLoading.showSuccess("Tesisten Çıkış Başarılı !");
+                  await SharedPref().clearAll().then((value) {
+                    //tüm routları temizle sadece splash kalsın
+                    context.router.replaceAll(
+                      [
+                        const SplashRoute(),
+                      ],
+                    );
+                  });
+                } else {
+                  EasyLoading.showError(
+                      "Tesisten Çıkış Başarısız.Error:${response.errors}-${response.message}");
+                }
               },
               child: Text(
                 "Çıkış Yap",

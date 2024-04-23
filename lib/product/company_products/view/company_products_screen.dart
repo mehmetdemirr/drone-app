@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/utilty/images_items.dart';
-import 'package:demo/product/company_products/service/company_product_service.dart';
+import 'package:demo/product/company_products/model/get_all_product_model.dart';
+import 'package:demo/product/company_products/viewmodel/company_products_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class CompanyProductsScreen extends StatefulWidget {
@@ -16,9 +18,12 @@ class _CompanyProductsScreenState extends State<CompanyProductsScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero).then((value) async {
-      await CompanyProductService().getAllProduct();
-      await CompanyProductService().getByIdProduct(1);
+    Future.microtask(() async {
+      setState(() {
+        Future.delayed(Duration.zero).then((value) async {
+          context.read<CompanyProductViewModel>().productListFetch();
+        });
+      });
     });
   }
 
@@ -67,18 +72,38 @@ class _CompanyProductsScreenState extends State<CompanyProductsScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: GridView.builder(
-                itemCount: 15,
+      body: context.watch<CompanyProductViewModel>().isLoading
+          ? const Center(child: CircularProgressIndicator.adaptive())
+          : Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _gridviewBuilderProduct(
+                        context.watch<CompanyProductViewModel>().productList),
+                  ),
+                ),
+              ],
+            ),
+    );
+  }
+
+  Widget _gridviewBuilderProduct(List<CompanyProductModel>? list) {
+    return list == null
+        ? const Text("ürünler yüklenemedi !")
+        : list.isEmpty
+            ? const Text("Ürün listeniz boş !")
+            : GridView.builder(
+                itemCount: list.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, childAspectRatio: 0.8),
                 itemBuilder: (context, index) {
                   double cardWidth = context.width / 2 - 10;
                   return InkWell(
                     onTap: () {
-                      context.navigateTo(CompanyProductDetailRoute(id: 1));
+                      context.navigateTo(
+                        CompanyProductDetailRoute(id: list[index].id),
+                      );
                     },
                     child: SizedBox(
                       height: context.height / 2,
@@ -99,7 +124,7 @@ class _CompanyProductsScreenState extends State<CompanyProductsScreen> {
                                 height: 8,
                               ),
                               Text(
-                                "Su",
+                                list[index].title,
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleMedium
@@ -110,7 +135,7 @@ class _CompanyProductsScreenState extends State<CompanyProductsScreen> {
                               Row(
                                 children: [
                                   Text(
-                                    "10,34",
+                                    list[index].price,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleMedium
@@ -165,10 +190,6 @@ class _CompanyProductsScreenState extends State<CompanyProductsScreen> {
                       ),
                     ),
                   );
-                }),
-          ),
-        ],
-      ),
-    );
+                });
   }
 }

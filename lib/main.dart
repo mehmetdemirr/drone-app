@@ -4,7 +4,10 @@ import 'package:demo/core/network_control/no_network_widget.dart';
 import 'package:demo/core/theme/dark_theme.dart';
 import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
+import 'package:demo/product/company_customer/viewmodel/company_customer_viewmodel.dart';
+import 'package:demo/product/company_products/viewmodel/company_products_viewmodel.dart';
 import 'package:demo/product/customer_login/viewmodel/customer_login_viewmodel.dart';
+import 'package:demo/product/customer_products/viewmodel/customer_product_viewmodel.dart';
 import 'package:demo/product/home_screen/home_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +38,15 @@ void main() async {
         ),
         ChangeNotifierProvider<CustomerLoginViewModel>(
           create: (_) => CustomerLoginViewModel(),
+        ),
+        ChangeNotifierProvider<CompanyCustomerViewModel>(
+          create: (_) => CompanyCustomerViewModel(),
+        ),
+        ChangeNotifierProvider<CompanyProductViewModel>(
+          create: (_) => CompanyProductViewModel(),
+        ),
+        ChangeNotifierProvider<CustomerProductViewModel>(
+          create: (_) => CustomerProductViewModel(),
         ),
       ],
       child: EasyLocalization(

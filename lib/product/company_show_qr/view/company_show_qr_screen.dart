@@ -12,10 +12,17 @@ class CompanyShowQrScreen extends StatefulWidget {
 }
 
 class _CompanyShowQrScreenState extends State<CompanyShowQrScreen> {
+  int? companyId;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    Future.microtask(() async {
+      setState(() {
+        Future.delayed(Duration.zero).then((value) async {
+          companyId = await SharedPref().getCompanyId() ?? 0;
+        });
+      });
+    });
   }
 
   @override
@@ -41,19 +48,23 @@ class _CompanyShowQrScreenState extends State<CompanyShowQrScreen> {
               },
               icon: const Icon(Icons.exit_to_app_outlined),
             ),
-            Text(
-              "Belek Üniversitesi",
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+            // Text(
+            //   "Belek Üniversitesi",
+            //   style: Theme.of(context).textTheme.titleMedium,
+            // ),
             const SizedBox(
               height: 16,
             ),
-            PrettyQrView.data(
-              data: 'lorem ipsum dolor sit amet',
-              decoration: const PrettyQrDecoration(
-                image: PrettyQrDecorationImage(
-                  image: AssetImage('assets/images/app_icon.png'),
-                ),
+            Text(companyId.toString() ?? "company id null"),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: PrettyQrView.data(
+                data: '$companyId',
+                // decoration: const PrettyQrDecoration(
+                //   image: PrettyQrDecorationImage(
+                //       // image: AssetImage('assets/images/app_icon.png'),
+                //       ),
+                // ),
               ),
             )
           ],

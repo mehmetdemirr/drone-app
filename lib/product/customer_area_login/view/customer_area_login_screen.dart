@@ -112,13 +112,26 @@ class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  EasyLoading.showSuccess("Giriş başarılı");
-                  //tüm routları temizle sadece customer ana sayfa kalsın
-                  context.router.replaceAll(
-                    [
-                      const CustomerHomeRoute(),
-                    ],
-                  );
+                  // burada company login yap
+                  if (true) {
+                    Future.delayed(Duration.zero).then((value) async {
+                      BaseResponse response =
+                          await CustomerCompanyService().userEnterCompany(1);
+                      if (response.succeeded) {
+                        EasyLoading.showSuccess("Giriş başarılı!");
+                        //tüm routları temizle sadece customer ana sayfa kalsın
+                        // ignore: use_build_context_synchronously
+                        context.router.replaceAll(
+                          [
+                            const CustomerWaitingRoomRoute(),
+                          ],
+                        );
+                      } else {
+                        EasyLoading.showError(
+                            "Şirkete giriş başarısız.Error:${response.message}-${response.errors}");
+                      }
+                    });
+                  }
                 },
                 child: const Text("Tesise giriş yap(şimdilik)"),
               ),
@@ -141,6 +154,13 @@ class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
                 .userEnterCompany(int.parse(result!.code ?? "-1"));
             if (response.succeeded) {
               EasyLoading.showSuccess("Giriş başarılı!");
+              //tüm routları temizle sadece customer ana sayfa kalsın
+              // ignore: use_build_context_synchronously
+              context.router.replaceAll(
+                [
+                  const CustomerWaitingRoomRoute(),
+                ],
+              );
             } else {
               EasyLoading.showError(
                   "Şirkete giriş başarısız.Error:${response.message}-${response.errors}");

@@ -6,7 +6,6 @@ import 'package:demo/product/customer_home/model/customer_info_model.dart';
 import 'package:demo/product/customer_home/service/customer_info_service.dart';
 import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 @RoutePage()
 class SplashScreen extends StatefulWidget {

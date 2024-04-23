@@ -7,7 +7,7 @@ class CustomerCompanyService extends ApiService {
     int companyId,
   ) {
     return requestMethod(
-      path: '/user/login-company',
+      path: '/user/company/login',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -24,7 +24,7 @@ class CustomerCompanyService extends ApiService {
 
   Future<BaseResponse> userLogoutCompany() {
     return requestMethod(
-      path: '/user/logout-company',
+      path: '/user/company/logout',
       headers: {
         'Content-Type': 'application/json',
       },
