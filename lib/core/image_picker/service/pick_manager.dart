@@ -14,6 +14,7 @@ abstract class IPickManager {
 class PickManager extends IPickManager {
   @override
   Future<XFile?> fetchImageGallery() async {
+    //TODO ios için izin farklıydı onu ayarla
     await Permission.photos.request();
     if (!await _iPermissionCheck.gallery()) {
       await AppSettings.openAppSettings();

@@ -9,7 +9,7 @@ class CustomerLoginService extends ApiService {
     String password,
   ) {
     return requestMethod<CustomerTokenModel>(
-      path: '/company/login',
+      path: '/auth/login',
       headers: {
         'Content-Type': 'application/json',
       },

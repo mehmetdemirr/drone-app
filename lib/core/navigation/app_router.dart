@@ -15,6 +15,7 @@ import 'package:demo/product/company_register/view/company_register_screen.dart'
 import 'package:demo/product/company_setting/view/company_setting_screen.dart';
 import 'package:demo/product/company_show_qr/view/company_show_qr_screen.dart';
 import 'package:demo/product/company_statistic/view/company_statistic_screen.dart';
+import 'package:demo/product/company_status_false/view/company_status_false_screen.dart';
 import 'package:demo/product/customer_area_login/view/customer_area_login_screen.dart';
 import 'package:demo/product/customer_cash/view/customer_cash_screen.dart';
 import 'package:demo/product/customer_home/view/customer_home_screen.dart';
@@ -139,6 +140,10 @@ class AppRouter extends _$AppRouter {
           path: RouterItem.companyFeedBack.str(),
           page: CompanyFeedBackRoute.page,
         ),
+        AutoRoute(
+          path: RouterItem.companyStatusFalse.str(),
+          page: CompanyStatusFalseRoute.page,
+        ),
         //company just qr show screen
         AutoRoute(
           path: RouterItem.companyShowQr.str(),
@@ -189,6 +194,7 @@ enum RouterItem {
   companyCash,
   companyCashEdit,
   companyFeedBack,
+  companyStatusFalse,
   //other
   home,
   setting,
@@ -249,6 +255,8 @@ extension RouterItems on RouterItem {
         return "/companyCashEdit";
       case RouterItem.companyFeedBack:
         return "/companyFeedBack";
+      case RouterItem.companyStatusFalse:
+        return "/companyStatusFalse";
 
       // işletme için sadece qr gösterme sayfası
       case RouterItem.companyShowQr:

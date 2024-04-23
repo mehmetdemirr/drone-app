@@ -50,7 +50,7 @@ class _QRViewExampleScreenState extends State<QRViewExampleScreen> {
                       'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
                   : const Text('Qr Tara'),
             ),
-          )
+          ),
         ],
       ),
     );

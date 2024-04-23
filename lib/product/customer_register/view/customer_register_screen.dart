@@ -1,5 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/cache/shared_pref.dart';
 import 'package:demo/core/navigation/app_router.dart';
+import 'package:demo/product/customer_login/model/customer_token_model.dart';
+import 'package:demo/product/customer_register/service/customer_register_service.dart';
+import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -136,15 +140,37 @@ class _CustomerRegisterScreenState extends State<CustomerRegisterScreen> {
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        EasyLoading.showSuccess("Giriş başarılı ");
-                        //tüm routları temizle sadece customer ana sayfa kalsın
-                        context.router.replaceAll(
-                          [
-                            const CompanyHomeRoute(),
-                          ],
+                        BaseResponse<CustomerTokenModel> response =
+                            await CustomerRegisterService().customerRegister(
+                          customerName.text,
+                          customerSurname.text,
+                          password.text,
+                          mail.text,
+                          phoneNumber.text,
                         );
+                        if (response.succeeded &&
+                            response.data?.token != null) {
+                          await SharedPref()
+                              .setCustomerToken(response.data?.token ?? "")
+                              .then((value) {
+                            EasyLoading.showSuccess(
+                                response.message ?? "Kayıt Yapıldı");
+                            //tüm routları temizle sadece customer ana sayfa kalsın
+                            // ignore: use_build_context_synchronously
+                            context.router.replaceAll(
+                              [
+                                const CustomerHomeRoute(),
+                              ],
+                            );
+                          });
+                        } else {
+                          EasyLoading.showError(
+                              "Kayıt başarısız ! \nError:${response.message}-${response.errors}");
+                        }
+
+                        //tüm routları temizle sadece customer ana sayfa kalsın
                       } else {
                         EasyLoading.showError(
                             "Verileri düzgün formatta giriniz!");

@@ -131,6 +131,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CompanyStatisticScreen(),
       );
     },
+    CompanyStatusFalseRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CompanyStatusFalseScreen(),
+      );
+    },
     CustomerAreaLoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -528,6 +534,20 @@ class CompanyStatisticRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CompanyStatisticRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CompanyStatusFalseScreen]
+class CompanyStatusFalseRoute extends PageRouteInfo<void> {
+  const CompanyStatusFalseRoute({List<PageRouteInfo>? children})
+      : super(
+          CompanyStatusFalseRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyStatusFalseRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

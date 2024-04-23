@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/utilty/images_items.dart';
+import 'package:demo/product/company_products/service/company_product_service.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -12,6 +13,15 @@ class CompanyProductsScreen extends StatefulWidget {
 }
 
 class _CompanyProductsScreenState extends State<CompanyProductsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero).then((value) async {
+      await CompanyProductService().getAllProduct();
+      await CompanyProductService().getByIdProduct(1);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

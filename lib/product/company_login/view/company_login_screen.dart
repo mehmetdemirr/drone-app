@@ -1,5 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/cache/shared_pref.dart';
 import 'package:demo/core/navigation/app_router.dart';
+import 'package:demo/product/company_login/service/company_login_service.dart';
+import 'package:demo/product/customer_login/model/customer_token_model.dart';
+import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -71,15 +75,39 @@ class _CompanyLoginScreenState extends State<CompanyLoginScreen> {
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          EasyLoading.showSuccess("Giriş başarılı ");
-                          //tüm routları temizle sadece customer ana sayfa kalsın
-                          context.router.replaceAll(
-                            [
-                              const CompanyHomeRoute(),
-                            ],
+                          BaseResponse<CustomerTokenModel?> response =
+                              await CompanyLoginService().companyLogin(
+                            mail.text,
+                            password.text,
                           );
+                          if (response.succeeded) {
+                            EasyLoading.showSuccess("Giriş başarılı ");
+                            //tüm routları temizle sadece company ana sayfa kalsın
+                            await SharedPref()
+                                .setCompanyToken(response.data?.token ?? "")
+                                .then((value) {
+                              // ignore: use_build_context_synchronously
+                              context.router.replaceAll(
+                                [
+                                  const CompanyHomeRoute(),
+                                ],
+                              );
+                            });
+                          } else {
+                            if (response.errors == "1") {
+                              // ignore: use_build_context_synchronously
+                              context.router.replaceAll(
+                                [
+                                  const CompanyStatusFalseRoute(),
+                                ],
+                              );
+                            } else {
+                              EasyLoading.showError(
+                                  "Giriş başarısız !\nError:${response.message}-${response.errors}");
+                            }
+                          }
                         } else {
                           EasyLoading.showError(
                               "Verileri düzgün formatta giriniz!");

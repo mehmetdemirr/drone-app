@@ -5,9 +5,11 @@ import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/utilty/images_items.dart';
 import 'package:demo/product/customer_login/model/customer_token_model.dart';
 import 'package:demo/product/customer_login/service/customer_login_service.dart';
+import 'package:demo/product/customer_login/viewmodel/customer_login_viewmodel.dart';
 import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class CustomerLoginScreen extends StatefulWidget {
@@ -79,9 +81,23 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: password,
-                      obscureText: false,
-                      decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.visibility_off),
+                      obscureText: context
+                          .watch<CustomerLoginViewModel>()
+                          .passwordVisible,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              context
+                                  .read<CustomerLoginViewModel>()
+                                  .passwordChangeVisible();
+                            },
+                            icon: Icon(
+                              context
+                                      .watch<CustomerLoginViewModel>()
+                                      .passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            )),
                         hintText: "Parolanızı giriniz",
                       ),
                       validator: (value) {
@@ -104,16 +120,22 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                                   .customerLogin(mail.text, password.text);
                           if (response.succeeded &&
                               response.data?.token != null) {
-                            SharedPref()
-                                .setCustomerToken(response.data?.token ?? "");
-                            EasyLoading.showSuccess("Giriş başarılı ");
-                            //tüm routları temizle sadece customer ana sayfa kalsın
-                            // ignore: use_build_context_synchronously
-                            context.router.replaceAll(
-                              [
-                                const CustomerAreaLoginRoute(),
-                              ],
-                            );
+                            await SharedPref()
+                                .setCustomerToken(response.data?.token ?? "")
+                                .then((value) {
+                              EasyLoading.showSuccess(
+                                  response.message ?? "Giriş Yapıldı");
+                              //tüm routları temizle sadece customer ana sayfa kalsın
+                              // ignore: use_build_context_synchronously
+                              context.router.replaceAll(
+                                [
+                                  const CustomerAreaLoginRoute(),
+                                ],
+                              );
+                            });
+                          } else {
+                            EasyLoading.showError(
+                                "Giriş başarısız ! \nError:${response.message}");
                           }
                         } else {
                           EasyLoading.showError(

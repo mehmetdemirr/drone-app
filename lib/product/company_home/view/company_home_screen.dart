@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/product/company_cash/view/company_cash_screen.dart';
+import 'package:demo/product/company_home/service/company_info_service.dart';
 import 'package:demo/product/company_order/view/company_order_screen.dart';
 import 'package:demo/product/company_products/view/company_products_screen.dart';
 import 'package:demo/product/company_setting/view/company_setting_screen.dart';

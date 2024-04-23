@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/cache/shared_pref.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/utilty/images_items.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,23 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2)).then((value) {
-      context.router.replaceNamed(RouterItem.customerLogin.str());
+    Future.delayed(const Duration(seconds: 2)).then((value) async {
+      String? companyToken = await SharedPref().getCompanyToken();
+      String? customerToken = await SharedPref().getCustomerToken();
+      int? companyId = await SharedPref().getCompanyId();
+      if (customerToken != null) {
+        // ignore: use_build_context_synchronously
+        context.router.replaceNamed(RouterItem.customerHome.str());
+      } else if (companyToken != null) {
+        // ignore: use_build_context_synchronously
+        context.router.replaceNamed(RouterItem.companyHome.str());
+      } else if (companyId != null) {
+        // ignore: use_build_context_synchronously
+        context.router.replaceNamed(RouterItem.companyShowQr.str());
+      } else {
+        // ignore: use_build_context_synchronously
+        context.router.replaceNamed(RouterItem.customerLogin.str());
+      }
     });
   }
 

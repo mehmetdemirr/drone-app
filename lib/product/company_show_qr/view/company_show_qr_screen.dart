@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/cache/shared_pref.dart';
+import 'package:demo/core/navigation/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
@@ -20,6 +22,19 @@ class _CompanyShowQrScreenState extends State<CompanyShowQrScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            IconButton(
+              onPressed: () async {
+                await SharedPref().clearAll().then((value) {
+                  //tüm routları temizle sadece splash kalsın
+                  context.router.replaceAll(
+                    [
+                      const SplashRoute(),
+                    ],
+                  );
+                });
+              },
+              icon: const Icon(Icons.exit_to_app_outlined),
+            ),
             Text(
               "Belek Üniversitesi",
               style: Theme.of(context).textTheme.titleMedium,

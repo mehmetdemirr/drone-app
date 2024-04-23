@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/cache/shared_pref.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/theme/dark_theme.dart';
@@ -105,14 +106,15 @@ class _CompanySettingScreenState extends State<CompanySettingScreen> {
             ),
             const Spacer(),
             InkWell(
-              onTap: () {
-                //TODO çıkış işlemlerini yap cache temizle //temayı- dil default yap
-                //tüm routları temizle sadece splash kalsın
-                context.router.replaceAll(
-                  [
-                    const SplashRoute(),
-                  ],
-                );
+              onTap: () async {
+                await SharedPref().clearAll().then((value) {
+                  //tüm routları temizle sadece splash kalsın
+                  context.router.replaceAll(
+                    [
+                      const SplashRoute(),
+                    ],
+                  );
+                });
               },
               child: Text(
                 "Çıkış Yap",

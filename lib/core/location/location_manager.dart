@@ -1,5 +1,4 @@
 import 'package:demo/core/log/log.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:location/location.dart';
 
 

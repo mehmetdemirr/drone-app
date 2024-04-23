@@ -23,7 +23,7 @@ class BaseResponse<T> {
   @JsonKey(name: 'errors')
   final String? errors;
 
-   @JsonKey(name: 'message')
+  @JsonKey(name: 'messages')
   final String? message;
 
   @JsonKey(name: 'succeeded')

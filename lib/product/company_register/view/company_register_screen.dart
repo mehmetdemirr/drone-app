@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/navigation/app_router.dart';
+import 'package:demo/product/company_register/service/company_register_service.dart';
+import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -96,7 +98,6 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
                       if (value.length < 6) {
                         return 'Parola 6 karakterden küçük olamaz !';
                       }
-
                       return null;
                     },
                   ),
@@ -115,7 +116,7 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
                       if (value.length < 6) {
                         return 'Parola 6 karakterden küçük olamaz !';
                       }
-                      if (passwordAgain.value != password.value) {
+                      if (value != password.text) {
                         return 'Parolalar uyuşmuyor !';
                       }
 
@@ -124,15 +125,28 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        EasyLoading.showSuccess("Giriş başarılı ");
-                        //tüm routları temizle sadece customer ana sayfa kalsın
-                        context.router.replaceAll(
-                          [
-                            const CompanyHomeRoute(),
-                          ],
+                        BaseResponse response =
+                            await CompanyRegisterService().companyRegister(
+                          companyName.text,
+                          phoneNumber.text,
+                          mail.text,
+                          password.text,
                         );
+                        if (response.succeeded) {
+                          EasyLoading.showSuccess("Kayıt başarılı ");
+                          //tüm routları temizle sadece customer ana sayfa kalsın
+                          // ignore: use_build_context_synchronously
+                          context.router.replaceAll(
+                            [
+                              const CompanyStatusFalseRoute(),
+                            ],
+                          );
+                        } else {
+                          EasyLoading.showError(
+                              "Kayıt başarısız! Error:${response.errors}-${response.message}");
+                        }
                       } else {
                         EasyLoading.showError(
                             "Verileri düzgün formatta giriniz!");

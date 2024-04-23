@@ -78,7 +78,7 @@ class ApiService {
             ? responseConverter(response.data?['data'])
             : null,
         errors: response.data?['errors'],
-        message: response.data?['message'],
+        message: response.data?['messages'],
         succeeded: response.data?['succeeded'] ?? false,
       );
     } on DioException catch (e) {
@@ -140,10 +140,13 @@ class ApiService {
             data: null,
             errors: e.response?.data.runtimeType is String
                 ? e.response?.data as String
-                : (e.response?.data as Map<String, dynamic>)['error']
+                : (e.response?.data as Map<String, dynamic>)['errors']
                     as String?,
             succeeded: false,
-            message: null,
+            message: e.response?.data.runtimeType is String
+                ? e.response?.data as String
+                : (e.response?.data as Map<String, dynamic>)['messages']
+                    as String?,
           );
         case DioExceptionType.cancel:
           return BaseResponse(

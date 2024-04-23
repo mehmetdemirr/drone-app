@@ -4,6 +4,7 @@ enum ImageItem {
   customerLogin,
   demoProduct,
   companyIcon,
+  defaultImage,
 }
 
 String defaultValue = "assets/images";
@@ -16,6 +17,7 @@ extension ImageItems on ImageItem {
       ImageItem.customerLogin => "$defaultValue/customer_login.png",
       ImageItem.demoProduct => "$defaultValue/demo-product.jpeg",
       ImageItem.companyIcon => "$defaultValue/company-icon.png",
+      ImageItem.defaultImage => "$defaultValue/default-image.png",
     };
   }
 }

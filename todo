@@ -10,7 +10,7 @@ Tesisten çıkış yap
 Sepete ürün ekle 
 Sepetten ürün çıkar 
 Konum belirt(golf sahası bölgeleri + haritadan seçim) ve sepeti onayla 
-Sipariş durumu (sipariş verildi, sipariş alındı, sipariş hazırlanıyor, sipariş teslim edilid)
+Sipariş durumu (sipariş verildi, sipariş alındı, sipariş hazırlanıyor, sipariş teslim edilidi)
 Kayıt olduğu şirketler (birden fazla golf sahasına gidebilir ya da şube olabilir, her zaman yeni üyelik saçma olur)
 kayıt olduğu şirketler olsun (giriş yaptığında tabloda tutulsun yani)
 
