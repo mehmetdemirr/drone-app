@@ -15,9 +15,8 @@ class CompanyLoginScreen extends StatefulWidget {
 }
 
 class _CompanyLoginScreenState extends State<CompanyLoginScreen> {
-  TextEditingController mail =
-      TextEditingController(text: "company@droneapp.com");
-  TextEditingController password = TextEditingController(text: "12345678");
+  TextEditingController mail = TextEditingController(text: "test@company.com");
+  TextEditingController password = TextEditingController(text: "123456");
   final _formKey = GlobalKey<FormState>();
 
   @override

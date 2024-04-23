@@ -7,7 +7,7 @@ class CustomerInfoModel {
   @JsonKey(name: "user")
   User user;
   @JsonKey(name: "activeCompany")
-  bool activeCompany;
+  String activeCompany;
 
   CustomerInfoModel({
     required this.user,

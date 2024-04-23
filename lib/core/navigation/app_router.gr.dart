@@ -33,6 +33,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CompanyCashScreen(),
       );
     },
+    CompanyCustomerRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CompanyCustomerScreen(),
+      );
+    },
     CompanyFeedBackRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -49,6 +55,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const CompanyLoginScreen(),
+      );
+    },
+    CompanyNewAreaRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CompanyNewAreaScreen(),
       );
     },
     CompanyNewOrderRoute.name: (routeData) {
@@ -198,6 +210,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CustomerStatisticScreen(),
       );
     },
+    CustomerWaitingRoomRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CustomerWaitingRoomScreen(),
+      );
+    },
     GetImageRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -291,6 +309,20 @@ class CompanyCashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CompanyCustomerScreen]
+class CompanyCustomerRoute extends PageRouteInfo<void> {
+  const CompanyCustomerRoute({List<PageRouteInfo>? children})
+      : super(
+          CompanyCustomerRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyCustomerRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [CompanyFeedBackScreen]
 class CompanyFeedBackRoute extends PageRouteInfo<void> {
   const CompanyFeedBackRoute({List<PageRouteInfo>? children})
@@ -328,6 +360,20 @@ class CompanyLoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CompanyLoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CompanyNewAreaScreen]
+class CompanyNewAreaRoute extends PageRouteInfo<void> {
+  const CompanyNewAreaRoute({List<PageRouteInfo>? children})
+      : super(
+          CompanyNewAreaRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyNewAreaRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -700,6 +746,20 @@ class CustomerStatisticRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CustomerStatisticRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CustomerWaitingRoomScreen]
+class CustomerWaitingRoomRoute extends PageRouteInfo<void> {
+  const CustomerWaitingRoomRoute({List<PageRouteInfo>? children})
+      : super(
+          CustomerWaitingRoomRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CustomerWaitingRoomRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

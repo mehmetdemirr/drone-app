@@ -9,7 +9,7 @@ part of 'customer_info_model.dart';
 CustomerInfoModel _$CustomerInfoModelFromJson(Map<String, dynamic> json) =>
     CustomerInfoModel(
       user: User.fromJson(json['user'] as Map<String, dynamic>),
-      activeCompany: json['activeCompany'] as bool,
+      activeCompany: json['activeCompany'] as String,
     );
 
 Map<String, dynamic> _$CustomerInfoModelToJson(CustomerInfoModel instance) =>

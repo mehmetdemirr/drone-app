@@ -3,6 +3,8 @@ import 'package:demo/core/cache/shared_pref.dart';
 import 'package:demo/core/log/log.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/utilty/images_items.dart';
+import 'package:demo/product/customer_home/model/customer_info_model.dart';
+import 'package:demo/product/customer_home/service/customer_info_service.dart';
 import 'package:demo/product/customer_login/model/customer_token_model.dart';
 import 'package:demo/product/customer_login/service/customer_login_service.dart';
 import 'package:demo/product/customer_login/viewmodel/customer_login_viewmodel.dart';
@@ -19,7 +21,7 @@ class CustomerLoginScreen extends StatefulWidget {
 }
 
 class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
-  TextEditingController mail = TextEditingController(text: "test@gmail.com");
+  TextEditingController mail = TextEditingController(text: "test@customer.com");
   TextEditingController password = TextEditingController(text: "123456");
   final _formKey = GlobalKey<FormState>();
 
@@ -122,16 +124,38 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                               response.data?.token != null) {
                             await SharedPref()
                                 .setCustomerToken(response.data?.token ?? "")
-                                .then((value) {
+                                .then((value) async {
                               EasyLoading.showSuccess(
                                   response.message ?? "Giriş Yapıldı");
-                              //tüm routları temizle sadece customer ana sayfa kalsın
-                              // ignore: use_build_context_synchronously
-                              context.router.replaceAll(
-                                [
-                                  const CustomerAreaLoginRoute(),
-                                ],
-                              );
+                              BaseResponse<CustomerInfoModel?> userInfo =
+                                  await CustomerInfoService().customerInfo();
+                              if (userInfo.data?.activeCompany == "true") {
+                                //tüm routları temizle sadece customer ana sayfa kalsın
+                                // ignore: use_build_context_synchronously
+                                context.router.replaceAll(
+                                  [
+                                    const CustomerHomeRoute(),
+                                  ],
+                                );
+                              } else if (userInfo.data?.activeCompany ==
+                                  "waiting") {
+                                //tüm routları temizle sadece customer ana sayfa kalsın
+                                // ignore: use_build_context_synchronously
+                                context.router.replaceAll(
+                                  [
+                                    const CustomerWaitingRoomRoute(),
+                                  ],
+                                );
+                              } else if (userInfo.data?.activeCompany ==
+                                  "false") {
+                                //tüm routları temizle sadece customer ana sayfa kalsın
+                                // ignore: use_build_context_synchronously
+                                context.router.replaceAll(
+                                  [
+                                    const CustomerAreaLoginRoute(),
+                                  ],
+                                );
+                              }
                             });
                           } else {
                             EasyLoading.showError(

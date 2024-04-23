@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/navigation/app_router.dart';
+import 'package:demo/product/customer_area_login/service/customer_company_service.dart';
 import 'package:demo/product/customer_area_login/widget/qr_border_paint.dart';
+import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -70,10 +72,10 @@ class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
                     Radius.circular(16.0),
                   ),
                 ),
-                child: SizedBox(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 180, horizontal: 90),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    decoration: const BoxDecoration(),
                     child: CustomPaint(
                       foregroundPainter: BorderPainter(),
                       child: SizedBox(
@@ -132,6 +134,19 @@ class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        // burada company login yap
+        if (result != null && result?.code != null) {
+          Future.delayed(Duration.zero).then((value) async {
+            BaseResponse response = await CustomerCompanyService()
+                .userEnterCompany(int.parse(result!.code ?? "-1"));
+            if (response.succeeded) {
+              EasyLoading.showSuccess("Giriş başarılı!");
+            } else {
+              EasyLoading.showError(
+                  "Şirkete giriş başarısız.Error:${response.message}-${response.errors}");
+            }
+          });
+        }
       });
     });
   }

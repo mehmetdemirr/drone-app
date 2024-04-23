@@ -9,11 +9,17 @@ class CustomPickImage extends IPickImage {
   final ImagePicker _picker = ImagePicker();
   @override
   Future<XFile?> pickImageGallery() async {
-    return await _picker.pickImage(source: ImageSource.gallery);
+    return await _picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 75,
+    );
   }
 
   @override
   Future<XFile?> pickImageCamera() async {
-    return await _picker.pickImage(source: ImageSource.camera);
+    return await _picker.pickImage(
+      source: ImageSource.camera,
+      imageQuality: 75,
+    );
   }
 }

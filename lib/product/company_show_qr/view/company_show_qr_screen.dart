@@ -13,6 +13,12 @@ class CompanyShowQrScreen extends StatefulWidget {
 
 class _CompanyShowQrScreenState extends State<CompanyShowQrScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("")),

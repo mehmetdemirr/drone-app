@@ -79,6 +79,33 @@ class _CompanySettingScreenState extends State<CompanySettingScreen> {
             ),
             InkWell(
               onTap: () {
+                context.navigateNamedTo(RouterItem.companyNewArea.str());
+              },
+              child: Card(
+                child: SizedBox(
+                  width: context.width,
+                  height: 60,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Şirket Alan Ekle",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const Spacer(),
+                        const Icon(Icons.arrow_forward),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
                 context.navigateNamedTo(RouterItem.companyFeedBack.str());
               },
               child: Card(

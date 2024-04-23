@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/product/company_cash/view/company_cash_screen.dart';
 import 'package:demo/product/company_cash_edit/view/company_cash_edit_screen.dart';
+import 'package:demo/product/company_customer/view/company_customer_screen.dart';
 import 'package:demo/product/company_feed_back/view/company_feed_back_screen.dart';
 import 'package:demo/product/company_home/view/company_home_screen.dart';
 import 'package:demo/product/company_login/view/company_login_screen.dart';
+import 'package:demo/product/company_new_area/view/company_new_area_screen.dart';
 import 'package:demo/product/company_new_order/view/company_new_order_screen.dart';
 import 'package:demo/product/company_new_product/view/company_new_product_screen.dart';
 import 'package:demo/product/company_order/view/company_order_screen.dart';
@@ -24,6 +26,7 @@ import 'package:demo/product/customer_order_confirm/view/customer_order_confirm_
 import 'package:demo/product/customer_register/view/customer_register_screen.dart';
 import 'package:demo/product/customer_setting/view/customer_setting_screen.dart';
 import 'package:demo/product/customer_statistic/view/customer_statistic_screen.dart';
+import 'package:demo/product/customer_waiting_room/view/customer_waiting_room_screen.dart';
 import 'package:demo/product/general/view/order_success_screen.dart';
 import 'package:demo/product/home_screen/home_screen.dart';
 import 'package:demo/product/customer_product_detail/view/customer_product_detail_screen.dart';
@@ -144,6 +147,10 @@ class AppRouter extends _$AppRouter {
           path: RouterItem.companyStatusFalse.str(),
           page: CompanyStatusFalseRoute.page,
         ),
+        AutoRoute(
+          path: RouterItem.companyNewArea.str(),
+          page: CompanyNewAreaRoute.page,
+        ),
         //company just qr show screen
         AutoRoute(
           path: RouterItem.companyShowQr.str(),
@@ -195,6 +202,7 @@ enum RouterItem {
   companyCashEdit,
   companyFeedBack,
   companyStatusFalse,
+  companyNewArea,
   //other
   home,
   setting,
@@ -257,6 +265,8 @@ extension RouterItems on RouterItem {
         return "/companyFeedBack";
       case RouterItem.companyStatusFalse:
         return "/companyStatusFalse";
+      case RouterItem.companyNewArea:
+        return "/companyNewArea";
 
       // işletme için sadece qr gösterme sayfası
       case RouterItem.companyShowQr:

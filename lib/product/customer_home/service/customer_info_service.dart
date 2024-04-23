@@ -4,7 +4,7 @@ import 'package:demo/product/general/model/base_response.dart';
 import 'package:demo/product/general/service/api_service.dart';
 
 class CustomerInfoService extends ApiService {
-  Future<BaseResponse<CustomerInfoModel?>> companyInfo() {
+  Future<BaseResponse<CustomerInfoModel?>> customerInfo() {
     return requestMethod<CustomerInfoModel?>(
       path: '/user',
       headers: {

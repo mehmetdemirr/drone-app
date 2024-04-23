@@ -15,13 +15,11 @@ class CompanyRegisterScreen extends StatefulWidget {
 class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
   TextEditingController companyName =
       TextEditingController(text: "Belek Üniversitesi");
-  TextEditingController phoneNumber =
-      TextEditingController(text: "+9040004003392");
-  TextEditingController mail =
-      TextEditingController(text: "company@droneapp.com");
+  TextEditingController phoneNumber = TextEditingController(text: "0");
+  TextEditingController mail = TextEditingController(text: "test@company.com");
 
-  TextEditingController password = TextEditingController(text: "12345678");
-  TextEditingController passwordAgain = TextEditingController(text: "12345678");
+  TextEditingController password = TextEditingController(text: "123456");
+  TextEditingController passwordAgain = TextEditingController(text: "123456");
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
