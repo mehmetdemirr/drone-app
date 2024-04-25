@@ -16,7 +16,7 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
   TextEditingController companyName =
       TextEditingController(text: "Belek Üniversitesi");
   TextEditingController phoneNumber = TextEditingController(text: "1");
-  TextEditingController mail = TextEditingController(text: "test1@company.com");
+  TextEditingController mail = TextEditingController(text: "test@company.com");
 
   TextEditingController password = TextEditingController(text: "123456");
   TextEditingController passwordAgain = TextEditingController(text: "123456");

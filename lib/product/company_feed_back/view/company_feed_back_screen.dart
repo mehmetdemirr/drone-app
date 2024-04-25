@@ -61,6 +61,7 @@ class _CompanyFeedBackScreenState extends State<CompanyFeedBackScreen> {
                     onTap: () {
                       EasyLoading.showSuccess(
                           "Geri bildirim için teşekkürler !");
+                      // ignore: deprecated_member_use
                       context.router.pop();
                     },
                     child: Container(

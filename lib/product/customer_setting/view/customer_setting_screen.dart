@@ -7,7 +7,6 @@ import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
 import 'package:demo/generated/locale_keys.g.dart';
 import 'package:demo/product/customer_area_login/service/customer_company_service.dart';
-import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
@@ -61,9 +60,8 @@ class _CustomerSettingScreenState extends State<CustomerSettingScreen> {
             const Spacer(),
             InkWell(
               onTap: () async {
-                BaseResponse response =
-                    await CustomerCompanyService().userLogoutCompany();
-                if (response.succeeded) {
+                await CustomerCompanyService().userLogoutCompany();
+                if (true) {
                   EasyLoading.showSuccess("Tesisten Çıkış Başarılı !");
                   await SharedPref().clearAll().then((value) {
                     //tüm routları temizle sadece splash kalsın
@@ -73,10 +71,11 @@ class _CustomerSettingScreenState extends State<CustomerSettingScreen> {
                       ],
                     );
                   });
-                } else {
-                  EasyLoading.showError(
-                      "Tesisten Çıkış Başarısız.Error:${response.errors}-${response.message}");
                 }
+                // else {
+                //   EasyLoading.showError(
+                //       "Tesisten Çıkış Başarısız.Error:${response.errors}-${response.message}");
+                // }
               },
               child: Text(
                 "Çıkış Yap",

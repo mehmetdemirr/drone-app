@@ -21,6 +21,41 @@ class _CustomerWaitingRoomScreenState extends State<CustomerWaitingRoomScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Bekleme Odası"),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              if (true) {
+                EasyLoading.showSuccess("Tesisten Çıkış Başarılı !");
+                await SharedPref().clearAll().then((value) {
+                  //tüm routları temizle sadece splash kalsın
+                  context.router.replaceAll(
+                    [
+                      const SplashRoute(),
+                    ],
+                  );
+                });
+              }
+              //TODO bu kullanılacak
+              // BaseResponse response =
+              //     await CustomerCompanyService().userLogoutCompany();
+              // if (response.succeeded) {
+              //   EasyLoading.showSuccess("Tesisten Çıkış Başarılı !");
+              //   await SharedPref().clearAll().then((value) {
+              //     //tüm routları temizle sadece splash kalsın
+              //     context.router.replaceAll(
+              //       [
+              //         const SplashRoute(),
+              //       ],
+              //     );
+              //   });
+              // } else {
+              //   EasyLoading.showError(
+              //       "Tesisten Çıkış Başarısız.Error:${response.errors}-${response.message}");
+              // }
+            },
+            icon: const Icon(Icons.logout_outlined),
+          )
+        ],
       ),
       body: Center(
         child: Column(

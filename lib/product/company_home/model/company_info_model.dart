@@ -18,8 +18,6 @@ class CompanyInfoModel {
   String email;
   @JsonKey(name: "phone")
   String phone;
-  @JsonKey(name: "password")
-  String password;
   @JsonKey(name: "created_at")
   DateTime createdAt;
   @JsonKey(name: "updated_at")
@@ -33,7 +31,6 @@ class CompanyInfoModel {
     required this.closeHour,
     required this.email,
     required this.phone,
-    required this.password,
     required this.createdAt,
     required this.updatedAt,
   });

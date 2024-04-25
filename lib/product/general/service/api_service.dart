@@ -11,7 +11,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 class ApiService {
   ApiService() : dio = Dio() {
     dio.options
-      ..baseUrl = AppConfig.BASE_URL
+      ..baseUrl = AppConfig.BASE_URL_API
       ..connectTimeout = const Duration(seconds: 14)
       ..receiveTimeout = const Duration(seconds: 14);
     dio.interceptors

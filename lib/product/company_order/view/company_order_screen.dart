@@ -3,7 +3,10 @@ import 'dart:math';
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/log/log.dart';
 import 'package:demo/core/navigation/app_router.dart';
+import 'package:demo/product/company_order/viewmodel/company_order_viewmodel.dart';
+import 'package:demo/product/general/enum/order_status.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class CompanyOrderScreen extends StatefulWidget {
@@ -67,31 +70,77 @@ class _CompanyOrderScreenState extends State<CompanyOrderScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  "Tümü",
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: const Color.fromRGBO(82, 0, 255, 1),
-                      ),
+                InkWell(
+                  onTap: () {
+                    context
+                        .read<CompanyOrderViewModel>()
+                        .changeOrderStatusItem(OrderStatusItem.tumu);
+                  },
+                  child: Text(
+                    "Tümü",
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: context
+                                      .watch<CompanyOrderViewModel>()
+                                      .orderStatusItem ==
+                                  OrderStatusItem.tumu
+                              ? const Color.fromRGBO(82, 0, 255, 1)
+                              : Colors.black38,
+                        ),
+                  ),
                 ),
-                Text(
-                  "Bekleyen",
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: Colors.black38,
-                      ),
+                InkWell(
+                  onTap: () {
+                    context
+                        .read<CompanyOrderViewModel>()
+                        .changeOrderStatusItem(OrderStatusItem.siparisVerildi);
+                  },
+                  child: Text(
+                    "Bekleyen",
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: context
+                                      .watch<CompanyOrderViewModel>()
+                                      .orderStatusItem ==
+                                  OrderStatusItem.siparisVerildi
+                              ? const Color.fromRGBO(82, 0, 255, 1)
+                              : Colors.black38,
+                        ),
+                  ),
                 ),
-                Text(
-                  "Teslim Edilen",
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: Colors.black38,
-                      ),
+                InkWell(
+                  onTap: () {
+                    context.read<CompanyOrderViewModel>().changeOrderStatusItem(
+                        OrderStatusItem.siparisTeslimEdildi);
+                  },
+                  child: Text(
+                    "Teslim Edilen",
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: context
+                                      .watch<CompanyOrderViewModel>()
+                                      .orderStatusItem ==
+                                  OrderStatusItem.siparisTeslimEdildi
+                              ? const Color.fromRGBO(82, 0, 255, 1)
+                              : Colors.black38,
+                        ),
+                  ),
                 ),
-                // iptal daha sonra eklenebilir
-                // Text(
-                //   "İptal",
-                //   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                //         color: Colors.black38,
-                //       ),
-                // ),
+                InkWell(
+                  onTap: () {
+                    context
+                        .read<CompanyOrderViewModel>()
+                        .changeOrderStatusItem(OrderStatusItem.siparisIptal);
+                  },
+                  child: Text(
+                    "İptal",
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: context
+                                      .watch<CompanyOrderViewModel>()
+                                      .orderStatusItem ==
+                                  OrderStatusItem.siparisIptal
+                              ? const Color.fromRGBO(82, 0, 255, 1)
+                              : Colors.black38,
+                        ),
+                  ),
+                ),
               ],
             ),
             const Padding(

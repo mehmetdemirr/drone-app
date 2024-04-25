@@ -97,6 +97,7 @@ class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
               Center(
                 child: Text(
                   result != null
+                      // ignore: deprecated_member_use
                       ? 'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}'
                       : '',
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -105,7 +106,13 @@ class _CustomerAreaLoginScreenState extends State<CustomerAreaLoginScreen> {
                 ),
               ),
               Text(
-                "Okuduktan sonra otomatik işletmeye giriş yapacak \n Not: Giriş yapmışsa bu sayfa gözükmeyecek !",
+                "Okuduktan sonra otomatik işletmeye giriş yapacak",
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Colors.white,
+                    ),
+              ),
+              Text(
+                "Not: Giriş yapmışsa bu sayfa gözükmeyecek !",
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: Colors.white,
                     ),

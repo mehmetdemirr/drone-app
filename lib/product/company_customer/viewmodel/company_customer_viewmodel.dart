@@ -46,9 +46,22 @@ class CompanyCustomerViewModel extends ChangeNotifier {
 
   void musteriSil(int id) async {
     BaseResponse response =
-        await CompanyCustomersService().userLogoutCompany(id);
+        await CompanyCustomersService().deletUserCompany(id);
     if (response.succeeded) {
       EasyLoading.showSuccess("Bekleyen müşteri silindi");
+      userListFetch();
+      notifyListeners();
+    } else {
+      EasyLoading.showError(
+          "Bekleyen müşteri silinemedi.Error:${response.errors}-${response.message}");
+    }
+  }
+
+  void musteriyiOnayBekleyenlereGonder(int id) async {
+    BaseResponse response =
+        await CompanyCustomersService().userLogoutCompany(id);
+    if (response.succeeded) {
+      EasyLoading.showSuccess("Aktif müşteriyi onay bekleyen hala geldi.");
       userListFetch();
       notifyListeners();
     } else {

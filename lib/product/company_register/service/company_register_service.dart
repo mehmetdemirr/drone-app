@@ -26,7 +26,7 @@ class CompanyRegisterService extends ApiService {
         "phone": phone,
         "email": email,
         "password": password,
-        "status": true,
+        // "status": true,
       },
       queryParameters: null,
       method: HttpMethod.post,

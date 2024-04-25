@@ -18,8 +18,6 @@ CompanyProductModel _$CompanyProductModelFromJson(Map<String, dynamic> json) =>
       stockAmount: json['stock_amount'] as String,
       companyId: json['company_id'] as String,
       status: json['status'] as String,
-      createdAt: DateTime.parse(json['created_at'] as String),
-      updatedAt: DateTime.parse(json['updated_at'] as String),
     );
 
 Map<String, dynamic> _$CompanyProductModelToJson(
@@ -35,6 +33,4 @@ Map<String, dynamic> _$CompanyProductModelToJson(
       'stock_amount': instance.stockAmount,
       'company_id': instance.companyId,
       'status': instance.status,
-      'created_at': instance.createdAt.toIso8601String(),
-      'updated_at': instance.updatedAt.toIso8601String(),
     };

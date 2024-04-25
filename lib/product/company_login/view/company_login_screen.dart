@@ -3,7 +3,6 @@ import 'package:demo/core/cache/shared_pref.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/company_login/model/company_model.dart';
 import 'package:demo/product/company_login/service/company_login_service.dart';
-import 'package:demo/product/customer_login/model/customer_token_model.dart';
 import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -16,7 +15,7 @@ class CompanyLoginScreen extends StatefulWidget {
 }
 
 class _CompanyLoginScreenState extends State<CompanyLoginScreen> {
-  TextEditingController mail = TextEditingController(text: "test1@company.com");
+  TextEditingController mail = TextEditingController(text: "test@company.com");
   TextEditingController password = TextEditingController(text: "123456");
   final _formKey = GlobalKey<FormState>();
 

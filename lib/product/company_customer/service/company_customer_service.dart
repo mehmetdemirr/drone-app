@@ -99,4 +99,22 @@ class CompanyCustomersService extends ApiService {
       method: HttpMethod.post,
     );
   }
+
+  //kullanıcıyı komple sil (arkada tutulur)
+  Future<BaseResponse> deletUserCompany(
+    int userId,
+  ) {
+    return requestMethod(
+      path: '/company/user-delete',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      responseConverter: (p0) {},
+      requestModel: {
+        "id": userId,
+      },
+      queryParameters: null,
+      method: HttpMethod.post,
+    );
+  }
 }

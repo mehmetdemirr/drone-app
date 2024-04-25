@@ -1,3 +1,4 @@
+import 'package:demo/product/customer_basket/model/customer_basket_model.dart';
 import 'package:demo/product/general/enum/http_methods.dart';
 import 'package:demo/product/general/model/base_response.dart';
 import 'package:demo/product/general/service/api_service.dart';
@@ -5,8 +6,6 @@ import 'package:demo/product/general/service/api_service.dart';
 class CustomerBasketService extends ApiService {
   Future<BaseResponse> addProductBasket(
     int productId,
-    int companyAreaId,
-    String desciption,
   ) async {
     return requestMethod(
       path: '/user/order',
@@ -16,8 +15,6 @@ class CustomerBasketService extends ApiService {
       responseConverter: (p0) {},
       requestModel: {
         "product_id": productId,
-        "company_area_id": companyAreaId,
-        "description": desciption,
       },
       queryParameters: null,
       method: HttpMethod.post,
@@ -52,13 +49,19 @@ class CustomerBasketService extends ApiService {
     );
   }
 
-  Future<BaseResponse> fetchBasket() async {
+  Future<BaseResponse<CustomerBasketModel?>> fetchBasket() async {
     return requestMethod(
       path: '/user/order',
       headers: {
         'Content-Type': 'application/json',
       },
-      responseConverter: (p0) {},
+      responseConverter: (p0) {
+        if (p0 != null) {
+          return CustomerBasketModel.fromJson(p0 as Map<String, dynamic>);
+        } else {
+          return null;
+        }
+      },
       requestModel: null,
       queryParameters: null,
       method: HttpMethod.get,
@@ -68,6 +71,8 @@ class CustomerBasketService extends ApiService {
   Future<BaseResponse> confirmBasket(
     double lat,
     double long,
+    String description,
+    int areaId,
   ) async {
     return requestMethod(
       path: '/user/order/confirm',
@@ -78,6 +83,8 @@ class CustomerBasketService extends ApiService {
       requestModel: {
         "location_latitude": lat,
         "location_longitude": long,
+        "description": description,
+        "company_area_id": areaId,
       },
       queryParameters: null,
       method: HttpMethod.post,

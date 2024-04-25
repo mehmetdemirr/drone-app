@@ -5,8 +5,14 @@ import 'package:demo/core/theme/dark_theme.dart';
 import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
 import 'package:demo/product/company_customer/viewmodel/company_customer_viewmodel.dart';
+import 'package:demo/product/company_order/viewmodel/company_order_viewmodel.dart';
 import 'package:demo/product/company_products/viewmodel/company_products_viewmodel.dart';
+import 'package:demo/product/company_statistic/viewmodel/company_statistic_viewmodel.dart';
+import 'package:demo/product/customer_basket/viewmodel/customer_basket_viewmodel.dart';
+import 'package:demo/product/customer_cash/viewmodel/customer_cash_viewmodel.dart';
+import 'package:demo/product/customer_home/viewmodel/customer_home_viewmodel.dart';
 import 'package:demo/product/customer_login/viewmodel/customer_login_viewmodel.dart';
+import 'package:demo/product/customer_order_confirm/viewmodel/customer_order_confirm_viewmodel.dart';
 import 'package:demo/product/customer_products/viewmodel/customer_product_viewmodel.dart';
 import 'package:demo/product/home_screen/home_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -47,6 +53,24 @@ void main() async {
         ),
         ChangeNotifierProvider<CustomerProductViewModel>(
           create: (_) => CustomerProductViewModel(),
+        ),
+        ChangeNotifierProvider<CustomerBasketViewModel>(
+          create: (_) => CustomerBasketViewModel(),
+        ),
+        ChangeNotifierProvider<CustomerHomeViewModel>(
+          create: (_) => CustomerHomeViewModel(),
+        ),
+        ChangeNotifierProvider<CompanyStatisticViewModel>(
+          create: (_) => CompanyStatisticViewModel(),
+        ),
+        ChangeNotifierProvider<CompanyOrderViewModel>(
+          create: (_) => CompanyOrderViewModel(),
+        ),
+        ChangeNotifierProvider<CustomerOrderConfirmViewModel>(
+          create: (_) => CustomerOrderConfirmViewModel(),
+        ),
+        ChangeNotifierProvider<CustomerCashViewModel>(
+          create: (_) => CustomerCashViewModel(),
         ),
       ],
       child: EasyLocalization(

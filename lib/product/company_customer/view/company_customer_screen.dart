@@ -105,25 +105,34 @@ class _CompanyCustomerScreenState extends State<CompanyCustomerScreen> {
                               ],
                             ),
                             const Spacer(),
-                            InkWell(
-                              onTap: () {
+                            context.watch<CompanyCustomerViewModel>().status ==
+                                    1
+                                ? const SizedBox()
+                                : InkWell(
+                                    onTap: () {
+                                      context
+                                          .read<CompanyCustomerViewModel>()
+                                          .musteriOnayla(
+                                              int.parse(list[index].pivot.id));
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.red.shade100,
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(10),
+                                          )),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text("Sil"),
+                                      ),
+                                    ),
+                                  ),
+                            const SizedBox(width: 3),
+                            _silButton(
                                 context
-                                    .read<CompanyCustomerViewModel>()
-                                    .musteriSil(
-                                        int.parse(list[index].pivot.id));
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.red.shade100,
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(10),
-                                    )),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text("Sil"),
-                                ),
-                              ),
-                            ),
+                                    .watch<CompanyCustomerViewModel>()
+                                    .status,
+                                int.parse(list[index].pivot.id)),
                             const SizedBox(width: 3),
                             context.watch<CompanyCustomerViewModel>().status ==
                                     2
@@ -146,7 +155,7 @@ class _CompanyCustomerScreenState extends State<CompanyCustomerScreen> {
                                         child: Text("Onayla"),
                                       ),
                                     ),
-                                  )
+                                  ),
                           ],
                         ),
                       ),
@@ -154,5 +163,38 @@ class _CompanyCustomerScreenState extends State<CompanyCustomerScreen> {
                   );
                 },
               );
+  }
+
+  InkWell _silButton(int statusId, int pivotId) {
+    return InkWell(
+      onTap: () {
+        if (statusId == 1) {
+          context.read<CompanyCustomerViewModel>().musteriSil(pivotId);
+        } else if (statusId == 2) {
+          context
+              .read<CompanyCustomerViewModel>()
+              .musteriyiOnayBekleyenlereGonder(pivotId);
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            color: statusId == 1
+                ? Colors.red.shade100
+                : statusId == 2
+                    ? Colors.black12
+                    : Colors.amber,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            )),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(statusId == 1
+              ? "Sil"
+              : statusId == 2
+                  ? "Beklet"
+                  : "-"),
+        ),
+      ),
+    );
   }
 }

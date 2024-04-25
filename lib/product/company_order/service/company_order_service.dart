@@ -1,26 +1,27 @@
-import 'package:demo/product/company_customer/model/company_customer_user_model.dart';
+import 'package:demo/product/company_order/model/company_order_details_model.dart';
+import 'package:demo/product/company_order/model/company_order_model.dart';
 import 'package:demo/product/general/enum/http_methods.dart';
+import 'package:demo/product/general/enum/order_status.dart';
 import 'package:demo/product/general/model/base_response.dart';
 import 'package:demo/product/general/service/api_service.dart';
 
-//TODO modelleri değiş
 class CompanyOrderService extends ApiService {
-  Future<BaseResponse<List<CompanyCustomerUserModel>?>> getOrder(
-    int statusId,
+  Future<BaseResponse<List<CompanyOrderModel>?>> getOrder(
+    OrderStatusItem statusId,
     int perPage,
     int page,
   ) {
-    return requestMethod<List<CompanyCustomerUserModel>?>(
+    return requestMethod<List<CompanyOrderModel>?>(
       path:
-          '/user/order/status?status_id=$statusId&perPage=$perPage&page=$page',
+          '/user/order/status?status_id=${statusId.str()}&perPage=$perPage&page=$page',
       headers: {
         'Content-Type': 'application/json',
       },
       responseConverter: (p0) {
         if (p0 is List) {
           return p0
-              .map((json) => CompanyCustomerUserModel.fromJson(
-                  json as Map<String, dynamic>))
+              .map((json) =>
+                  CompanyOrderModel.fromJson(json as Map<String, dynamic>))
               .toList();
         }
         return null;
@@ -31,17 +32,17 @@ class CompanyOrderService extends ApiService {
     );
   }
 
-  Future<BaseResponse<CompanyCustomerUserModel?>> getAnOrder(
+  Future<BaseResponse<CompanyOrderDetailModel?>> getAnOrder(
     int id,
   ) {
-    return requestMethod<CompanyCustomerUserModel?>(
+    return requestMethod<CompanyOrderDetailModel?>(
       path: '/company/order/$id',
       headers: {
         'Content-Type': 'application/json',
       },
       responseConverter: (p0) {
         if (p0 != null) {
-          return CompanyCustomerUserModel.fromJson(p0 as Map<String, dynamic>);
+          return CompanyOrderDetailModel.fromJson(p0 as Map<String, dynamic>);
         }
         return null;
       },
@@ -51,7 +52,7 @@ class CompanyOrderService extends ApiService {
     );
   }
 
-  Future<BaseResponse<CompanyCustomerUserModel?>> createOrder(
+  Future<BaseResponse> createOrder(
     int userId,
     int companyAreaId,
     String description,
@@ -59,15 +60,12 @@ class CompanyOrderService extends ApiService {
     int paidStatusId, // ödendi , ödenmedi , ödenmez gibi
     List<int> productIdList,
   ) {
-    return requestMethod<CompanyCustomerUserModel?>(
+    return requestMethod(
       path: '/company/order/',
       headers: {
         'Content-Type': 'application/json',
       },
       responseConverter: (p0) {
-        if (p0 != null) {
-          return CompanyCustomerUserModel.fromJson(p0 as Map<String, dynamic>);
-        }
         return null;
       },
       requestModel: {
@@ -83,18 +81,15 @@ class CompanyOrderService extends ApiService {
     );
   }
 
-  Future<BaseResponse<CompanyCustomerUserModel?>> deleteOrder(
+  Future<BaseResponse> deleteOrder(
     int orderId,
   ) {
-    return requestMethod<CompanyCustomerUserModel?>(
+    return requestMethod(
       path: '/company/order/$orderId',
       headers: {
         'Content-Type': 'application/json',
       },
       responseConverter: (p0) {
-        if (p0 != null) {
-          return CompanyCustomerUserModel.fromJson(p0 as Map<String, dynamic>);
-        }
         return null;
       },
       requestModel: null,
@@ -103,19 +98,16 @@ class CompanyOrderService extends ApiService {
     );
   }
 
-  Future<BaseResponse<CompanyCustomerUserModel?>> changeOrderStatus(
+  Future<BaseResponse> changeOrderStatus(
     int orderId,
     int statusId,
   ) {
-    return requestMethod<CompanyCustomerUserModel?>(
+    return requestMethod(
       path: '/company/order/$orderId/status/$statusId',
       headers: {
         'Content-Type': 'application/json',
       },
       responseConverter: (p0) {
-        if (p0 != null) {
-          return CompanyCustomerUserModel.fromJson(p0 as Map<String, dynamic>);
-        }
         return null;
       },
       requestModel: null,
@@ -124,21 +116,16 @@ class CompanyOrderService extends ApiService {
     );
   }
 
-  Future<BaseResponse<CompanyCustomerUserModel?>> changePaymentStatus(
+  Future<BaseResponse> changePaymentStatus(
     int orderId,
     int paymentId,
   ) {
-    return requestMethod<CompanyCustomerUserModel?>(
+    return requestMethod(
       path: '/company/order/$orderId/payment/$paymentId',
       headers: {
         'Content-Type': 'application/json',
       },
-      responseConverter: (p0) {
-        if (p0 != null) {
-          return CompanyCustomerUserModel.fromJson(p0 as Map<String, dynamic>);
-        }
-        return null;
-      },
+      responseConverter: (p0) {},
       requestModel: null,
       queryParameters: null,
       method: HttpMethod.put,

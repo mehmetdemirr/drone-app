@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/navigation/app_router.dart';
-import 'package:demo/core/utilty/images_items.dart';
 import 'package:demo/product/company_products/model/get_all_product_model.dart';
 import 'package:demo/product/company_products/viewmodel/company_products_viewmodel.dart';
+import 'package:demo/product/general/widget/custom_cached_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -114,11 +114,11 @@ class _CompanyProductsScreenState extends State<CompanyProductsScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.asset(
+                              SizedBox(
                                 width: cardWidth,
                                 height: 125,
-                                ImageItem.demoProduct.str(),
-                                fit: BoxFit.cover,
+                                child: CustomCachedImageWidget(
+                                    imageUrl: list[index].imageUrl ?? "-"),
                               ),
                               const SizedBox(
                                 height: 8,

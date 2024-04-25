@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:demo/core/cache/shared_pref.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/customer_login/model/customer_token_model.dart';
 import 'package:demo/product/customer_register/service/customer_register_service.dart';

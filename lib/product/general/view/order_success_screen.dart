@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/navigation/app_router.dart';
+import 'package:demo/product/customer_home/viewmodel/customer_home_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 @RoutePage()
 class OrderSuccessScreen extends StatefulWidget {
@@ -35,6 +37,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
             ),
             TextButton(
               onPressed: () {
+                context.read<CustomerHomeViewModel>().changeTab(0);
                 //tüm routları temizle sadece customer ana sayfa kalsın
                 context.router.replaceAll(
                   [

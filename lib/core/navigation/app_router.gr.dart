@@ -174,9 +174,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     CustomerOrderConfirmRoute.name: (routeData) {
+      final args = routeData.argsAs<CustomerOrderConfirmRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CustomerOrderConfirmScreen(),
+        child: CustomerOrderConfirmScreen(
+          key: args.key,
+          locationData: args.locationData,
+        ),
       );
     },
     CustomerProductDetailRoute.name: (routeData) {
@@ -656,16 +660,41 @@ class CustomerLoginRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [CustomerOrderConfirmScreen]
-class CustomerOrderConfirmRoute extends PageRouteInfo<void> {
-  const CustomerOrderConfirmRoute({List<PageRouteInfo>? children})
-      : super(
+class CustomerOrderConfirmRoute
+    extends PageRouteInfo<CustomerOrderConfirmRouteArgs> {
+  CustomerOrderConfirmRoute({
+    Key? key,
+    required LocationData locationData,
+    List<PageRouteInfo>? children,
+  }) : super(
           CustomerOrderConfirmRoute.name,
+          args: CustomerOrderConfirmRouteArgs(
+            key: key,
+            locationData: locationData,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CustomerOrderConfirmRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<CustomerOrderConfirmRouteArgs> page =
+      PageInfo<CustomerOrderConfirmRouteArgs>(name);
+}
+
+class CustomerOrderConfirmRouteArgs {
+  const CustomerOrderConfirmRouteArgs({
+    this.key,
+    required this.locationData,
+  });
+
+  final Key? key;
+
+  final LocationData locationData;
+
+  @override
+  String toString() {
+    return 'CustomerOrderConfirmRouteArgs{key: $key, locationData: $locationData}';
+  }
 }
 
 /// generated route for

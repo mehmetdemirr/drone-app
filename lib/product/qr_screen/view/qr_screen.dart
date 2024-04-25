@@ -47,6 +47,7 @@ class _QRViewExampleScreenState extends State<QRViewExampleScreen> {
             child: Center(
               child: (result != null)
                   ? Text(
+                      // ignore: deprecated_member_use
                       'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
                   : const Text('Qr Tara'),
             ),

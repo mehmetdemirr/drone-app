@@ -55,7 +55,7 @@ class _CompanyShowQrScreenState extends State<CompanyShowQrScreen> {
             const SizedBox(
               height: 16,
             ),
-            Text(companyId.toString() ?? "company id null"),
+            Text(companyId.toString()),
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: PrettyQrView.data(

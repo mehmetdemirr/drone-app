@@ -48,7 +48,7 @@
   <!--#enddocregion android-queries-->
   <!--#enddocregion android-queries-->
     <application
-        android:label="Drone App"
+        android:label="Golfrone"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

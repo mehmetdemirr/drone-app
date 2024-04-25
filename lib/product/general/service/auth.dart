@@ -18,13 +18,28 @@ class AuthInterceptor extends Interceptor {
       if (companyAccessToken != null) {
         Log.success('onrequestAlanında $companyAccessToken');
         options.headers['Authorization'] = 'Bearer $companyAccessToken';
+        options.headers['Content-Type'] = 'application/json';
+        options.headers['Accept'] = 'application/json';
       }
       if (customerAccessToken != null) {
         Log.success('onrequestAlanında $customerAccessToken');
         options.headers['Authorization'] = 'Bearer $customerAccessToken';
+        options.headers['Content-Type'] = 'application/json';
+        options.headers['Accept'] = 'application/json';
       }
     }
-
     super.onRequest(options, handler);
+  }
+
+  @override
+  Future<void> onError(
+      DioException err, ErrorInterceptorHandler handler) async {
+    Log.error(err.toString());
+    if (err.response?.statusCode == 401) {
+      await SharedPref().setAuth(false);
+      return handler.next(err);
+    } else {
+      return handler.next(err);
+    }
   }
 }

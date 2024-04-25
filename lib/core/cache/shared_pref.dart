@@ -6,6 +6,7 @@ class SharedPref {
     await prefs.clear();
   }
 
+  //theme
   Future<void> setTheme(bool theme) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool(SharedKeyItem.theme.str(), theme);
@@ -16,6 +17,7 @@ class SharedPref {
     return prefs.getBool(SharedKeyItem.theme.str()) ?? false;
   }
 
+  //language
   Future<void> setLanguage(String language) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(SharedKeyItem.language.str(), language);
@@ -26,6 +28,7 @@ class SharedPref {
     return prefs.getString(SharedKeyItem.language.str());
   }
 
+  //customer token
   Future<void> setCustomerToken(String customerToken) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(SharedKeyItem.customerToken.str(), customerToken);
@@ -36,6 +39,7 @@ class SharedPref {
     return prefs.getString(SharedKeyItem.customerToken.str());
   }
 
+  //company token
   Future<void> setCompanyToken(String companyToken) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(SharedKeyItem.companyToken.str(), companyToken);
@@ -46,6 +50,7 @@ class SharedPref {
     return prefs.getString(SharedKeyItem.companyToken.str());
   }
 
+  //company id
   Future<void> setCompanyId(int companyId) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt(SharedKeyItem.companyId.str(), companyId);
@@ -55,6 +60,17 @@ class SharedPref {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt(SharedKeyItem.companyId.str());
   }
+
+  //auth
+  Future<void> setAuth(bool value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(SharedKeyItem.auth.str(), value);
+  }
+
+  Future<bool> getAuth() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(SharedKeyItem.auth.str()) ?? true;
+  }
 }
 
 enum SharedKeyItem {
@@ -63,6 +79,7 @@ enum SharedKeyItem {
   customerToken,
   companyToken,
   companyId,
+  auth,
 }
 
 extension SharedKeyItems on SharedKeyItem {
@@ -73,6 +90,7 @@ extension SharedKeyItems on SharedKeyItem {
       SharedKeyItem.companyId => "companyId",
       SharedKeyItem.companyToken => "companyToken",
       SharedKeyItem.customerToken => "customerToken",
+      SharedKeyItem.auth => "auth",
     };
   }
 }

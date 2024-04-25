@@ -71,7 +71,7 @@ class _CompanySettingScreenState extends State<CompanySettingScreen> {
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const Spacer(),
-                      const Text("Gelecek..."),
+                      // const Text("Gelecek..."),
                     ],
                   ),
                 ),

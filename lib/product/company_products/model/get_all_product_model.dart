@@ -24,10 +24,6 @@ class CompanyProductModel {
   String companyId;
   @JsonKey(name: "status")
   String status;
-  @JsonKey(name: "created_at")
-  DateTime createdAt;
-  @JsonKey(name: "updated_at")
-  DateTime updatedAt;
 
   CompanyProductModel({
     required this.id,
@@ -40,8 +36,6 @@ class CompanyProductModel {
     required this.stockAmount,
     required this.companyId,
     required this.status,
-    required this.createdAt,
-    required this.updatedAt,
   });
 
   factory CompanyProductModel.fromJson(Map<String, dynamic> json) =>

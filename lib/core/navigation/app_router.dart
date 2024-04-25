@@ -34,146 +34,162 @@ import 'package:demo/product/qr_screen/view/qr_screen.dart';
 import 'package:demo/product/setting_screen/setting_screen.dart';
 import 'package:demo/product/splash_screen/view/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 
 import '../../product/get_image_screen/view/get_image_screen.dart';
 
 part 'app_router.gr.dart';
 
-@AutoRouterConfig()
+@AutoRouterConfig(
+  replaceInRouteName: 'Screen|Page,Route',
+)
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
         // splash
-        AutoRoute(
-          path: RouterItem.splash.str(),
+        CustomRoute(
+          path: RouterItem.companyHome.str(),
           page: SplashRoute.page,
           initial: true,
         ),
         // for customer
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.customerLogin.str(),
           page: CustomerLoginRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.customerRegister.str(),
           page: CustomerRegisterRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.customerAreaLogin.str(),
           page: CustomerAreaLoginRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.customerHome.str(),
           page: CustomerHomeRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.customerProductDetail.str(),
           page: CustomerProductDetailRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.customerOrderConfirm.str(),
           page: CustomerOrderConfirmRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.customerOrderSucces.str(),
           page: OrderSuccessRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.customerSetting.str(),
           page: CustomerSettingRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.customerSetting.str(),
           page: CustomerSettingRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.customerStatistic.str(),
           page: CustomerStatisticRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.customerWaitingRoom.str(),
           page: CustomerWaitingRoomRoute.page,
         ),
         // for company
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyLogin.str(),
           page: CompanyLoginRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyRegister.str(),
           page: CompanyRegisterRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyHome.str(),
           page: CompanyHomeRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyOrderDetail.str(),
           page: CompanyOrderDetailRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyNewOrder.str(),
           page: CompanyNewOrderRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companySetting.str(),
           page: CompanySettingRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyProduct.str(),
           page: CompanyProductsRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyNewProduct.str(),
           page: CompanyNewProductRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyProductDetail.str(),
           page: CompanyProductDetailRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyProductEdit.str(),
           page: CompanyProductEditRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyCash.str(),
           page: CompanyCashRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyCashEdit.str(),
           page: CompanyCashEditRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyFeedBack.str(),
           page: CompanyFeedBackRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyStatusFalse.str(),
           page: CompanyStatusFalseRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyNewArea.str(),
           page: CompanyNewAreaRoute.page,
         ),
         //company just qr show screen
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.companyShowQr.str(),
           page: CompanyShowQrRoute.page,
         ),
 
         //other
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.home.str(),
           page: HomeRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.setting.str(),
           page: SettingRoute.page,
         ),
-        AutoRoute(
+        CustomRoute(
           path: RouterItem.getImage.str(),
           page: GetImageRoute.page,
         ),
+
+        // guards: const [
+        //   // //TODO bunun testini yap
+        //   // AutoRouteGuard.simple((resolver, router) async {
+        //   //   bool isAuthendicated = await SharedPref().getAuth();
+        //   //   if (!isAuthendicated) {
+        //   //     EasyLoading.showError("Erişiminiz yok ! Çıkış yapılıyor ...");
+        //   //     resolver.redirect(const SplashRoute());
+        //   //   } else {
+        //   //     resolver.next();
+        //   //   }
+        //   // }),
+        // ],
       ];
 }
 
@@ -216,76 +232,6 @@ enum RouterItem {
 
 extension RouterItems on RouterItem {
   String str() {
-    switch (this) {
-      case RouterItem.splash:
-        return "/splash";
-      //customer
-      case RouterItem.customerHome:
-        return "/customerHome";
-      case RouterItem.qr:
-        return "/qr";
-      case RouterItem.customerProductDetail:
-        return "/productDetail";
-      case RouterItem.customerLogin:
-        return "/customerLogin";
-      case RouterItem.customerRegister:
-        return "/customerRegister";
-      case RouterItem.customerAreaLogin:
-        return "/customerAreaLogin";
-      case RouterItem.customerOrderConfirm:
-        return "/customerOrderConfirm";
-      case RouterItem.customerOrderSucces:
-        return "/customerOrderSucces";
-      case RouterItem.customerSetting:
-        return "/customerSetting";
-      case RouterItem.customerStatistic:
-        return "/customerStatistic";
-      case RouterItem.customerWaitingRoom:
-        return "/customerWaitingRoom";
-
-      //company
-      case RouterItem.companyLogin:
-        return "/companyLogin";
-      case RouterItem.companyRegister:
-        return "/companyRegister";
-      case RouterItem.companyHome:
-        return "/companyHome";
-      case RouterItem.companyOrderDetail:
-        return "/companyOrderDetail";
-      case RouterItem.companySetting:
-        return "/companySetting";
-      case RouterItem.companyNewOrder:
-        return "/companyNewOrder";
-      case RouterItem.companyProduct:
-        return "/companyProduct";
-      case RouterItem.companyNewProduct:
-        return "/companyNewProduct";
-      case RouterItem.companyProductDetail:
-        return "/companyProductDetail";
-      case RouterItem.companyProductEdit:
-        return "/companyProductEdit";
-      case RouterItem.companyCash:
-        return "/companyCash";
-      case RouterItem.companyCashEdit:
-        return "/companyCashEdit";
-      case RouterItem.companyFeedBack:
-        return "/companyFeedBack";
-      case RouterItem.companyStatusFalse:
-        return "/companyStatusFalse";
-      case RouterItem.companyNewArea:
-        return "/companyNewArea";
-
-      // işletme için sadece qr gösterme sayfası
-      case RouterItem.companyShowQr:
-        return "/companyShowQr";
-
-      //other
-      case RouterItem.home:
-        return "/home";
-      case RouterItem.setting:
-        return "/setting";
-      case RouterItem.getImage:
-        return "/getImage";
-    }
+    return "/$name";
   }
 }
