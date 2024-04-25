@@ -1,15 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'company_order_model.g.dart';
+part 'company_cash_model.g.dart';
 
 @JsonSerializable()
-class CompanyOrderModel {
+class CompanyCashModel {
   @JsonKey(name: "current_page")
   int currentPage;
   @JsonKey(name: "data")
-  List<Datum> data;
+  List<DatumCompanyCash> data;
   @JsonKey(name: "first_page_url")
-  String firstPageUrl;
+  String? firstPageUrl;
   @JsonKey(name: "from")
   int? from;
   @JsonKey(name: "last_page")
@@ -31,7 +31,7 @@ class CompanyOrderModel {
   @JsonKey(name: "total")
   int total;
 
-  CompanyOrderModel({
+  CompanyCashModel({
     required this.currentPage,
     required this.data,
     required this.firstPageUrl,
@@ -47,14 +47,14 @@ class CompanyOrderModel {
     required this.total,
   });
 
-  factory CompanyOrderModel.fromJson(Map<String, dynamic> json) =>
-      _$CompanyOrderModelFromJson(json);
+  factory CompanyCashModel.fromJson(Map<String, dynamic> json) =>
+      _$CompanyCashModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CompanyOrderModelToJson(this);
+  Map<String, dynamic> toJson() => _$CompanyCashModelToJson(this);
 }
 
 @JsonSerializable()
-class Datum {
+class DatumCompanyCash {
   @JsonKey(name: "id")
   int id;
   @JsonKey(name: "username")
@@ -62,7 +62,7 @@ class Datum {
   @JsonKey(name: "status_id")
   String statusId;
   @JsonKey(name: "payment_status_id")
-  String? paymentStatusId;
+  String paymentStatusId;
   @JsonKey(name: "total_price")
   String totalPrice;
   @JsonKey(name: "count")
@@ -70,7 +70,7 @@ class Datum {
   @JsonKey(name: "created_at")
   DateTime createdAt;
 
-  Datum({
+  DatumCompanyCash({
     required this.id,
     required this.username,
     required this.statusId,
@@ -80,9 +80,10 @@ class Datum {
     required this.createdAt,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+  factory DatumCompanyCash.fromJson(Map<String, dynamic> json) =>
+      _$DatumCompanyCashFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DatumToJson(this);
+  Map<String, dynamic> toJson() => _$DatumCompanyCashToJson(this);
 }
 
 @JsonSerializable()

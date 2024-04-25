@@ -76,9 +76,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     CompanyOrderDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<CompanyOrderDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CompanyOrderDetailScreen(),
+        child: CompanyOrderDetailScreen(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     CompanyOrderRoute.name: (routeData) {
@@ -412,16 +416,41 @@ class CompanyNewProductRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [CompanyOrderDetailScreen]
-class CompanyOrderDetailRoute extends PageRouteInfo<void> {
-  const CompanyOrderDetailRoute({List<PageRouteInfo>? children})
-      : super(
+class CompanyOrderDetailRoute
+    extends PageRouteInfo<CompanyOrderDetailRouteArgs> {
+  CompanyOrderDetailRoute({
+    Key? key,
+    required int id,
+    List<PageRouteInfo>? children,
+  }) : super(
           CompanyOrderDetailRoute.name,
+          args: CompanyOrderDetailRouteArgs(
+            key: key,
+            id: id,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CompanyOrderDetailRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<CompanyOrderDetailRouteArgs> page =
+      PageInfo<CompanyOrderDetailRouteArgs>(name);
+}
+
+class CompanyOrderDetailRouteArgs {
+  const CompanyOrderDetailRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final Key? key;
+
+  final int id;
+
+  @override
+  String toString() {
+    return 'CompanyOrderDetailRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for

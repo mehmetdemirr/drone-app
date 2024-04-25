@@ -11,19 +11,19 @@ class CompanyOrderDetailModel {
   @JsonKey(name: "company_id")
   String companyId;
   @JsonKey(name: "location_latitude")
-  String locationLatitude;
+  String? locationLatitude;
   @JsonKey(name: "location_longitude")
-  String locationLongitude;
+  String? locationLongitude;
   @JsonKey(name: "status_id")
   String statusId;
   @JsonKey(name: "total_price")
   String totalPrice;
   @JsonKey(name: "company_area_id")
-  String companyAreaId;
+  String? companyAreaId;
   @JsonKey(name: "description")
-  String description;
+  String? description;
   @JsonKey(name: "payment_status_id")
-  String paymentStatusId;
+  String? paymentStatusId;
   @JsonKey(name: "created_at")
   DateTime createdAt;
   @JsonKey(name: "updated_at")
@@ -69,11 +69,11 @@ class OrderItem {
   @JsonKey(name: "product_id")
   String productId;
   @JsonKey(name: "title")
-  String title;
+  String? title;
   @JsonKey(name: "price")
-  String price;
+  String? price;
   @JsonKey(name: "tax")
-  String tax;
+  String? tax;
   @JsonKey(name: "amount")
   String amount;
   @JsonKey(name: "created_at")

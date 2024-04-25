@@ -1,4 +1,4 @@
-import 'package:demo/product/company_order/model/company_order_details_model.dart';
+import 'package:demo/product/company_order_detail/model/company_order_details_model.dart';
 import 'package:demo/product/company_order/model/company_order_model.dart';
 import 'package:demo/product/general/enum/http_methods.dart';
 import 'package:demo/product/general/enum/order_status.dart';
@@ -6,23 +6,19 @@ import 'package:demo/product/general/model/base_response.dart';
 import 'package:demo/product/general/service/api_service.dart';
 
 class CompanyOrderService extends ApiService {
-  Future<BaseResponse<List<CompanyOrderModel>?>> getOrder(
+  Future<BaseResponse<CompanyOrderModel?>> getOrder(
     OrderStatusItem statusId,
     int perPage,
     int page,
   ) {
-    return requestMethod<List<CompanyOrderModel>?>(
-      path:
-          '/user/order/status?status_id=${statusId.str()}&perPage=$perPage&page=$page',
+    return requestMethod<CompanyOrderModel?>(
+      path: '/company/order/status/${statusId.str()}',
       headers: {
         'Content-Type': 'application/json',
       },
       responseConverter: (p0) {
-        if (p0 is List) {
-          return p0
-              .map((json) =>
-                  CompanyOrderModel.fromJson(json as Map<String, dynamic>))
-              .toList();
+        if (p0 != null) {
+          return CompanyOrderModel.fromJson(p0 as Map<String, dynamic>);
         }
         return null;
       },

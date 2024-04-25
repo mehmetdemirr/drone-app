@@ -1,30 +1,22 @@
-import 'package:demo/product/company_order/model/company_order_model.dart';
 import 'package:demo/product/company_order/service/company_order_service.dart';
-import 'package:demo/product/general/enum/order_status.dart';
+import 'package:demo/product/company_order_detail/model/company_order_details_model.dart';
 import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-class CompanyOrderViewModel extends ChangeNotifier {
+class CompanyOrderDetailViewModel extends ChangeNotifier {
   bool isLoading = false;
-  OrderStatusItem orderStatusItem = OrderStatusItem.tumu;
-  CompanyOrderModel? orderModel;
+  CompanyOrderDetailModel? orderModel;
 
   void changeLoading() {
     isLoading = !isLoading;
     notifyListeners();
   }
 
-  void changeOrderStatusItem(OrderStatusItem status) {
-    orderStatusItem = status;
-    orderListFetch(1);
-    notifyListeners();
-  }
-
-  void orderListFetch(int page) async {
+  void fetchOrderDetail(int id) async {
     changeLoading();
-    BaseResponse<CompanyOrderModel?> response =
-        await CompanyOrderService().getOrder(orderStatusItem, 10, page);
+    BaseResponse<CompanyOrderDetailModel?> response =
+        await CompanyOrderService().getAnOrder(id);
     if (response.succeeded) {
       orderModel = response.data;
     } else {

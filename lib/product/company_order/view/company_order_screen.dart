@@ -1,8 +1,8 @@
-import 'dart:math';
-
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/extension/date_time.dart';
 import 'package:demo/core/log/log.dart';
 import 'package:demo/core/navigation/app_router.dart';
+import 'package:demo/product/company_order/model/company_order_model.dart';
 import 'package:demo/product/company_order/viewmodel/company_order_viewmodel.dart';
 import 'package:demo/product/general/enum/order_status.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +16,14 @@ class CompanyOrderScreen extends StatefulWidget {
 }
 
 class _CompanyOrderScreenState extends State<CompanyOrderScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero).then((value) async {
+      context.read<CompanyOrderViewModel>().orderListFetch(1);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -152,161 +160,188 @@ class _CompanyOrderScreenState extends State<CompanyOrderScreen> {
                 ),
               ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 15,
-                itemBuilder: (context, index) {
-                  var random = Random();
-                  int rSayi = random.nextInt(2); // 0 , 1
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: InkWell(
-                      onTap: () {
-                        context.navigateNamedTo(
-                            RouterItem.companyOrderDetail.str());
-                      },
-                      child: Card(
-                        color: Colors.white,
-                        elevation: 1,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Mehmet Demir",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "Sipariş Id:",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium
-                                            ?.copyWith(
-                                              color: const Color.fromRGBO(
-                                                  153, 153, 153, 1),
-                                            ),
-                                      ),
-                                      Text(
-                                        " 17392  | 6 Parça",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium
-                                            ?.copyWith(
-                                              color: const Color.fromRGBO(
-                                                  153, 153, 153, 1),
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "₺250.00",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(
-                                              color: const Color.fromRGBO(
-                                                  82, 0, 255, 1),
-                                            ),
-                                      ),
-                                      const SizedBox(width: 15),
-                                      const Icon(Icons.motorcycle_outlined),
-                                      Text(
-                                        " | 12 Haz 2024 12.30",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium
-                                            ?.copyWith(
-                                              color: const Color.fromRGBO(
-                                                  153, 153, 153, 1),
-                                            ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        Log.info("Sipariş detay");
-                                      },
-                                      icon: const Icon(
-                                          Icons.keyboard_arrow_down_outlined),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: const Color.fromRGBO(
-                                                184, 184, 201, 1),
-                                            width: 2,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(3.0),
-                                          child: Text(
-                                            rSayi == 1
-                                                ? "Tamamlandı"
-                                                : "Bekliyor",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodySmall
-                                                ?.copyWith(
-                                                  color: rSayi == 1
-                                                      ? const Color.fromRGBO(
-                                                          0, 194, 13, 1)
-                                                      : const Color.fromRGBO(
-                                                          233, 181, 47, 1),
-                                                ),
-                                          ),
-                                        )
-                                        //todo container yerine ikonda koyabiliriz
-                                        // Icon(rSayi == 1
-                                        //     ? Icons.check_circle_outline_outlined
-                                        //     : Icons.cached_outlined),
-                                        ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            )
+            context.watch<CompanyOrderViewModel>().isLoading
+                ? const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  )
+                : Expanded(
+                    child: _listViewBuilder(context
+                            .watch<CompanyOrderViewModel>()
+                            .orderModel
+                            ?.data ??
+                        []),
+                  )
           ],
         ),
       ),
     );
+  }
+
+  Widget _listViewBuilder(List<Datum> list) {
+    return list.isEmpty
+        ? const Text("Sipariş bulunamadı !")
+        : ListView.builder(
+            itemCount: list.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: InkWell(
+                  onTap: () {
+                    context.navigateTo(
+                        CompanyOrderDetailRoute(id: list[index].id));
+                  },
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    list[index].username,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Sipariş Id:",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          color: const Color.fromRGBO(
+                                              153, 153, 153, 1),
+                                        ),
+                                  ),
+                                  Text(
+                                    " ${list[index].id}  | ${list[index].count} Parça",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          color: const Color.fromRGBO(
+                                              153, 153, 153, 1),
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    " ${list[index].totalPrice} TL",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                          color: const Color.fromRGBO(
+                                              82, 0, 255, 1),
+                                        ),
+                                  ),
+                                  const SizedBox(width: 15),
+                                  const Icon(Icons.motorcycle_outlined),
+                                  Text(
+                                    " | ${list[index].createdAt.str()}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(
+                                          color: const Color.fromRGBO(
+                                              153, 153, 153, 1),
+                                        ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    Log.info("Sipariş detay");
+                                  },
+                                  icon: const Icon(
+                                      Icons.keyboard_arrow_down_outlined),
+                                ),
+                                const SizedBox(height: 10),
+                                Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: const Color.fromRGBO(
+                                            184, 184, 201, 1),
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: Text(
+                                        !(int.parse(list[index].statusId) ==
+                                                    1 ||
+                                                int.parse(
+                                                        list[index].statusId) ==
+                                                    2 ||
+                                                int.parse(
+                                                        list[index].statusId) ==
+                                                    3 ||
+                                                int.parse(
+                                                        list[index].statusId) ==
+                                                    4)
+                                            ? "Tamamlandı"
+                                            : "Bekliyor",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              color: !(int.parse(list[index]
+                                                              .statusId) ==
+                                                          1 ||
+                                                      int.parse(list[index]
+                                                              .statusId) ==
+                                                          2 ||
+                                                      int.parse(list[index]
+                                                              .statusId) ==
+                                                          3 ||
+                                                      int.parse(list[index]
+                                                              .statusId) ==
+                                                          4)
+                                                  ? const Color.fromRGBO(
+                                                      0, 194, 13, 1)
+                                                  : const Color.fromRGBO(
+                                                      233, 181, 47, 1),
+                                            ),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
   }
 }

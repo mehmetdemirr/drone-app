@@ -4,8 +4,10 @@ import 'package:demo/core/network_control/no_network_widget.dart';
 import 'package:demo/core/theme/dark_theme.dart';
 import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
+import 'package:demo/product/company_cash/viewmodel/campany_cash_viewmodel.dart';
 import 'package:demo/product/company_customer/viewmodel/company_customer_viewmodel.dart';
 import 'package:demo/product/company_order/viewmodel/company_order_viewmodel.dart';
+import 'package:demo/product/company_order_detail/viewmodel/company_order_detail_viewmodel.dart';
 import 'package:demo/product/company_products/viewmodel/company_products_viewmodel.dart';
 import 'package:demo/product/company_statistic/viewmodel/company_statistic_viewmodel.dart';
 import 'package:demo/product/customer_basket/viewmodel/customer_basket_viewmodel.dart';
@@ -71,6 +73,12 @@ void main() async {
         ),
         ChangeNotifierProvider<CustomerCashViewModel>(
           create: (_) => CustomerCashViewModel(),
+        ),
+        ChangeNotifierProvider<CompanyOrderDetailViewModel>(
+          create: (_) => CompanyOrderDetailViewModel(),
+        ),
+        ChangeNotifierProvider<CompanyCashViewModel>(
+          create: (_) => CompanyCashViewModel(),
         ),
       ],
       child: EasyLocalization(

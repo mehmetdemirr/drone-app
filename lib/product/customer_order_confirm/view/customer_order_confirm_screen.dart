@@ -170,16 +170,7 @@ class _CustomerOrderConfirmScreenState
                             polylineCulling: false,
                             polylines: [
                               Polyline(
-                                points: [
-                                  // LatLng(
-                                  //   locationData?.latitude ?? 0,
-                                  //   locationData?.longitude ?? 0,
-                                  // ),
-                                  const LatLng(
-                                    37,
-                                    42,
-                                  ),
-                                ],
+                                points: [],
                                 color: Colors.blue,
                                 strokeWidth: 100,
                               ),

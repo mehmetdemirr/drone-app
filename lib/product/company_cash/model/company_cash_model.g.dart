@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'company_order_model.dart';
+part of 'company_cash_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CompanyOrderModel _$CompanyOrderModelFromJson(Map<String, dynamic> json) =>
-    CompanyOrderModel(
+CompanyCashModel _$CompanyCashModelFromJson(Map<String, dynamic> json) =>
+    CompanyCashModel(
       currentPage: json['current_page'] as int,
       data: (json['data'] as List<dynamic>)
-          .map((e) => Datum.fromJson(e as Map<String, dynamic>))
+          .map((e) => DatumCompanyCash.fromJson(e as Map<String, dynamic>))
           .toList(),
-      firstPageUrl: json['first_page_url'] as String,
+      firstPageUrl: json['first_page_url'] as String?,
       from: json['from'] as int?,
       lastPage: json['last_page'] as int?,
       lastPageUrl: json['last_page_url'] as String?,
@@ -27,7 +27,7 @@ CompanyOrderModel _$CompanyOrderModelFromJson(Map<String, dynamic> json) =>
       total: json['total'] as int,
     );
 
-Map<String, dynamic> _$CompanyOrderModelToJson(CompanyOrderModel instance) =>
+Map<String, dynamic> _$CompanyCashModelToJson(CompanyCashModel instance) =>
     <String, dynamic>{
       'current_page': instance.currentPage,
       'data': instance.data,
@@ -44,17 +44,19 @@ Map<String, dynamic> _$CompanyOrderModelToJson(CompanyOrderModel instance) =>
       'total': instance.total,
     };
 
-Datum _$DatumFromJson(Map<String, dynamic> json) => Datum(
+DatumCompanyCash _$DatumCompanyCashFromJson(Map<String, dynamic> json) =>
+    DatumCompanyCash(
       id: json['id'] as int,
       username: json['username'] as String,
       statusId: json['status_id'] as String,
-      paymentStatusId: json['payment_status_id'] as String?,
+      paymentStatusId: json['payment_status_id'] as String,
       totalPrice: json['total_price'] as String,
       count: json['count'] as int,
       createdAt: DateTime.parse(json['created_at'] as String),
     );
 
-Map<String, dynamic> _$DatumToJson(Datum instance) => <String, dynamic>{
+Map<String, dynamic> _$DatumCompanyCashToJson(DatumCompanyCash instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'username': instance.username,
       'status_id': instance.statusId,
