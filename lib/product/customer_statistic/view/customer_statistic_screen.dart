@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/cache/shared_pref.dart';
 import 'package:demo/core/extension/screen_size.dart';
+import 'package:demo/core/log/log.dart';
 import 'package:demo/core/utilty/images_items.dart';
 import 'package:demo/product/general/grafikler/radial_gauge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 @RoutePage()
 class CustomerStatisticScreen extends StatefulWidget {
@@ -21,7 +24,7 @@ class _CustomerStatisticScreenState extends State<CustomerStatisticScreen> {
         title: const Text("Ana Sayfa"),
         actions: [
           IconButton(
-            onPressed: () {
+            onPressed: () async {
               EasyLoading.showInfo("Yakında ...");
             },
             icon: const Icon(Icons.notifications_active_outlined),

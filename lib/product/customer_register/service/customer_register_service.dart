@@ -10,6 +10,7 @@ class CustomerRegisterService extends ApiService {
     String password,
     String email,
     String phone,
+    String onesignalId,
   ) {
     return requestMethod<CustomerTokenModel>(
       path: '/auth/register',
@@ -24,6 +25,7 @@ class CustomerRegisterService extends ApiService {
         "password": password,
         "email": email,
         "phone": phone,
+        "onesignal_id": onesignalId,
       },
       queryParameters: null,
       method: HttpMethod.post,

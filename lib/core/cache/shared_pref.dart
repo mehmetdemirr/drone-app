@@ -71,6 +71,17 @@ class SharedPref {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool(SharedKeyItem.auth.str()) ?? true;
   }
+
+  //onesignalId
+  Future<void> setOnesignalId(String id) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(SharedKeyItem.oneSignalId.str(), id);
+  }
+
+  Future<String?> getOnesignalId() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(SharedKeyItem.oneSignalId.str());
+  }
 }
 
 enum SharedKeyItem {
@@ -80,6 +91,7 @@ enum SharedKeyItem {
   companyToken,
   companyId,
   auth,
+  oneSignalId,
 }
 
 extension SharedKeyItems on SharedKeyItem {
@@ -91,6 +103,7 @@ extension SharedKeyItems on SharedKeyItem {
       SharedKeyItem.companyToken => "companyToken",
       SharedKeyItem.customerToken => "customerToken",
       SharedKeyItem.auth => "auth",
+      SharedKeyItem.oneSignalId => "auth",
     };
   }
 }

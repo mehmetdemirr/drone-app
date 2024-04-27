@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/cache/shared_pref.dart';
+import 'package:demo/core/log/log.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/company_login/model/company_model.dart';
 import 'package:demo/product/company_login/service/company_login_service.dart';
 import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 @RoutePage()
 class CompanyLoginScreen extends StatefulWidget {
@@ -76,36 +78,44 @@ class _CompanyLoginScreenState extends State<CompanyLoginScreen> {
                     ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          BaseResponse<CompanyTokenModel?> response =
-                              await CompanyLoginService().companyLogin(
-                            mail.text,
-                            password.text,
-                          );
-                          if (response.succeeded) {
-                            EasyLoading.showSuccess("Giriş başarılı ");
-                            //tüm routları temizle sadece company ana sayfa kalsın
-                            await SharedPref()
-                                .setCompanyToken(response.data?.token ?? "")
-                                .then((value) {
-                              // ignore: use_build_context_synchronously
-                              context.router.replaceAll(
-                                [
-                                  const CompanyHomeRoute(),
-                                ],
-                              );
-                            });
-                          } else {
-                            if (response.errors == "1") {
-                              // ignore: use_build_context_synchronously
-                              context.router.replaceAll(
-                                [
-                                  const CompanyStatusFalseRoute(),
-                                ],
-                              );
+                          final id = OneSignal.User.pushSubscription.id;
+                          if (id != null) {
+                            await SharedPref().setOnesignalId(id);
+                            Log.info("Onesignal id: $id");
+                            BaseResponse<CompanyTokenModel?> response =
+                                await CompanyLoginService().companyLogin(
+                              mail.text,
+                              password.text,
+                              id,
+                            );
+                            if (response.succeeded) {
+                              EasyLoading.showSuccess("Giriş başarılı ");
+                              //tüm routları temizle sadece company ana sayfa kalsın
+                              await SharedPref()
+                                  .setCompanyToken(response.data?.token ?? "")
+                                  .then((value) {
+                                // ignore: use_build_context_synchronously
+                                context.router.replaceAll(
+                                  [
+                                    const CompanyHomeRoute(),
+                                  ],
+                                );
+                              });
                             } else {
-                              EasyLoading.showError(
-                                  "Giriş başarısız !\nError:${response.message}-${response.errors}");
+                              if (response.errors == "1") {
+                                // ignore: use_build_context_synchronously
+                                context.router.replaceAll(
+                                  [
+                                    const CompanyStatusFalseRoute(),
+                                  ],
+                                );
+                              } else {
+                                EasyLoading.showError(
+                                    "Giriş başarısız !\nError:${response.message}-${response.errors}");
+                              }
                             }
+                          } else {
+                            EasyLoading.showError("Onesignal id error");
                           }
                         } else {
                           EasyLoading.showError(
@@ -117,36 +127,44 @@ class _CompanyLoginScreenState extends State<CompanyLoginScreen> {
                     ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          BaseResponse<CompanyTokenModel?> response =
-                              await CompanyLoginService().companyLogin(
-                            mail.text,
-                            password.text,
-                          );
-                          if (response.succeeded) {
-                            EasyLoading.showSuccess("Giriş başarılı ");
-                            //tüm routları temizle sadece company ana sayfa kalsın
-                            await SharedPref()
-                                .setCompanyId(response.data?.companyId ?? -1)
-                                .then((value) {
-                              // ignore: use_build_context_synchronously
-                              context.router.replaceAll(
-                                [
-                                  const CompanyShowQrRoute(),
-                                ],
-                              );
-                            });
-                          } else {
-                            if (response.errors == "1") {
-                              // ignore: use_build_context_synchronously
-                              context.router.replaceAll(
-                                [
-                                  const CompanyStatusFalseRoute(),
-                                ],
-                              );
+                          final id = OneSignal.User.pushSubscription.id;
+                          if (id != null) {
+                            await SharedPref().setOnesignalId(id);
+                            Log.info("Onesignal id: $id");
+                            BaseResponse<CompanyTokenModel?> response =
+                                await CompanyLoginService().companyLogin(
+                              mail.text,
+                              password.text,
+                              id,
+                            );
+                            if (response.succeeded) {
+                              EasyLoading.showSuccess("Giriş başarılı ");
+                              //tüm routları temizle sadece company ana sayfa kalsın
+                              await SharedPref()
+                                  .setCompanyId(response.data?.companyId ?? -1)
+                                  .then((value) {
+                                // ignore: use_build_context_synchronously
+                                context.router.replaceAll(
+                                  [
+                                    const CompanyShowQrRoute(),
+                                  ],
+                                );
+                              });
                             } else {
-                              EasyLoading.showError(
-                                  "Giriş başarısız !\nError:${response.message}-${response.errors}");
+                              if (response.errors == "1") {
+                                // ignore: use_build_context_synchronously
+                                context.router.replaceAll(
+                                  [
+                                    const CompanyStatusFalseRoute(),
+                                  ],
+                                );
+                              } else {
+                                EasyLoading.showError(
+                                    "Giriş başarısız !\nError:${response.message}-${response.errors}");
+                              }
                             }
+                          } else {
+                            EasyLoading.showError("Onesignal id error");
                           }
                         } else {
                           EasyLoading.showError(

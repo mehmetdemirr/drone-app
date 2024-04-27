@@ -11,6 +11,7 @@ import 'package:demo/product/customer_login/viewmodel/customer_login_viewmodel.d
 import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -117,49 +118,58 @@ class _CustomerLoginScreenState extends State<CustomerLoginScreen> {
                     ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          BaseResponse<CustomerTokenModel> response =
-                              await CustomerLoginService()
-                                  .customerLogin(mail.text, password.text);
-                          if (response.succeeded &&
-                              response.data?.token != null) {
-                            await SharedPref()
-                                .setCustomerToken(response.data?.token ?? "")
-                                .then((value) async {
-                              EasyLoading.showSuccess(
-                                  response.message ?? "Giriş Yapıldı");
-                              BaseResponse<CustomerInfoModel?> userInfo =
-                                  await CustomerInfoService().customerInfo();
-                              if (userInfo.data?.activeCompany == "true") {
-                                //tüm routları temizle sadece customer ana sayfa kalsın
-                                // ignore: use_build_context_synchronously
-                                context.router.replaceAll(
-                                  [
-                                    const CustomerHomeRoute(),
-                                  ],
-                                );
-                              } else if (userInfo.data?.activeCompany ==
-                                  "waiting") {
-                                //tüm routları temizle sadece customer ana sayfa kalsın
-                                // ignore: use_build_context_synchronously
-                                context.router.replaceAll(
-                                  [
-                                    const CustomerWaitingRoomRoute(),
-                                  ],
-                                );
-                              } else if (userInfo.data?.activeCompany ==
-                                  "false") {
-                                //tüm routları temizle sadece customer ana sayfa kalsın
-                                // ignore: use_build_context_synchronously
-                                context.router.replaceAll(
-                                  [
-                                    const CustomerAreaLoginRoute(),
-                                  ],
-                                );
-                              }
-                            });
+                          final id = OneSignal.User.pushSubscription.id;
+                          if (id != null) {
+                            await SharedPref().setOnesignalId(id);
+                            Log.info("Onesignal id: $id");
+                            BaseResponse<CustomerTokenModel> response =
+                                await CustomerLoginService().customerLogin(
+                                    mail.text, password.text, id);
+                            if (response.succeeded &&
+                                response.data?.token != null) {
+                              await SharedPref()
+                                  .setCustomerToken(response.data?.token ?? "")
+                                  .then((value) async {
+                                EasyLoading.showSuccess(
+                                    response.message ?? "Giriş Yapıldı");
+                                BaseResponse<CustomerInfoModel?> userInfo =
+                                    await CustomerInfoService().customerInfo();
+                                if (userInfo.data?.activeCompany == "true") {
+                                  //tüm routları temizle sadece customer ana sayfa kalsın
+                                  // ignore: use_build_context_synchronously
+                                  context.router.replaceAll(
+                                    [
+                                      const CustomerHomeRoute(),
+                                    ],
+                                  );
+                                } else if (userInfo.data?.activeCompany ==
+                                    "waiting") {
+                                  //tüm routları temizle sadece customer ana sayfa kalsın
+                                  // ignore: use_build_context_synchronously
+                                  context.router.replaceAll(
+                                    [
+                                      const CustomerWaitingRoomRoute(),
+                                    ],
+                                  );
+                                } else if (userInfo.data?.activeCompany ==
+                                    "false") {
+                                  //tüm routları temizle sadece customer ana sayfa kalsın
+                                  // ignore: use_build_context_synchronously
+                                  context.router.replaceAll(
+                                    [
+                                      const CustomerAreaLoginRoute(),
+                                    ],
+                                  );
+                                }
+                              });
+                            } else {
+                              EasyLoading.showError(
+                                  "Giriş başarısız ! \nError:${response.message}");
+                            }
                           } else {
+                            Log.error("onesignal id yok");
                             EasyLoading.showError(
-                                "Giriş başarısız ! \nError:${response.message}");
+                                "Uygulamadan çıkıp tekrar deneyiniz !.Error:Onesignal id alınamadı!");
                           }
                         } else {
                           EasyLoading.showError(

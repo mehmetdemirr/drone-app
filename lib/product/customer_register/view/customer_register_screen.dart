@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/cache/shared_pref.dart';
+import 'package:demo/core/log/log.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/customer_login/model/customer_token_model.dart';
 import 'package:demo/product/customer_register/service/customer_register_service.dart';
 import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 @RoutePage()
 class CustomerRegisterScreen extends StatefulWidget {
@@ -139,28 +142,38 @@ class _CustomerRegisterScreenState extends State<CustomerRegisterScreen> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        BaseResponse<CustomerTokenModel> response =
-                            await CustomerRegisterService().customerRegister(
-                          customerName.text,
-                          customerSurname.text,
-                          password.text,
-                          mail.text,
-                          phoneNumber.text,
-                        );
-                        if (response.succeeded &&
-                            response.data?.token != null) {
-                          EasyLoading.showSuccess(
-                              response.message ?? "Kayıt Yapıldı");
-                          //tüm routları temizle sadece customer ana sayfa kalsın
-                          // ignore: use_build_context_synchronously
-                          context.router.replaceAll(
-                            [
-                              const CustomerLoginRoute(),
-                            ],
+                        final id = OneSignal.User.pushSubscription.id;
+                        if (id != null) {
+                          await SharedPref().setOnesignalId(id);
+                          Log.info("Onesignal id: $id");
+                          BaseResponse<CustomerTokenModel> response =
+                              await CustomerRegisterService().customerRegister(
+                            customerName.text,
+                            customerSurname.text,
+                            password.text,
+                            mail.text,
+                            phoneNumber.text,
+                            id,
                           );
+                          if (response.succeeded &&
+                              response.data?.token != null) {
+                            EasyLoading.showSuccess(
+                                response.message ?? "Kayıt Yapıldı");
+                            //tüm routları temizle sadece customer ana sayfa kalsın
+                            // ignore: use_build_context_synchronously
+                            context.router.replaceAll(
+                              [
+                                const CustomerLoginRoute(),
+                              ],
+                            );
+                          } else {
+                            EasyLoading.showError(
+                                "Kayıt başarısız ! \nError:${response.message}-${response.errors}");
+                          }
                         } else {
+                          Log.error("onesignal id yok");
                           EasyLoading.showError(
-                              "Kayıt başarısız ! \nError:${response.message}-${response.errors}");
+                              "Uygulamadan çıkıp tekrar deneyiniz !.Error:Onesignal id alınamadı!");
                         }
 
                         //tüm routları temizle sadece customer ana sayfa kalsın

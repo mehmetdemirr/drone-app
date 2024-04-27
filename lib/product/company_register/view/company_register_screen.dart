@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/cache/shared_pref.dart';
+import 'package:demo/core/log/log.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/company_register/service/company_register_service.dart';
 import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 @RoutePage()
 class CompanyRegisterScreen extends StatefulWidget {
@@ -125,25 +128,33 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        BaseResponse response =
-                            await CompanyRegisterService().companyRegister(
-                          companyName.text,
-                          phoneNumber.text,
-                          mail.text,
-                          password.text,
-                        );
-                        if (response.succeeded) {
-                          EasyLoading.showSuccess("Kayıt başarılı ");
-                          //tüm routları temizle sadece customer ana sayfa kalsın
-                          // ignore: use_build_context_synchronously
-                          context.router.replaceAll(
-                            [
-                              const CompanyStatusFalseRoute(),
-                            ],
+                        final id = OneSignal.User.pushSubscription.id;
+                        if (id != null) {
+                          await SharedPref().setOnesignalId(id);
+                          Log.info("Onesignal id: $id");
+                          BaseResponse response =
+                              await CompanyRegisterService().companyRegister(
+                            companyName.text,
+                            phoneNumber.text,
+                            mail.text,
+                            password.text,
+                            id,
                           );
+                          if (response.succeeded) {
+                            EasyLoading.showSuccess("Kayıt başarılı ");
+                            //tüm routları temizle sadece customer ana sayfa kalsın
+                            // ignore: use_build_context_synchronously
+                            context.router.replaceAll(
+                              [
+                                const CompanyStatusFalseRoute(),
+                              ],
+                            );
+                          } else {
+                            EasyLoading.showError(
+                                "Kayıt başarısız! Error:${response.errors}-${response.message}");
+                          }
                         } else {
-                          EasyLoading.showError(
-                              "Kayıt başarısız! Error:${response.errors}-${response.message}");
+                          EasyLoading.showError("Onesignal id error");
                         }
                       } else {
                         EasyLoading.showError(

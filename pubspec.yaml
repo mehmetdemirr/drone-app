@@ -59,7 +59,7 @@ dependencies:
   #locaition
   location: ^6.0.1 
   #onesignal
-  onesignal_flutter: ^5.1.5
+  onesignal_flutter: ^5.1.2
   #share 
   # share_plus: ^9.0.0
 

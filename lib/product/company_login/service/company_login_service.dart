@@ -7,6 +7,7 @@ class CompanyLoginService extends ApiService {
   Future<BaseResponse<CompanyTokenModel?>> companyLogin(
     String email,
     String password,
+    String onesignalId,
   ) {
     return requestMethod<CompanyTokenModel?>(
       path: '/company/login',
@@ -22,6 +23,7 @@ class CompanyLoginService extends ApiService {
       requestModel: {
         "email": email,
         "password": password,
+        "onesignal_id": onesignalId,
       },
       queryParameters: null,
       method: HttpMethod.post,

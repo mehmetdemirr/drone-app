@@ -1,4 +1,5 @@
 import 'package:demo/core/cache/shared_pref.dart';
+import 'package:demo/core/log/log.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/network_control/no_network_widget.dart';
 import 'package:demo/core/theme/dark_theme.dart';
@@ -32,6 +33,14 @@ void main() async {
   //Remove this method to stop OneSignal Debugging
   OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
   OneSignal.initialize("256ad2af-27b2-4cd4-b82a-99228b2af03f");
+  final id = OneSignal.User.pushSubscription.id;
+  if (id != null) {
+    await SharedPref().setOnesignalId(id);
+    Log.info("Onseignal id: $id");
+  } else {
+    Log.error("onesignal id yok");
+  }
+
   // The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
   OneSignal.Notifications.requestPermission(true);
 
