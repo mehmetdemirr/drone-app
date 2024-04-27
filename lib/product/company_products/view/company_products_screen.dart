@@ -4,6 +4,7 @@ import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/company_products/model/get_all_product_model.dart';
 import 'package:demo/product/company_products/viewmodel/company_products_viewmodel.dart';
 import 'package:demo/product/general/widget/custom_cached_image.dart';
+import 'package:demo/product/general/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -73,7 +74,9 @@ class _CompanyProductsScreenState extends State<CompanyProductsScreen> {
         ],
       ),
       body: context.watch<CompanyProductViewModel>().isLoading
-          ? const Center(child: CircularProgressIndicator.adaptive())
+          ? const Center(
+              child: LoadingWidget(),
+            )
           : Column(
               children: [
                 Expanded(

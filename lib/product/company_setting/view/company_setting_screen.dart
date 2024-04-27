@@ -7,6 +7,7 @@ import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
 import 'package:demo/core/utilty/images_items.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -27,12 +28,12 @@ class _CompanySettingScreenState extends State<CompanySettingScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Image.asset(
-              width: context.width / 3,
-              ImageItem.companyIcon.str(),
+            CircleAvatar(
+              radius: context.width / 6,
+              backgroundImage: AssetImage(ImageItem.appIcon.str()),
             ),
             Text(
-              "Antalya Belek Üniversitesi",
+              "username",
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Colors.black54,
                     fontStyle: FontStyle.italic,
@@ -118,6 +119,33 @@ class _CompanySettingScreenState extends State<CompanySettingScreen> {
                       children: [
                         Text(
                           "Geri Bildirim",
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const Spacer(),
+                        const Icon(Icons.arrow_forward),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                EasyLoading.showInfo("Yakında geliyor...");
+              },
+              child: Card(
+                child: SizedBox(
+                  width: context.width,
+                  height: 60,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Profilini Düzenle",
                           style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const Spacer(),

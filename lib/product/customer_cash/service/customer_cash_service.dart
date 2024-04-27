@@ -11,7 +11,7 @@ class CustomerCashService extends ApiService {
     int page,
   ) {
     return requestMethod<CustomerCashModel?>(
-      path: '/user/order/status/${statusId.str()}',
+      path: '/user/order/status/${statusId.strOrderStatus2Int()}',
       headers: {
         'Content-Type': 'application/json',
       },

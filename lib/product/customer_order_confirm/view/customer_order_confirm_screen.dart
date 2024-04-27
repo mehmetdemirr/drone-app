@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/log/log.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/customer_basket/service/customer_basket_service.dart';
 import 'package:demo/product/customer_order_confirm/viewmodel/customer_order_confirm_viewmodel.dart';
@@ -29,8 +30,7 @@ class CustomerOrderConfirmScreen extends StatefulWidget {
 
 class _CustomerOrderConfirmScreenState
     extends State<CustomerOrderConfirmScreen> {
-  late LocationData locationData;
-  LatLng initialLocationData = const LatLng(32, 23);
+  LatLng locationData = const LatLng(0, 0);
 
   final MultiSelectController _controller = MultiSelectController();
   final TextEditingController _description = TextEditingController();
@@ -39,7 +39,8 @@ class _CustomerOrderConfirmScreenState
   @override
   void initState() {
     super.initState();
-    locationData = widget.locationData;
+    locationData = LatLng(
+        widget.locationData.latitude ?? 0, widget.locationData.longitude ?? 0);
     Future.delayed(Duration.zero).then((value) async {
       context.read<CustomerOrderConfirmViewModel>().fetchCompanyArea();
     });
@@ -64,7 +65,8 @@ class _CustomerOrderConfirmScreenState
                   LocationData? response =
                       await LocationManager().getLoacation();
                   if (response != null) {
-                    locationData = response;
+                    locationData =
+                        LatLng(response.latitude ?? 0, response.longitude ?? 0);
                   } else {
                     EasyLoading.showError("Konum null geldi");
                   }
@@ -138,11 +140,18 @@ class _CustomerOrderConfirmScreenState
                       child: FlutterMap(
                         options: MapOptions(
                           initialCenter: LatLng(
-                            locationData.latitude ??
-                                initialLocationData.latitude,
-                            locationData.longitude ??
-                                initialLocationData.longitude,
+                            locationData.latitude,
+                            locationData.longitude,
                           ),
+                          onTap: (a, LatLng point) {
+                            // Kullanıcının haritada herhangi bir yere dokunması durumunda
+                            setState(() {
+                              locationData =
+                                  LatLng(point.latitude, point.longitude);
+                              Log.info(
+                                  "Harita tıklandı :${point.latitude},${point.longitude} ");
+                            });
+                          },
                         ),
                         children: [
                           TileLayer(
@@ -155,27 +164,29 @@ class _CustomerOrderConfirmScreenState
                             markers: [
                               Marker(
                                 point: LatLng(
-                                  locationData.latitude ??
-                                      initialLocationData.latitude,
-                                  locationData.longitude ??
-                                      initialLocationData.longitude,
+                                  locationData.latitude,
+                                  locationData.longitude,
                                 ),
-                                width: 37,
-                                height: 42,
-                                child: const FlutterLogo(),
+                                width: 40,
+                                height: 40,
+                                child: const Icon(
+                                  Icons.location_on,
+                                  color: Colors.red,
+                                  size: 30,
+                                ),
                               ),
                             ],
                           ),
-                          PolylineLayer(
-                            polylineCulling: false,
-                            polylines: [
-                              Polyline(
-                                points: [],
-                                color: Colors.blue,
-                                strokeWidth: 100,
-                              ),
-                            ],
-                          )
+                          // PolylineLayer(
+                          //   polylineCulling: false,
+                          //   polylines: [
+                          //     Polyline(
+                          //       points: [],
+                          //       color: Colors.blue,
+                          //       strokeWidth: 100,
+                          //     ),
+                          //   ],
+                          // )
                         ],
                       ),
                     ),
@@ -201,8 +212,8 @@ class _CustomerOrderConfirmScreenState
                     if (_controller.selectedOptions.isNotEmpty) {
                       BaseResponse response =
                           await CustomerBasketService().confirmBasket(
-                        locationData.longitude ?? 0,
-                        locationData.longitude ?? 0,
+                        locationData.latitude,
+                        locationData.longitude,
                         _description.text,
                         _controller.selectedOptions[0].value as int,
                       );

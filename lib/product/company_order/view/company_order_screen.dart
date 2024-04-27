@@ -5,6 +5,8 @@ import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/company_order/model/company_order_model.dart';
 import 'package:demo/product/company_order/viewmodel/company_order_viewmodel.dart';
 import 'package:demo/product/general/enum/order_status.dart';
+import 'package:demo/product/general/extension/status_to_string.dart';
+import 'package:demo/product/general/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -103,7 +105,7 @@ class _CompanyOrderScreenState extends State<CompanyOrderScreen> {
                         .changeOrderStatusItem(OrderStatusItem.siparisVerildi);
                   },
                   child: Text(
-                    "Bekleyen",
+                    "Onay Bekleyen",
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: context
                                       .watch<CompanyOrderViewModel>()
@@ -162,7 +164,7 @@ class _CompanyOrderScreenState extends State<CompanyOrderScreen> {
             ),
             context.watch<CompanyOrderViewModel>().isLoading
                 ? const Center(
-                    child: CircularProgressIndicator.adaptive(),
+                    child: LoadingWidget(),
                   )
                 : Expanded(
                     child: _listViewBuilder(context
@@ -254,7 +256,7 @@ class _CompanyOrderScreenState extends State<CompanyOrderScreen> {
                                         ),
                                   ),
                                   const SizedBox(width: 15),
-                                  const Icon(Icons.motorcycle_outlined),
+                                  const Icon(Icons.flight_outlined),
                                   Text(
                                     " | ${list[index].createdAt.str()}",
                                     style: Theme.of(context)
@@ -285,53 +287,48 @@ class _CompanyOrderScreenState extends State<CompanyOrderScreen> {
                                 ),
                                 const SizedBox(height: 10),
                                 Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: const Color.fromRGBO(
-                                            184, 184, 201, 1),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(5),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: const Color.fromRGBO(
+                                          184, 184, 201, 1),
+                                      width: 2,
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: Text(
-                                        !(int.parse(list[index].statusId) ==
-                                                    1 ||
-                                                int.parse(
-                                                        list[index].statusId) ==
-                                                    2 ||
-                                                int.parse(
-                                                        list[index].statusId) ==
-                                                    3 ||
-                                                int.parse(
-                                                        list[index].statusId) ==
-                                                    4)
-                                            ? "Tamamlandı"
-                                            : "Bekliyor",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                              color: !(int.parse(list[index]
-                                                              .statusId) ==
-                                                          1 ||
-                                                      int.parse(list[index]
-                                                              .statusId) ==
-                                                          2 ||
-                                                      int.parse(list[index]
-                                                              .statusId) ==
-                                                          3 ||
-                                                      int.parse(list[index]
-                                                              .statusId) ==
-                                                          4)
-                                                  ? const Color.fromRGBO(
-                                                      0, 194, 13, 1)
-                                                  : const Color.fromRGBO(
-                                                      233, 181, 47, 1),
-                                            ),
-                                      ),
-                                    )),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: Text(
+                                      int.parse(list[index].statusId)
+                                          .int2OrderStatus()
+                                          .strOrderStatus2String(),
+                                      style:
+                                          Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(
+                                                color: (int.parse(list[index].statusId) == 1 ||
+                                                        int.parse(list[index]
+                                                                .statusId) ==
+                                                            2 ||
+                                                        int.parse(list[index]
+                                                                .statusId) ==
+                                                            3 ||
+                                                        int.parse(
+                                                                list[index]
+                                                                    .statusId) ==
+                                                            4)
+                                                    ? const Color.fromRGBO(
+                                                        233, 181, 47, 1)
+                                                    : int.parse(list[index]
+                                                                .statusId) ==
+                                                            5
+                                                        ? const Color.fromRGBO(
+                                                            0, 194, 13, 1)
+                                                        : Colors.red.shade400,
+                                              ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),

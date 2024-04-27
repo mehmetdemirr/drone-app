@@ -3,6 +3,7 @@ import 'package:demo/core/extension/date_time.dart';
 import 'package:demo/product/customer_cash/model/customer_cash_model.dart';
 import 'package:demo/product/customer_cash/viewmodel/customer_cash_viewmodel.dart';
 import 'package:demo/product/general/enum/order_status.dart';
+import 'package:demo/product/general/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +31,7 @@ class _CustomerCashScreenState extends State<CustomerCashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Son Siparişlerim"),
+        title: const Text("Geçmiş Siparişlerim"),
       ),
       body: Column(
         children: [
@@ -111,7 +112,9 @@ class _CustomerCashScreenState extends State<CustomerCashScreen> {
             ],
           ),
           context.watch<CustomerCashViewModel>().isLoading
-              ? const Center(child: CircularProgressIndicator.adaptive())
+              ? const Center(
+                  child: LoadingWidget(),
+                )
               : Expanded(
                   child: _listViewBuilder(
                       context.watch<CustomerCashViewModel>().orderModel?.data),
@@ -123,7 +126,9 @@ class _CustomerCashScreenState extends State<CustomerCashScreen> {
 
   Widget _listViewBuilder(List<Datum>? list) {
     return (list == null || list.isEmpty)
-        ? const Text("Sipariş bulunamadı !")
+        ? const Center(
+            child: Text("Sipariş bulunamadı !"),
+          )
         : ListView.builder(
             itemCount: list.length,
             itemBuilder: (context, index) {

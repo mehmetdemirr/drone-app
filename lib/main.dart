@@ -16,22 +16,24 @@ import 'package:demo/product/customer_home/viewmodel/customer_home_viewmodel.dar
 import 'package:demo/product/customer_login/viewmodel/customer_login_viewmodel.dart';
 import 'package:demo/product/customer_order_confirm/viewmodel/customer_order_confirm_viewmodel.dart';
 import 'package:demo/product/customer_products/viewmodel/customer_product_viewmodel.dart';
+import 'package:demo/product/customer_setting/viewmodel/customer_setting_viewmodel.dart';
 import 'package:demo/product/home_screen/home_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-// import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Permission.notification.request();
-//   //Remove this method to stop OneSignal Debugging
-//   OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
-//   OneSignal.initialize("256ad2af-27b2-4cd4-b82a-99228b2af03f");
-// // The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
-//   OneSignal.Notifications.requestPermission(true);
+  //Remove this method to stop OneSignal Debugging
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.initialize("256ad2af-27b2-4cd4-b82a-99228b2af03f");
+  // The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+  OneSignal.Notifications.requestPermission(true);
 
   await EasyLocalization.ensureInitialized();
   var darkModeOn = await SharedPref().getTheme();
@@ -79,6 +81,9 @@ void main() async {
         ),
         ChangeNotifierProvider<CompanyCashViewModel>(
           create: (_) => CompanyCashViewModel(),
+        ),
+        ChangeNotifierProvider<CustomerSettingViewModel>(
+          create: (_) => CustomerSettingViewModel(),
         ),
       ],
       child: EasyLocalization(

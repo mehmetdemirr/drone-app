@@ -7,7 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class CustomerCashViewModel extends ChangeNotifier {
   bool isLoading = false;
-  OrderStatusItem orderStatusItem = OrderStatusItem.siparisVerildi;
+  OrderStatusItem orderStatusItem = OrderStatusItem.tumu;
   CustomerCashModel? orderModel;
 
   void changeLoading() {

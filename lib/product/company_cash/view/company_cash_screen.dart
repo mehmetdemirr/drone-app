@@ -3,6 +3,7 @@ import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/company_cash/model/company_cash_model.dart';
 import 'package:demo/product/company_cash/viewmodel/campany_cash_viewmodel.dart';
 import 'package:demo/product/general/enum/payment_status.dart';
+import 'package:demo/product/general/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -76,7 +77,9 @@ class _CompanyCashScreenState extends State<CompanyCashScreen> {
             ),
           ),
           context.watch<CompanyCashViewModel>().isLoading
-              ? const Center(child: CircularProgressIndicator.adaptive())
+              ? const Center(
+                  child: LoadingWidget(),
+                )
               : Expanded(
                   child: _listViewBuilder(
                       context.watch<CompanyCashViewModel>().orderModel),

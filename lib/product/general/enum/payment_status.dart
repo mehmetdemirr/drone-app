@@ -18,4 +18,17 @@ extension PaymentStatusItems on PaymentStatusItem {
         return 4;
     }
   }
+
+  String strString() {
+    switch (this) {
+      case PaymentStatusItem.odemeBekleniyor:
+        return "Bekliyor";
+      case PaymentStatusItem.odendi:
+        return "Ödendi";
+      case PaymentStatusItem.odenmez:
+        return "Ödenmez";
+      case PaymentStatusItem.iptal:
+        return "İptal";
+    }
+  }
 }

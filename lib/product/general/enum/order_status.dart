@@ -9,7 +9,7 @@ enum OrderStatusItem {
 }
 
 extension PaymentStatusItems on OrderStatusItem {
-  int str() {
+  int strOrderStatus2Int() {
     switch (this) {
       case OrderStatusItem.tumu:
         return 0;
@@ -25,6 +25,25 @@ extension PaymentStatusItems on OrderStatusItem {
         return 5;
       case OrderStatusItem.siparisIptal:
         return 6;
+    }
+  }
+
+  String strOrderStatus2String() {
+    switch (this) {
+      case OrderStatusItem.tumu:
+        return "-";
+      case OrderStatusItem.sepette:
+        return "Sepette";
+      case OrderStatusItem.siparisVerildi:
+        return "Bekliyor";
+      case OrderStatusItem.siparisHazirlaniyor:
+        return "Hazırlanıyor";
+      case OrderStatusItem.siparisYolda:
+        return "Yolda";
+      case OrderStatusItem.siparisTeslimEdildi:
+        return "Tamamlandı";
+      case OrderStatusItem.siparisIptal:
+        return "İptal";
     }
   }
 }

@@ -11,11 +11,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #fronted - view 
   cupertino_icons: ^1.0.2
   flutter_easyloading: ^3.0.5
   syncfusion_flutter_charts: ^25.1.40
+  syncfusion_flutter_gauges: ^25.1.41
   syncfusion_flutter_core: ^25.1.40
   multi_dropdown: ^2.1.4
+  lottie: ^3.1.0
   #set managment
   provider: ^6.0.5
   #cache
@@ -56,7 +59,7 @@ dependencies:
   #locaition
   location: ^6.0.1 
   #onesignal
-  # onesignal_flutter: ^5.1.5
+  onesignal_flutter: ^5.1.5
   #share 
   # share_plus: ^9.0.0
 

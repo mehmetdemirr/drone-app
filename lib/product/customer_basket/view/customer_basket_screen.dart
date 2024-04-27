@@ -5,6 +5,7 @@ import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/customer_basket/model/customer_basket_model.dart';
 import 'package:demo/product/customer_basket/viewmodel/customer_basket_viewmodel.dart';
 import 'package:demo/product/general/widget/custom_cached_image.dart';
+import 'package:demo/product/general/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:location/location.dart';
@@ -44,7 +45,9 @@ class _CustomerBasketScreenState extends State<CustomerBasketScreen> {
         ],
       ),
       body: context.watch<CustomerBasketViewModel>().isLoading
-          ? const Center(child: CircularProgressIndicator.adaptive())
+          ? const Center(
+              child: LoadingWidget(),
+            )
           : Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -149,6 +152,8 @@ class _CustomerBasketScreenState extends State<CustomerBasketScreen> {
                       height: 150,
                       child: Card(
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -161,8 +166,10 @@ class _CustomerBasketScreenState extends State<CustomerBasketScreen> {
                                 ),
                               ),
                             ),
+                            const SizedBox(width: 10),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   list[index].product.title,
@@ -177,7 +184,7 @@ class _CustomerBasketScreenState extends State<CustomerBasketScreen> {
                                   "${list[index].amount} adet",
                                 ),
                                 Text(
-                                  "${int.parse(list[index].product.stockAmount) * double.parse(list[index].product.price)} TL",
+                                  "${int.parse(list[index].amount) * double.parse(list[index].product.price)} TL",
                                 ),
                               ],
                             ),

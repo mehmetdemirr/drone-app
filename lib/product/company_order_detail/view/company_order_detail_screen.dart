@@ -1,14 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/log/log.dart';
-import 'package:demo/core/share_plus/share_plus_function.dart';
 import 'package:demo/core/url_launcher/url_launher_func.dart';
 import 'package:demo/product/company_order/service/company_order_service.dart';
 import 'package:demo/product/company_order_detail/model/company_order_details_model.dart';
 import 'package:demo/product/company_order_detail/viewmodel/company_order_detail_viewmodel.dart';
 import 'package:demo/product/general/enum/order_status.dart';
 import 'package:demo/product/general/enum/payment_status.dart';
+import 'package:demo/product/general/extension/status_to_string.dart';
 import 'package:demo/product/general/model/base_response.dart';
+import 'package:demo/product/general/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -25,7 +26,7 @@ class CompanyOrderDetailScreen extends StatefulWidget {
 }
 
 class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
-  LatLng initialLocationData = const LatLng(32, 23);
+  LatLng initialLocationData = const LatLng(0, 0);
   @override
   void initState() {
     super.initState();
@@ -41,7 +42,9 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
         title: const Text("Sipariş Detayı"),
       ),
       body: context.watch<CompanyOrderDetailViewModel>().isLoading
-          ? const Center(child: CircularProgressIndicator.adaptive())
+          ? const Center(
+              child: LoadingWidget(),
+            )
           : SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -76,20 +79,9 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
                     Center(
                       child: Row(
                         children: [
-                          ElevatedButton(
-                            onPressed: () async {
-                              try {
-                                await CustomUrlLauncher.openMap(
-                                    context, 30, 20);
-                              } catch (e) {
-                                Log.error(
-                                    "company order detail screen harita yönlendirme hatası");
-                                EasyLoading.showError(
-                                    "Yönlendirme yapılamadı!\nLütfen tekrar deneyiniz.");
-                              }
-                            },
-                            child: const Text("Konuma Git"),
-                          ),
+                          _konumaGitButton(context
+                              .watch<CompanyOrderDetailViewModel>()
+                              .orderModel),
                           const SizedBox(width: 15),
                           _konumPaylas(context
                               .watch<CompanyOrderDetailViewModel>()
@@ -111,6 +103,25 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
     );
   }
 
+  ElevatedButton _konumaGitButton(CompanyOrderDetailModel? orderModel) {
+    return ElevatedButton(
+      onPressed: () async {
+        try {
+          await CustomUrlLauncher.openMap(
+            context,
+            double.parse(orderModel?.locationLatitude ?? "0"),
+            double.parse(orderModel?.locationLongitude ?? "0"),
+          );
+        } catch (e) {
+          Log.error("company order detail screen harita yönlendirme hatası");
+          EasyLoading.showError(
+              "Yönlendirme yapılamadı!\nLütfen tekrar deneyiniz.");
+        }
+      },
+      child: const Text("Konuma Git"),
+    );
+  }
+
   Column _siparisDurumGuncelle(int id) {
     return Column(
       children: [
@@ -121,7 +132,9 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
               onPressed: () async {
                 BaseResponse response = await CompanyOrderService()
                     .changeOrderStatus(
-                        id, OrderStatusItem.siparisHazirlaniyor.str());
+                        id,
+                        OrderStatusItem.siparisHazirlaniyor
+                            .strOrderStatus2Int());
                 if (response.succeeded) {
                   EasyLoading.showSuccess(
                       "Sipariş durumu güncellendi ! \nDurum:Hazırlanıyor");
@@ -136,7 +149,7 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
               onPressed: () async {
                 BaseResponse response = await CompanyOrderService()
                     .changeOrderStatus(
-                        id, OrderStatusItem.siparisHazirlaniyor.str());
+                        id, OrderStatusItem.siparisYolda.strOrderStatus2Int());
                 if (response.succeeded) {
                   EasyLoading.showSuccess(
                       "Sipariş durumu güncellendi ! \nDurum:Yolda");
@@ -151,7 +164,9 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
               onPressed: () async {
                 BaseResponse response = await CompanyOrderService()
                     .changeOrderStatus(
-                        id, OrderStatusItem.siparisHazirlaniyor.str());
+                        id,
+                        OrderStatusItem.siparisTeslimEdildi
+                            .strOrderStatus2Int());
                 if (response.succeeded) {
                   EasyLoading.showSuccess(
                       "Sipariş durumu güncellendi ! \nDurum:Teslim edildi");
@@ -166,7 +181,7 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
               onPressed: () async {
                 BaseResponse response = await CompanyOrderService()
                     .changeOrderStatus(
-                        id, OrderStatusItem.siparisHazirlaniyor.str());
+                        id, OrderStatusItem.siparisIptal.strOrderStatus2Int());
                 if (response.succeeded) {
                   EasyLoading.showSuccess(
                       "Sipariş durumu güncellendi ! \nDurum:İptal");
@@ -199,7 +214,8 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
             ElevatedButton(
               onPressed: () async {
                 BaseResponse response = await CompanyOrderService()
-                    .changePaymentStatus(id, PaymentStatusItem.odendi.str());
+                    .changePaymentStatus(
+                        id, PaymentStatusItem.odemeBekleniyor.str());
                 if (response.succeeded) {
                   EasyLoading.showSuccess(
                       "Ödeme durumu güncellendi ! \nDurum:Ödeme bekleniyor");
@@ -213,7 +229,7 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
             ElevatedButton(
               onPressed: () async {
                 BaseResponse response = await CompanyOrderService()
-                    .changePaymentStatus(id, PaymentStatusItem.odendi.str());
+                    .changePaymentStatus(id, PaymentStatusItem.iptal.str());
                 if (response.succeeded) {
                   EasyLoading.showSuccess(
                       "Ödeme durumu güncellendi ! \nDurum:İptal");
@@ -227,7 +243,7 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
             ElevatedButton(
               onPressed: () async {
                 BaseResponse response = await CompanyOrderService()
-                    .changePaymentStatus(id, PaymentStatusItem.odendi.str());
+                    .changePaymentStatus(id, PaymentStatusItem.odenmez.str());
                 if (response.succeeded) {
                   EasyLoading.showSuccess(
                       "Ödeme durumu güncellendi ! \nDurum:Ödenmez");
@@ -247,22 +263,23 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
   ElevatedButton _konumPaylas(CompanyOrderDetailModel? orderModel) {
     return ElevatedButton(
       onPressed: () async {
-        try {
-          if (orderModel?.locationLatitude != null &&
-              orderModel?.locationLongitude != null) {
-            await CustomSharePlusFunction().share(
-                double.parse(orderModel?.locationLatitude ?? "0"),
-                double.parse(orderModel?.locationLongitude ?? "0"));
-            // EasyLoading.showSuccess(
-            //     "Konum paylaşılacak (share plus)");
-          } else {
-            EasyLoading.showError("Paylaşmada hata oluştu");
-          }
-        } catch (e) {
-          Log.error("company order detail screen konum paylaşma hatası");
-          EasyLoading.showError(
-              "Paylaşmada hata oluştu!\nLütfen tekrar deneyiniz.Error: ${e.toString()}");
-        }
+        EasyLoading.showInfo("Yakında ...");
+        // try {
+        //   if (orderModel?.locationLatitude != null &&
+        //       orderModel?.locationLongitude != null) {
+        //     await CustomSharePlusFunction().share(
+        //         double.parse(orderModel?.locationLatitude ?? "0"),
+        //         double.parse(orderModel?.locationLongitude ?? "0"));
+        //     // EasyLoading.showSuccess(
+        //     //     "Konum paylaşılacak (share plus)");
+        //   } else {
+        //     EasyLoading.showError("Paylaşmada hata oluştu");
+        //   }
+        // } catch (e) {
+        //   Log.error("company order detail screen konum paylaşma hatası");
+        //   EasyLoading.showError(
+        //       "Paylaşmada hata oluştu!\nLütfen tekrar deneyiniz.Error: ${e.toString()}");
+        // }
       },
       child: const Text("Konuma paylaş"),
     );
@@ -292,10 +309,10 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
           "Company Area id : ${orderModel?.companyAreaId}",
         ),
         Text(
-          "Sipariş id : ${orderModel?.statusId}",
+          "Sipariş id : ${(int.parse(orderModel?.statusId ?? "0")).int2OrderStatus().strOrderStatus2String()}",
         ),
         Text(
-          "Ödeme id : ${orderModel?.paymentStatusId}",
+          "Ödeme id : ${int.parse(orderModel?.paymentStatusId ?? "0").int2PaymentStatus().strString()}",
         ),
       ],
     );
@@ -329,9 +346,13 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
                       double.parse(orderModel.locationLongitude ??
                           "${initialLocationData.longitude}"),
                     ),
-                    width: 37,
-                    height: 42,
-                    child: const FlutterLogo(),
+                    width: 40,
+                    height: 40,
+                    child: const Icon(
+                      Icons.location_on,
+                      color: Colors.red,
+                      size: 30,
+                    ),
                   ),
                 ],
               ),

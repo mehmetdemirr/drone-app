@@ -12,7 +12,7 @@ class CompanyOrderService extends ApiService {
     int page,
   ) {
     return requestMethod<CompanyOrderModel?>(
-      path: '/company/order/status/${statusId.str()}',
+      path: '/company/order/status/${statusId.strOrderStatus2Int()}',
       headers: {
         'Content-Type': 'application/json',
       },

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/product/company_customer/model/company_customer_user_model.dart';
 import 'package:demo/product/company_customer/viewmodel/company_customer_viewmodel.dart';
+import 'package:demo/product/general/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +70,9 @@ class _CompanyCustomerScreenState extends State<CompanyCustomerScreen> {
           ),
           const SizedBox(height: 16),
           context.watch<CompanyCustomerViewModel>().isLoading
-              ? const CircularProgressIndicator.adaptive()
+              ? const Center(
+                  child: LoadingWidget(),
+                )
               : Expanded(
                   child: _listviewBuilder(
                       context.watch<CompanyCustomerViewModel>().musteriList),

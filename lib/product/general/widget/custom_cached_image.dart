@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:demo/product/general/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 
 class CustomCachedImageWidget extends StatelessWidget {
@@ -10,19 +11,21 @@ class CustomCachedImageWidget extends StatelessWidget {
     super.key,
     required this.imageUrl,
     this.isCircular = false,
-    this.circular = 0,
+    this.circular = 11,
   });
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      placeholder: (context, url) => const CircularProgressIndicator.adaptive(),
+      placeholder: (context, url) => const Center(
+        child: LoadingWidget(),
+      ),
       errorWidget: (context, url, error) => const Icon(Icons.error),
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
-            isCircular ? (circular ?? 10) : 0,
+            isCircular ? (circular ?? 11) : 0,
           ),
           image: DecorationImage(
             image: imageProvider,

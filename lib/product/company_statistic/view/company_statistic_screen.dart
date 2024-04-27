@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/product/company_statistic/model/company_statistic_model.dart';
 import 'package:demo/product/company_statistic/viewmodel/company_statistic_viewmodel.dart';
+import 'package:demo/product/general/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,7 @@ class _CompanyStatisticScreenState extends State<CompanyStatisticScreen> {
       ),
       body: context.watch<CompanyStatisticViewModel>().isLoading
           ? const Center(
-              child: CircularProgressIndicator.adaptive(),
+              child: LoadingWidget(),
             )
           : Padding(
               padding: const EdgeInsets.all(8.0),
