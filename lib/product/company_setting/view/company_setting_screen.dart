@@ -6,6 +6,8 @@ import 'package:demo/core/theme/dark_theme.dart';
 import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
 import 'package:demo/core/utilty/images_items.dart';
+import 'package:demo/product/company_setting/service/company_setting_service.dart';
+import 'package:demo/product/general/model/base_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
@@ -162,14 +164,21 @@ class _CompanySettingScreenState extends State<CompanySettingScreen> {
             const Spacer(),
             InkWell(
               onTap: () async {
-                await SharedPref().clearAll().then((value) {
-                  //tüm routları temizle sadece splash kalsın
-                  context.router.replaceAll(
-                    [
-                      const SplashRoute(),
-                    ],
-                  );
-                });
+                BaseResponse response =
+                    await CompanySettingService().companyLogout();
+                if (response.succeeded) {
+                  EasyLoading.showSuccess("Çıkış başarılı");
+                  await SharedPref().clearAll().then((value) {
+                    //tüm routları temizle sadece splash kalsın
+                    context.router.replaceAll(
+                      [
+                        const SplashRoute(),
+                      ],
+                    );
+                  });
+                } else {
+                  EasyLoading.showError("Çıkış yapılamadı !\nTekrar deneyiniz");
+                }
               },
               child: Text(
                 "Çıkış Yap",

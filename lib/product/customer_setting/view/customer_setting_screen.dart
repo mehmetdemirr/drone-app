@@ -7,7 +7,9 @@ import 'package:demo/core/theme/light_theme.dart';
 import 'package:demo/core/theme/theme_view_model.dart';
 import 'package:demo/core/utilty/images_items.dart';
 import 'package:demo/product/customer_home/model/customer_info_model.dart';
+import 'package:demo/product/customer_setting/service/customer_setting_service.dart';
 import 'package:demo/product/customer_setting/viewmodel/customer_setting_viewmodel.dart';
+import 'package:demo/product/general/model/base_response.dart';
 import 'package:demo/product/general/widget/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -150,14 +152,22 @@ class _CustomerSettingScreenState extends State<CustomerSettingScreen> {
                   const Spacer(),
                   InkWell(
                     onTap: () async {
-                      await SharedPref().clearAll().then((value) {
-                        //tüm routları temizle sadece splash kalsın
-                        context.router.replaceAll(
-                          [
-                            const SplashRoute(),
-                          ],
-                        );
-                      });
+                      BaseResponse response =
+                          await CustomerSettingService().customerLogout();
+                      if (response.succeeded) {
+                        EasyLoading.showSuccess("Çıkış başarılı");
+                        await SharedPref().clearAll().then((value) {
+                          //tüm routları temizle sadece splash kalsın
+                          context.router.replaceAll(
+                            [
+                              const SplashRoute(),
+                            ],
+                          );
+                        });
+                      } else {
+                        EasyLoading.showError(
+                            "Çıkış yapılamadı!\nLütfen tekrar deneyiniz");
+                      }
                     },
                     child: Text(
                       "Çıkış Yap",

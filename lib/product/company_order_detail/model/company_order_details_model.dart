@@ -110,9 +110,9 @@ class User {
   @JsonKey(name: "surname")
   String surname;
   @JsonKey(name: "avatar_url")
-  String avatarUrl;
-  @JsonKey(name: "user_type")
-  String userType;
+  String? avatarUrl;
+  @JsonKey(name: "user_onesignal_id")
+  String? userType;
   @JsonKey(name: "token")
   String token;
   @JsonKey(name: "email_verified_at")
