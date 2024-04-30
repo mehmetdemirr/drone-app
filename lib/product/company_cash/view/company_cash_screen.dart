@@ -27,12 +27,12 @@ class _CompanyCashScreenState extends State<CompanyCashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Kasam"),
+        title: const Text('Kasam'),
       ),
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -41,10 +41,11 @@ class _CompanyCashScreenState extends State<CompanyCashScreen> {
                     context
                         .read<CompanyCashViewModel>()
                         .changePaymentStatusItem(
-                            PaymentStatusItem.odemeBekleniyor);
+                          PaymentStatusItem.odemeBekleniyor,
+                        );
                   },
                   child: Text(
-                    "Bekleyen Ödemeler",
+                    'Bekleyen Ödemeler',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: context
                                       .watch<CompanyCashViewModel>()
@@ -62,7 +63,7 @@ class _CompanyCashScreenState extends State<CompanyCashScreen> {
                         .changePaymentStatusItem(PaymentStatusItem.odendi);
                   },
                   child: Text(
-                    "Ödenmiş Ödemeler",
+                    'Ödenmiş Ödemeler',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: context
                                       .watch<CompanyCashViewModel>()
@@ -76,14 +77,16 @@ class _CompanyCashScreenState extends State<CompanyCashScreen> {
               ],
             ),
           ),
-          context.watch<CompanyCashViewModel>().isLoading
-              ? const Center(
-                  child: LoadingWidget(),
-                )
-              : Expanded(
-                  child: _listViewBuilder(
-                      context.watch<CompanyCashViewModel>().orderModel),
-                ),
+          if (context.watch<CompanyCashViewModel>().isLoading)
+            const Center(
+              child: LoadingWidget(),
+            )
+          else
+            Expanded(
+              child: _listViewBuilder(
+                context.watch<CompanyCashViewModel>().orderModel,
+              ),
+            ),
         ],
       ),
     );
@@ -91,15 +94,15 @@ class _CompanyCashScreenState extends State<CompanyCashScreen> {
 
   Widget _listViewBuilder(CompanyCashModel? orderModel) {
     return orderModel == null
-        ? const Text("Ödeme bulunamadı !")
+        ? const Text('Ödeme bulunamadı !')
         : (orderModel.data.isEmpty)
-            ? const Text("Ödeme bulunamadı !")
+            ? const Text('Ödeme bulunamadı !')
             : ListView.builder(
                 itemCount: orderModel.data.length,
                 itemBuilder: (context, index) {
-                  DatumCompanyCash data = orderModel.data[index];
+                  final data = orderModel.data[index];
                   return Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: InkWell(
                       onTap: () {
                         context.navigateTo(CompanyCashEditRoute(id: 1));
@@ -107,9 +110,8 @@ class _CompanyCashScreenState extends State<CompanyCashScreen> {
                       child: Card(
                         color: Colors.white,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
@@ -119,7 +121,7 @@ class _CompanyCashScreenState extends State<CompanyCashScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(data.username),
-                                      Text("Toplam : ${data.totalPrice} TL")
+                                      Text('Toplam : ${data.totalPrice} TL'),
                                     ],
                                   ),
                                   const Spacer(),
@@ -127,26 +129,38 @@ class _CompanyCashScreenState extends State<CompanyCashScreen> {
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         color: const Color.fromRGBO(
-                                            184, 184, 201, 1),
+                                          184,
+                                          184,
+                                          201,
+                                          1,
+                                        ),
                                         width: 2,
                                       ),
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.all(3.0),
+                                      padding: const EdgeInsets.all(3),
                                       child: Text(
-                                        data.paymentStatusId == "2"
-                                            ? "Ödeme Alındı"
-                                            : "Bekliyor",
+                                        data.paymentStatusId == '2'
+                                            ? 'Ödeme Alındı'
+                                            : 'Bekliyor',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodySmall
                                             ?.copyWith(
-                                              color: data.paymentStatusId == "2"
+                                              color: data.paymentStatusId == '2'
                                                   ? const Color.fromRGBO(
-                                                      0, 194, 13, 1)
+                                                      0,
+                                                      194,
+                                                      13,
+                                                      1,
+                                                    )
                                                   : const Color.fromRGBO(
-                                                      233, 181, 47, 1),
+                                                      233,
+                                                      181,
+                                                      47,
+                                                      1,
+                                                    ),
                                             ),
                                       ),
                                     ),

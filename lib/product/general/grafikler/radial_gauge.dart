@@ -40,6 +40,7 @@ class RadialGauge extends StatelessWidget {
                 markerWidth: 15,
                 elevation: 1,
                 color: const Color(0xFF55F165),
+                markerOffset: 3,
               )
             ],
             annotations: <GaugeAnnotation>[

@@ -208,30 +208,27 @@ class _CustomerOrderConfirmScreenState
             children: [
               InkWell(
                 onTap: () async {
-                  if (_formKey.currentState!.validate()) {
-                    if (_controller.selectedOptions.isNotEmpty) {
-                      BaseResponse response =
-                          await CustomerBasketService().confirmBasket(
-                        locationData.latitude,
-                        locationData.longitude,
-                        _description.text,
-                        _controller.selectedOptions[0].value as int,
-                      );
-                      if (response.succeeded) {
-                        EasyLoading.showSuccess(
-                            "İşlem tamamladı.Sipariş alındığında bilgilendirme yapılacaktır !");
-                        // ignore: use_build_context_synchronously
-                        context.navigateNamedTo(
-                            RouterItem.customerOrderSucces.str());
-                      } else {
-                        EasyLoading.showError(
-                            "Sepet onaylanamadı.Error:${response.errors}-${response.message}");
-                      }
+                  // if (_formKey.currentState!.validate()) {
+                  if (_controller.selectedOptions.isNotEmpty) {
+                    BaseResponse response =
+                        await CustomerBasketService().confirmBasket(
+                      locationData.latitude,
+                      locationData.longitude,
+                      _description.text,
+                      _controller.selectedOptions[0].value as int,
+                    );
+                    if (response.succeeded) {
+                      EasyLoading.showSuccess(
+                          "İşlem tamamladı.Sipariş alındığında bilgilendirme yapılacaktır !");
+                      // ignore: use_build_context_synchronously
+                      context.navigateNamedTo(
+                          RouterItem.customerOrderSucces.str());
                     } else {
-                      EasyLoading.showError("Lütfen tesis alanı seçin !");
+                      EasyLoading.showError(
+                          "Sepet onaylanamadı.Error:${response.errors}-${response.message}");
                     }
                   } else {
-                    EasyLoading.showError("Zorunlu alanları doldurunuz");
+                    EasyLoading.showError("Lütfen tesis alanı seçin !");
                   }
                 },
                 child: Container(

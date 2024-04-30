@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/location/location_manager.dart';
+import 'package:demo/core/log/log.dart';
 import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/product/customer_basket/model/customer_basket_model.dart';
 import 'package:demo/product/customer_basket/viewmodel/customer_basket_viewmodel.dart';
@@ -87,28 +88,32 @@ class _CustomerBasketScreenState extends State<CustomerBasketScreen> {
         children: [
           InkWell(
             onTap: () async {
-              if (customerBasketModel == null) {
-                EasyLoading.showError("Lütfen sepete ürün ekleyin !");
-              } else {
-                context
-                    .read<CustomerBasketViewModel>()
-                    .changeLoadingSepetiOnayla();
-                LocationData? locationData =
-                    await LocationManager().getLoacation();
-                // ignore: use_build_context_synchronously
-                context
-                    .read<CustomerBasketViewModel>()
-                    .changeLoadingSepetiOnayla();
-                if (locationData != null) {
-                  EasyLoading.showSuccess(
-                      "Konum alındı : lat:${locationData.latitude}-${locationData.longitude}");
-                  // ignore: use_build_context_synchronously
-                  context.router.navigate(
-                    CustomerOrderConfirmRoute(locationData: locationData),
-                  );
+              try {
+                if (customerBasketModel == null) {
+                  EasyLoading.showError("Lütfen sepete ürün ekleyin !");
                 } else {
-                  EasyLoading.showError("Konum alınamadı");
+                  context
+                      .read<CustomerBasketViewModel>()
+                      .changeLoadingSepetiOnayla();
+                  LocationData? locationData =
+                      await LocationManager().getLoacation();
+                  // ignore: use_build_context_synchronously
+                  context
+                      .read<CustomerBasketViewModel>()
+                      .changeLoadingSepetiOnayla();
+                  if (locationData != null) {
+                    EasyLoading.showSuccess(
+                        "Konum alındı : lat:${locationData.latitude}-${locationData.longitude}");
+                    // ignore: use_build_context_synchronously
+                    context.router.navigate(
+                      CustomerOrderConfirmRoute(locationData: locationData),
+                    );
+                  } else {
+                    EasyLoading.showError("Konum alınamadı");
+                  }
                 }
+              } catch (e) {
+                Log.error(e);
               }
             },
             child: Container(

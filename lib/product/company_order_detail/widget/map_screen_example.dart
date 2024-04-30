@@ -15,9 +15,10 @@ class FlutterMapExample extends StatefulWidget {
 
 class _FlutterMapExampleState extends State<FlutterMapExample> {
   final start = TextEditingController(
-      text: "Kadriye, Celal Bayar Cad No:5-6, 07525 Serik/Antalya");
+    text: 'Kadriye, Celal Bayar Cad No:5-6, 07525 Serik/Antalya',
+  );
   final end =
-      TextEditingController(text: "Merkez, 2026. Sk., 07500 Serik/Antalya");
+      TextEditingController(text: 'Merkez, 2026. Sk., 07500 Serik/Antalya');
   bool isVisible = false;
   List<LatLng> routpoints = [const LatLng(52.05884, -1.345583)];
 
@@ -27,7 +28,7 @@ class _FlutterMapExampleState extends State<FlutterMapExample> {
       backgroundColor: Colors.grey[300],
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(12),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -40,40 +41,45 @@ class _FlutterMapExampleState extends State<FlutterMapExample> {
                   height: 15,
                 ),
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[500]),
-                    onPressed: () async {
-                      List<Location> startL =
-                          await locationFromAddress(start.text);
-                      List<Location> endL = await locationFromAddress(end.text);
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[500],
+                  ),
+                  onPressed: () async {
+                    final startL = await locationFromAddress(start.text);
+                    final endL = await locationFromAddress(end.text);
 
-                      var v1 = startL[0].latitude;
-                      var v2 = startL[0].longitude;
-                      var v3 = endL[0].latitude;
-                      var v4 = endL[0].longitude;
+                    final v1 = startL[0].latitude;
+                    final v2 = startL[0].longitude;
+                    final v3 = endL[0].latitude;
+                    final v4 = endL[0].longitude;
 
-                      var url =
-                          'http://router.project-osrm.org/route/v1/driving/$v2,$v1;$v4,$v3?steps=true&annotations=true&geometries=geojson&overview=full';
-                      var response = await Dio().get(url);
-                      Log.info(response.data);
-                      setState(() {
-                        routpoints = [];
-                        var ruter = response.data['routes'][0]['geometry']
-                            ['coordinates'];
-                        for (int i = 0; i < ruter.length; i++) {
-                          var reep = ruter[i].toString();
-                          reep = reep.replaceAll("[", "");
-                          reep = reep.replaceAll("]", "");
-                          var lat1 = reep.split(',');
-                          var long1 = reep.split(",");
-                          routpoints.add(LatLng(
-                              double.parse(lat1[1]), double.parse(long1[0])));
-                        }
-                        isVisible = !isVisible;
-                        Log.info(routpoints);
-                      });
-                    },
-                    child: const Text('Press')),
+                    final url =
+                        'http://router.project-osrm.org/route/v1/driving/$v2,$v1;$v4,$v3?steps=true&annotations=true&geometries=geojson&overview=full';
+                    final response = await Dio().get(url);
+                    Log.info(response.data);
+                    setState(() {
+                      routpoints = [];
+                      final ruter =
+                          response.data['routes'][0]['geometry']['coordinates'];
+                      for (var i = 0; i < ruter.length; i++) {
+                        var reep = ruter[i].toString();
+                        reep = reep.replaceAll('[', '');
+                        reep = reep.replaceAll(']', '');
+                        final lat1 = reep.split(',');
+                        final long1 = reep.split(',');
+                        routpoints.add(
+                          LatLng(
+                            double.parse(lat1[1]),
+                            double.parse(long1[0]),
+                          ),
+                        );
+                      }
+                      isVisible = !isVisible;
+                      Log.info(routpoints);
+                    });
+                  },
+                  child: const Text('Press'),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -99,15 +105,14 @@ class _FlutterMapExampleState extends State<FlutterMapExample> {
                           userAgentPackageName: 'com.example.app',
                         ),
                         PolylineLayer(
-                          polylineCulling: false,
                           polylines: [
                             Polyline(
                               points: routpoints,
                               color: Colors.blue,
                               strokeWidth: 9,
-                            )
+                            ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
