@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/log/log.dart';
 import 'package:demo/core/url_launcher/url_launher_func.dart';
@@ -314,6 +315,41 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
         Text(
           "Ödeme id : ${int.parse(orderModel?.paymentStatusId ?? "0").int2PaymentStatus().strString()}",
         ),
+        Row(
+          children: [
+            Text(
+              "Enlem : ${orderModel?.locationLatitude}",
+            ),
+            IconButton(
+              onPressed: () {
+                FlutterClipboard.copy(orderModel?.locationLatitude ?? "")
+                    .then((value) {
+                  EasyLoading.showSuccess(
+                      "Enlem kopyalandı: ${orderModel?.locationLatitude}");
+                });
+              },
+              icon: const Icon(Icons.copy),
+            )
+          ],
+        ),
+        const SizedBox(height: 5),
+        Row(
+          children: [
+            Text(
+              "Boylam : ${orderModel?.locationLongitude}",
+            ),
+            IconButton(
+              onPressed: () {
+                FlutterClipboard.copy(orderModel?.locationLongitude ?? "")
+                    .then((value) {
+                  EasyLoading.showSuccess(
+                      "Enlem kopyalandı: ${orderModel?.locationLongitude}");
+                });
+              },
+              icon: const Icon(Icons.copy),
+            )
+          ],
+        ),
       ],
     );
   }
@@ -381,7 +417,7 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
                 padding: const EdgeInsets.all(3.0),
                 child: Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: Column(
                       children: [
                         Row(

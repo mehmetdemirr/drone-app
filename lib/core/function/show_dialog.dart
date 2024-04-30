@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-Future<void> customShowAlertDialog(
-    BuildContext context, Widget title, Widget text, Widget no, Widget yes,
-    {VoidCallback? noFunction,
-    VoidCallback? yesFunction,
-    bool barrierDismissible = true}) async {
+Future<void> customShowAlertDialog({
+  required BuildContext context,
+  required Widget title,
+  required Widget text,
+  required Widget no,
+  required Widget yes,
+  VoidCallback? noFunction,
+  VoidCallback? yesFunction,
+  bool barrierDismissible = true,
+}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: barrierDismissible, // user must tap button,

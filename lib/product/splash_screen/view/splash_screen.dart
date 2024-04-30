@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2)).then((value) async {
+    Future.delayed(Duration.zero).then((value) async {
       String? companyToken = await SharedPref().getCompanyToken();
       String? customerToken = await SharedPref().getCustomerToken();
       int? companyId = await SharedPref().getCompanyId();

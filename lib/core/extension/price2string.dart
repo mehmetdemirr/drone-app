@@ -6,7 +6,6 @@ extension DoubleExtension on double? {
     if (this == null) {
       return '-';
     }
-
     var formatlayici = NumberFormat.currency(locale: locale, symbol: '₺');
     return formatlayici.format(this);
   }

@@ -28,15 +28,10 @@ import 'package:demo/product/customer_setting/view/customer_setting_screen.dart'
 import 'package:demo/product/customer_statistic/view/customer_statistic_screen.dart';
 import 'package:demo/product/customer_waiting_room/view/customer_waiting_room_screen.dart';
 import 'package:demo/product/general/view/order_success_screen.dart';
-import 'package:demo/product/home_screen/home_screen.dart';
 import 'package:demo/product/customer_product_detail/view/customer_product_detail_screen.dart';
-import 'package:demo/product/qr_screen/view/qr_screen.dart';
-import 'package:demo/product/setting_screen/setting_screen.dart';
 import 'package:demo/product/splash_screen/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-
-import '../../product/get_image_screen/view/get_image_screen.dart';
 
 part 'app_router.gr.dart';
 
@@ -164,20 +159,6 @@ class AppRouter extends _$AppRouter {
           page: CompanyShowQrRoute.page,
         ),
 
-        //other
-        CustomRoute(
-          path: RouterItem.home.str(),
-          page: HomeRoute.page,
-        ),
-        CustomRoute(
-          path: RouterItem.setting.str(),
-          page: SettingRoute.page,
-        ),
-        CustomRoute(
-          path: RouterItem.getImage.str(),
-          page: GetImageRoute.page,
-        ),
-
         // guards: const [
         //   // //TODO bunun testini yap
         //   // AutoRouteGuard.simple((resolver, router) async {
@@ -224,10 +205,6 @@ enum RouterItem {
   companyFeedBack,
   companyStatusFalse,
   companyNewArea,
-  //other
-  home,
-  setting,
-  getImage,
 }
 
 extension RouterItems on RouterItem {

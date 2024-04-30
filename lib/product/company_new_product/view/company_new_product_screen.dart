@@ -5,6 +5,7 @@ import 'package:demo/core/extension/screen_size.dart';
 import 'package:demo/core/helper/range_text_formetter.dart';
 import 'package:demo/core/image_picker/service/pick_manager.dart';
 import 'package:demo/core/log/log.dart';
+import 'package:demo/core/navigation/app_router.dart';
 import 'package:demo/core/utilty/images_items.dart';
 import 'package:demo/product/company_products/service/company_product_service.dart';
 import 'package:demo/product/general/model/base_response.dart';
@@ -218,6 +219,9 @@ class _CompanyNewProductScreenState extends State<CompanyNewProductScreen> {
                       );
                       if (response.succeeded) {
                         EasyLoading.showSuccess("Ürün başarıyla eklendi");
+                        // ignore: use_build_context_synchronously
+                        context.router
+                            .replaceNamed(RouterItem.companyHome.str());
                       } else {
                         EasyLoading.showError(
                             "Ürün eklenemedi.Error:${response.errors}-${response.message}");

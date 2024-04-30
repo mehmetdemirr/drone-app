@@ -145,9 +145,11 @@ class _CustomerBasketScreenState extends State<CustomerBasketScreen> {
 
   Widget _basketListviewBuilder(List<OrderItem>? list) {
     return list == null
-        ? const Text("Sepette ürün bulunmadı ! Ürün ekleyebilirsiniz !")
+        ? const Center(
+            child: Text("Sepette ürün bulunmadı ! Ürün ekleyebilirsiniz !"))
         : list.isEmpty
-            ? const Text("Sepette ürün bulunmadı ! Ürün ekleyebilirsiniz !")
+            ? const Center(
+                child: Text("Sepette ürün bulunmadı ! Ürün ekleyebilirsiniz !"))
             : ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (context, index) {

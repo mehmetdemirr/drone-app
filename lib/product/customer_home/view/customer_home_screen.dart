@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:demo/core/function/show_dialog.dart';
 import 'package:demo/product/customer_basket/view/customer_basket_screen.dart';
 import 'package:demo/product/customer_cash/view/customer_cash_screen.dart';
 import 'package:demo/product/customer_home/viewmodel/customer_home_viewmodel.dart';
@@ -6,6 +7,7 @@ import 'package:demo/product/customer_products/view/customer_products_screen.dar
 import 'package:demo/product/customer_setting/view/customer_setting_screen.dart';
 import 'package:demo/product/customer_statistic/view/customer_statistic_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 @RoutePage()
@@ -27,7 +29,29 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[context.watch<CustomerHomeViewModel>().selectedTab],
+      body: PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) async {
+          customShowAlertDialog(
+            context: context,
+            title: const Text("Çıkış"),
+            text: const Text("Golfrone'dan çıkmak istiyor musunuz ?"),
+            no: TextButton(
+              onPressed: () {
+                context.router.pop();
+              },
+              child: const Text("Hayır"),
+            ),
+            yes: TextButton(
+              onPressed: () {
+                SystemNavigator.pop();
+              },
+              child: const Text("Evet"),
+            ),
+          );
+        },
+        child: _pages[context.watch<CustomerHomeViewModel>().selectedTab],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: context.watch<CustomerHomeViewModel>().selectedTab,
         onTap: (index) =>

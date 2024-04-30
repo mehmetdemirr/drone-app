@@ -18,13 +18,11 @@ import 'package:demo/product/customer_login/viewmodel/customer_login_viewmodel.d
 import 'package:demo/product/customer_order_confirm/viewmodel/customer_order_confirm_viewmodel.dart';
 import 'package:demo/product/customer_products/viewmodel/customer_product_viewmodel.dart';
 import 'package:demo/product/customer_setting/viewmodel/customer_setting_viewmodel.dart';
-import 'package:demo/product/home_screen/home_view_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
-// import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -40,7 +38,6 @@ void main() async {
   } else {
     Log.error("onesignal id yok");
   }
-
   // The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
   OneSignal.Notifications.requestPermission(true);
 
@@ -51,9 +48,6 @@ void main() async {
       providers: [
         ChangeNotifierProvider<ThemeNotifier>(
           create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
-        ),
-        ChangeNotifierProvider<HomeViewModel>(
-          create: (_) => HomeViewModel(),
         ),
         ChangeNotifierProvider<CustomerLoginViewModel>(
           create: (_) => CustomerLoginViewModel(),
