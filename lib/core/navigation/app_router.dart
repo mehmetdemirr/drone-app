@@ -38,7 +38,7 @@ part 'app_router.gr.dart';
 @AutoRouterConfig(
   replaceInRouteName: 'Screen|Page,Route',
 )
-class AppRouter extends _$AppRouter {
+class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
         // splash

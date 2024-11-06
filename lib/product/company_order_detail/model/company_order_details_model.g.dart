@@ -9,7 +9,7 @@ part of 'company_order_details_model.dart';
 CompanyOrderDetailModel _$CompanyOrderDetailModelFromJson(
         Map<String, dynamic> json) =>
     CompanyOrderDetailModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       userId: json['user_id'] as String,
       companyId: json['company_id'] as String,
       locationLatitude: json['location_latitude'] as String?,
@@ -47,7 +47,7 @@ Map<String, dynamic> _$CompanyOrderDetailModelToJson(
     };
 
 OrderItem _$OrderItemFromJson(Map<String, dynamic> json) => OrderItem(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       userId: json['user_id'] as String,
       companyId: json['company_id'] as String,
       userOrderId: json['user_order_id'] as String,
@@ -75,7 +75,7 @@ Map<String, dynamic> _$OrderItemToJson(OrderItem instance) => <String, dynamic>{
     };
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       surname: json['surname'] as String,
       avatarUrl: json['avatar_url'] as String?,

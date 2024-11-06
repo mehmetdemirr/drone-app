@@ -9,7 +9,7 @@ part of 'company_customer_user_model.dart';
 CompanyCustomerUserModel _$CompanyCustomerUserModelFromJson(
         Map<String, dynamic> json) =>
     CompanyCustomerUserModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       surname: json['surname'] as String,
       email: json['email'] as String,

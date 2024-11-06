@@ -8,7 +8,7 @@ part of 'customer_basket_model.dart';
 
 CustomerBasketModel _$CustomerBasketModelFromJson(Map<String, dynamic> json) =>
     CustomerBasketModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       userId: json['user_id'] as String,
       companyId: json['company_id'] as String,
       locationLatitude: json['location_latitude'],
@@ -44,7 +44,7 @@ Map<String, dynamic> _$CustomerBasketModelToJson(
     };
 
 OrderItem _$OrderItemFromJson(Map<String, dynamic> json) => OrderItem(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       amount: json['amount'] as String,
       product: Product.fromJson(json['product'] as Map<String, dynamic>),
     );
@@ -56,7 +56,7 @@ Map<String, dynamic> _$OrderItemToJson(OrderItem instance) => <String, dynamic>{
     };
 
 Product _$ProductFromJson(Map<String, dynamic> json) => Product(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       description: json['description'] as String,
       price: json['price'] as String,

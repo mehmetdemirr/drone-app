@@ -9,7 +9,7 @@ part of 'company_model.dart';
 CompanyTokenModel _$CompanyTokenModelFromJson(Map<String, dynamic> json) =>
     CompanyTokenModel(
       token: json['token'] as String,
-      companyId: json['company_id'] as int,
+      companyId: (json['company_id'] as num).toInt(),
     );
 
 Map<String, dynamic> _$CompanyTokenModelToJson(CompanyTokenModel instance) =>

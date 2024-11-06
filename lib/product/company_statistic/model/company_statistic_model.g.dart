@@ -21,12 +21,12 @@ Map<String, dynamic> _$CompanyStatisticModelToJson(
     };
 
 Orders _$OrdersFromJson(Map<String, dynamic> json) => Orders(
-      totalOrders: json['totalOrders'] as int,
-      successfulOrders: json['successfulOrders'] as int,
+      totalOrders: (json['totalOrders'] as num).toInt(),
+      successfulOrders: (json['successfulOrders'] as num).toInt(),
       orderStatusCounts: OrderStatusCounts.fromJson(
           json['orderStatusCounts'] as Map<String, dynamic>),
       totalSales: json['totalSales'] as String,
-      customerCount: json['customerCount'] as int,
+      customerCount: (json['customerCount'] as num).toInt(),
     );
 
 Map<String, dynamic> _$OrdersToJson(Orders instance) => <String, dynamic>{

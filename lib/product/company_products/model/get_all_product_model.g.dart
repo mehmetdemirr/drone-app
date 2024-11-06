@@ -8,7 +8,7 @@ part of 'get_all_product_model.dart';
 
 CompanyProductModel _$CompanyProductModelFromJson(Map<String, dynamic> json) =>
     CompanyProductModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       description: json['description'] as String,
       price: json['price'] as String,

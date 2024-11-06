@@ -393,7 +393,7 @@ class _CompanyOrderDetailScreenState extends State<CompanyOrderDetailScreen> {
                 ],
               ),
               PolylineLayer(
-                polylineCulling: false,
+                // polylineCulling: false,
                 polylines: [
                   Polyline(
                     points: [],

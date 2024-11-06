@@ -9,236 +9,6 @@
 
 part of 'app_router.dart';
 
-abstract class _$AppRouter extends RootStackRouter {
-  // ignore: unused_element
-  _$AppRouter({super.navigatorKey});
-
-  @override
-  final Map<String, PageFactory> pagesMap = {
-    CompanyCashEditRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<CompanyCashEditRouteArgs>(
-          orElse: () => CompanyCashEditRouteArgs(id: pathParams.getInt('id')));
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: CompanyCashEditScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
-    CompanyCashRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyCashScreen(),
-      );
-    },
-    CompanyCustomerRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyCustomerScreen(),
-      );
-    },
-    CompanyFeedBackRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyFeedBackScreen(),
-      );
-    },
-    CompanyHomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyHomeScreen(),
-      );
-    },
-    CompanyLoginRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyLoginScreen(),
-      );
-    },
-    CompanyNewAreaRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyNewAreaScreen(),
-      );
-    },
-    CompanyNewOrderRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyNewOrderScreen(),
-      );
-    },
-    CompanyNewProductRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyNewProductScreen(),
-      );
-    },
-    CompanyOrderDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<CompanyOrderDetailRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: CompanyOrderDetailScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
-    CompanyOrderRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyOrderScreen(),
-      );
-    },
-    CompanyProductDetailRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<CompanyProductDetailRouteArgs>(
-          orElse: () =>
-              CompanyProductDetailRouteArgs(id: pathParams.getInt('id')));
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: CompanyProductDetailScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
-    CompanyProductEditRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<CompanyProductEditRouteArgs>(
-          orElse: () =>
-              CompanyProductEditRouteArgs(id: pathParams.getInt('id')));
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: CompanyProductEditScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
-    CompanyProductsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyProductsScreen(),
-      );
-    },
-    CompanyRegisterRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyRegisterScreen(),
-      );
-    },
-    CompanySettingRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanySettingScreen(),
-      );
-    },
-    CompanyShowQrRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyShowQrScreen(),
-      );
-    },
-    CompanyStatisticRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyStatisticScreen(),
-      );
-    },
-    CompanyStatusFalseRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompanyStatusFalseScreen(),
-      );
-    },
-    CustomerAreaLoginRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CustomerAreaLoginScreen(),
-      );
-    },
-    CustomerCashRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CustomerCashScreen(),
-      );
-    },
-    CustomerHomeRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CustomerHomeScreen(),
-      );
-    },
-    CustomerLoginRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CustomerLoginScreen(),
-      );
-    },
-    CustomerOrderConfirmRoute.name: (routeData) {
-      final args = routeData.argsAs<CustomerOrderConfirmRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: CustomerOrderConfirmScreen(
-          key: args.key,
-          locationData: args.locationData,
-        ),
-      );
-    },
-    CustomerProductDetailRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<CustomerProductDetailRouteArgs>(
-          orElse: () =>
-              CustomerProductDetailRouteArgs(id: pathParams.getInt('id')));
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: CustomerProductDetailScreen(
-          key: args.key,
-          id: args.id,
-        ),
-      );
-    },
-    CustomerRegisterRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CustomerRegisterScreen(),
-      );
-    },
-    CustomerSettingRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CustomerSettingScreen(),
-      );
-    },
-    CustomerStatisticRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CustomerStatisticScreen(),
-      );
-    },
-    CustomerWaitingRoomRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CustomerWaitingRoomScreen(),
-      );
-    },
-    OrderSuccessRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const OrderSuccessScreen(),
-      );
-    },
-    SplashRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SplashScreen(),
-      );
-    },
-  };
-}
-
 /// generated route for
 /// [CompanyCashEditScreen]
 class CompanyCashEditRoute extends PageRouteInfo<CompanyCashEditRouteArgs> {
@@ -258,8 +28,18 @@ class CompanyCashEditRoute extends PageRouteInfo<CompanyCashEditRouteArgs> {
 
   static const String name = 'CompanyCashEditRoute';
 
-  static const PageInfo<CompanyCashEditRouteArgs> page =
-      PageInfo<CompanyCashEditRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<CompanyCashEditRouteArgs>(
+          orElse: () => CompanyCashEditRouteArgs(id: pathParams.getInt('id')));
+      return CompanyCashEditScreen(
+        key: args.key,
+        id: args.id,
+      );
+    },
+  );
 }
 
 class CompanyCashEditRouteArgs {
@@ -289,7 +69,12 @@ class CompanyCashRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyCashRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyCashScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -303,7 +88,12 @@ class CompanyCustomerRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyCustomerRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyCustomerScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -317,7 +107,12 @@ class CompanyFeedBackRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyFeedBackRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyFeedBackScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -331,7 +126,12 @@ class CompanyHomeRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyHomeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyHomeScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -345,7 +145,12 @@ class CompanyLoginRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyLoginRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyLoginScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -359,7 +164,12 @@ class CompanyNewAreaRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyNewAreaRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyNewAreaScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -373,7 +183,12 @@ class CompanyNewOrderRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyNewOrderRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyNewOrderScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -387,7 +202,12 @@ class CompanyNewProductRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyNewProductRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyNewProductScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -409,8 +229,16 @@ class CompanyOrderDetailRoute
 
   static const String name = 'CompanyOrderDetailRoute';
 
-  static const PageInfo<CompanyOrderDetailRouteArgs> page =
-      PageInfo<CompanyOrderDetailRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<CompanyOrderDetailRouteArgs>();
+      return CompanyOrderDetailScreen(
+        key: args.key,
+        id: args.id,
+      );
+    },
+  );
 }
 
 class CompanyOrderDetailRouteArgs {
@@ -440,7 +268,12 @@ class CompanyOrderRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyOrderRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyOrderScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -463,8 +296,19 @@ class CompanyProductDetailRoute
 
   static const String name = 'CompanyProductDetailRoute';
 
-  static const PageInfo<CompanyProductDetailRouteArgs> page =
-      PageInfo<CompanyProductDetailRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<CompanyProductDetailRouteArgs>(
+          orElse: () =>
+              CompanyProductDetailRouteArgs(id: pathParams.getInt('id')));
+      return CompanyProductDetailScreen(
+        key: args.key,
+        id: args.id,
+      );
+    },
+  );
 }
 
 class CompanyProductDetailRouteArgs {
@@ -503,8 +347,19 @@ class CompanyProductEditRoute
 
   static const String name = 'CompanyProductEditRoute';
 
-  static const PageInfo<CompanyProductEditRouteArgs> page =
-      PageInfo<CompanyProductEditRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<CompanyProductEditRouteArgs>(
+          orElse: () =>
+              CompanyProductEditRouteArgs(id: pathParams.getInt('id')));
+      return CompanyProductEditScreen(
+        key: args.key,
+        id: args.id,
+      );
+    },
+  );
 }
 
 class CompanyProductEditRouteArgs {
@@ -534,7 +389,12 @@ class CompanyProductsRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyProductsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyProductsScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -548,7 +408,12 @@ class CompanyRegisterRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyRegisterRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyRegisterScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -562,7 +427,12 @@ class CompanySettingRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanySettingRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanySettingScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -576,7 +446,12 @@ class CompanyShowQrRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyShowQrRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyShowQrScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -590,7 +465,12 @@ class CompanyStatisticRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyStatisticRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyStatisticScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -604,7 +484,12 @@ class CompanyStatusFalseRoute extends PageRouteInfo<void> {
 
   static const String name = 'CompanyStatusFalseRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CompanyStatusFalseScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -618,7 +503,12 @@ class CustomerAreaLoginRoute extends PageRouteInfo<void> {
 
   static const String name = 'CustomerAreaLoginRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CustomerAreaLoginScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -632,7 +522,12 @@ class CustomerCashRoute extends PageRouteInfo<void> {
 
   static const String name = 'CustomerCashRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CustomerCashScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -646,7 +541,12 @@ class CustomerHomeRoute extends PageRouteInfo<void> {
 
   static const String name = 'CustomerHomeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CustomerHomeScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -660,7 +560,12 @@ class CustomerLoginRoute extends PageRouteInfo<void> {
 
   static const String name = 'CustomerLoginRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CustomerLoginScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -682,8 +587,16 @@ class CustomerOrderConfirmRoute
 
   static const String name = 'CustomerOrderConfirmRoute';
 
-  static const PageInfo<CustomerOrderConfirmRouteArgs> page =
-      PageInfo<CustomerOrderConfirmRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<CustomerOrderConfirmRouteArgs>();
+      return CustomerOrderConfirmScreen(
+        key: args.key,
+        locationData: args.locationData,
+      );
+    },
+  );
 }
 
 class CustomerOrderConfirmRouteArgs {
@@ -722,8 +635,19 @@ class CustomerProductDetailRoute
 
   static const String name = 'CustomerProductDetailRoute';
 
-  static const PageInfo<CustomerProductDetailRouteArgs> page =
-      PageInfo<CustomerProductDetailRouteArgs>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<CustomerProductDetailRouteArgs>(
+          orElse: () =>
+              CustomerProductDetailRouteArgs(id: pathParams.getInt('id')));
+      return CustomerProductDetailScreen(
+        key: args.key,
+        id: args.id,
+      );
+    },
+  );
 }
 
 class CustomerProductDetailRouteArgs {
@@ -753,7 +677,12 @@ class CustomerRegisterRoute extends PageRouteInfo<void> {
 
   static const String name = 'CustomerRegisterRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CustomerRegisterScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -767,7 +696,12 @@ class CustomerSettingRoute extends PageRouteInfo<void> {
 
   static const String name = 'CustomerSettingRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CustomerSettingScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -781,7 +715,12 @@ class CustomerStatisticRoute extends PageRouteInfo<void> {
 
   static const String name = 'CustomerStatisticRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CustomerStatisticScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -795,7 +734,12 @@ class CustomerWaitingRoomRoute extends PageRouteInfo<void> {
 
   static const String name = 'CustomerWaitingRoomRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const CustomerWaitingRoomScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -809,7 +753,12 @@ class OrderSuccessRoute extends PageRouteInfo<void> {
 
   static const String name = 'OrderSuccessRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const OrderSuccessScreen();
+    },
+  );
 }
 
 /// generated route for
@@ -823,5 +772,10 @@ class SplashRoute extends PageRouteInfo<void> {
 
   static const String name = 'SplashRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SplashScreen();
+    },
+  );
 }

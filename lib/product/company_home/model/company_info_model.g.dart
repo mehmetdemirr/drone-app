@@ -8,7 +8,7 @@ part of 'company_info_model.dart';
 
 CompanyInfoModel _$CompanyInfoModelFromJson(Map<String, dynamic> json) =>
     CompanyInfoModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       status: json['status'] as String,
       openHour: json['open_hour'],

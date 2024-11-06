@@ -76,7 +76,7 @@ class _CompanyNewAreaScreenState extends State<CompanyNewAreaScreen> {
                         if (response.succeeded) {
                           EasyLoading.showSuccess("Alan başarıyla eklendi.");
                           // ignore: deprecated_member_use, use_build_context_synchronously
-                          context.router.pop();
+                          context.router.canPop();
                         } else {
                           EasyLoading.showError(
                               "Alan eklenemedi.Error:${response.message}-${response.errors}");

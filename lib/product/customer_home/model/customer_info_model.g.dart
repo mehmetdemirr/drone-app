@@ -19,7 +19,7 @@ Map<String, dynamic> _$CustomerInfoModelToJson(CustomerInfoModel instance) =>
     };
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       surname: json['surname'] as String,
       email: json['email'] as String,

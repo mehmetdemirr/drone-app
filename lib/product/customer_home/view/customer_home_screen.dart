@@ -38,7 +38,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
             text: const Text("Golfrone'dan çıkmak istiyor musunuz ?"),
             no: TextButton(
               onPressed: () {
-                context.router.pop();
+                context.router.canPop();
               },
               child: const Text("Hayır"),
             ),

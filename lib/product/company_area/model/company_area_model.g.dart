@@ -8,12 +8,12 @@ part of 'company_area_model.dart';
 
 CompanyAreaModel _$CompanyAreaModelFromJson(Map<String, dynamic> json) =>
     CompanyAreaModel(
-      companyId: json['company_id'] as int,
+      companyId: (json['company_id'] as num).toInt(),
       description: json['description'] as String,
       title: json['title'] as String,
       updatedAt: DateTime.parse(json['updated_at'] as String),
       createdAt: DateTime.parse(json['created_at'] as String),
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
     );
 
 Map<String, dynamic> _$CompanyAreaModelToJson(CompanyAreaModel instance) =>

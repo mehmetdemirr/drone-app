@@ -8,23 +8,23 @@ part of 'customer_cash_model.dart';
 
 CustomerCashModel _$CustomerCashModelFromJson(Map<String, dynamic> json) =>
     CustomerCashModel(
-      currentPage: json['current_page'] as int,
+      currentPage: (json['current_page'] as num).toInt(),
       data: (json['data'] as List<dynamic>)
           .map((e) => Datum.fromJson(e as Map<String, dynamic>))
           .toList(),
       firstPageUrl: json['first_page_url'] as String,
-      from: json['from'] as int?,
-      lastPage: json['last_page'] as int?,
+      from: (json['from'] as num?)?.toInt(),
+      lastPage: (json['last_page'] as num?)?.toInt(),
       lastPageUrl: json['last_page_url'] as String,
       links: (json['links'] as List<dynamic>)
           .map((e) => Link.fromJson(e as Map<String, dynamic>))
           .toList(),
       nextPageUrl: json['next_page_url'] as String?,
       path: json['path'] as String?,
-      perPage: json['per_page'] as int?,
+      perPage: (json['per_page'] as num?)?.toInt(),
       prevPageUrl: json['prev_page_url'] as String?,
-      to: json['to'] as int?,
-      total: json['total'] as int,
+      to: (json['to'] as num?)?.toInt(),
+      total: (json['total'] as num).toInt(),
     );
 
 Map<String, dynamic> _$CustomerCashModelToJson(CustomerCashModel instance) =>
@@ -45,7 +45,7 @@ Map<String, dynamic> _$CustomerCashModelToJson(CustomerCashModel instance) =>
     };
 
 Datum _$DatumFromJson(Map<String, dynamic> json) => Datum(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       userId: json['user_id'] as String,
       companyId: json['company_id'] as String,
       locationLatitude: json['location_latitude'] as String?,
@@ -83,7 +83,7 @@ Map<String, dynamic> _$DatumToJson(Datum instance) => <String, dynamic>{
     };
 
 Company _$CompanyFromJson(Map<String, dynamic> json) => Company(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
     );
 
@@ -93,7 +93,7 @@ Map<String, dynamic> _$CompanyToJson(Company instance) => <String, dynamic>{
     };
 
 Status _$StatusFromJson(Map<String, dynamic> json) => Status(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
     );
 
